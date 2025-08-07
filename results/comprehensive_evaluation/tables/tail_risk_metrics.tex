@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Tail Risk Metrics Comparison}
+\label{tab:tail_risk}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Model & VaR_1% & ES_1% & VaR_5% & ES_5% & VaR_95% & ES_95% & VaR_99% & ES_99% \\
+\midrule
+Real Data & -3.1849 & -4.5257 & -1.6625 & -2.6824 & 1.5420 & -0.0782 & 2.6296 & 0.0036 \\
+GARCH & -0.0314 & -0.0373 & -0.0176 & -0.0259 & 0.0183 & -0.0010 & 0.0257 & -0.0001 \\
+DDPM & -2.4055 & -2.8319 & -1.6456 & -2.1184 & 1.6614 & -0.0828 & 2.3637 & -0.0014 \\
+TimeGrad & -2.5973 & -3.0826 & -1.6388 & -2.2307 & 1.4889 & -0.0677 & 2.1733 & 0.0055 \\
+\bottomrule
+\end{tabular}
+\end{table}
