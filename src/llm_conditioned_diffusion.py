@@ -339,7 +339,7 @@ def load_and_prepare_data():
     print("📊 Loading S&P 500 data...")
     
     # Load data
-    data = pd.read_csv("../data/sp500_data.csv", index_col=0, parse_dates=True)
+    data = pd.read_csv("data/sp500_data.csv", index_col=0, parse_dates=True)
     data.index = pd.to_datetime(data.index)
     
     # Handle potential header row
