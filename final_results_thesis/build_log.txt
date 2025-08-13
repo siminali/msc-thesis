@@ -1,0 +1,577 @@
+2025-08-13 16:38:35,074 - INFO - === BUILD LOG START ===
+2025-08-13 16:38:35,074 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 16:38:35,074 - INFO - OS: Darwin 24.0.0
+2025-08-13 16:38:35,074 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 16:38:35,074 - INFO - Timestamp: 2025-08-13T16:38:35.074526
+2025-08-13 16:38:35,074 - INFO - NumPy version: 1.26.4
+2025-08-13 16:38:35,074 - INFO - Pandas version: 2.2.2
+2025-08-13 16:38:35,074 - INFO - Matplotlib version: 3.8.4
+2025-08-13 16:38:35,074 - INFO - Seaborn version: 0.13.2
+2025-08-13 16:38:35,074 - INFO - SciPy version: 1.13.1
+2025-08-13 16:38:35,074 - INFO - Statsmodels version: 0.14.2
+2025-08-13 16:38:35,074 - INFO - Validating input files...
+2025-08-13 16:38:35,075 - INFO - All input files validated successfully
+2025-08-13 16:38:35,075 - INFO - Real data: data/sp500_data.csv
+2025-08-13 16:38:35,075 - INFO - Synthetic data directory: results
+2025-08-13 16:38:35,075 - INFO -   GARCH: garch_returns.npy
+2025-08-13 16:38:35,075 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 16:38:35,075 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 16:38:35,076 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 16:38:35,076 - INFO - Creating output directories...
+2025-08-13 16:38:35,076 - INFO - Initializing evaluation framework...
+2025-08-13 16:38:35,102 - INFO - Computing evaluation metrics...
+2025-08-13 16:47:08,037 - INFO - === BUILD LOG START ===
+2025-08-13 16:47:08,038 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 16:47:08,038 - INFO - OS: Darwin 24.0.0
+2025-08-13 16:47:08,038 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 16:47:08,038 - INFO - Timestamp: 2025-08-13T16:47:08.038330
+2025-08-13 16:47:08,038 - INFO - NumPy version: 1.26.4
+2025-08-13 16:47:08,038 - INFO - Pandas version: 2.2.2
+2025-08-13 16:47:08,038 - INFO - Matplotlib version: 3.8.4
+2025-08-13 16:47:08,038 - INFO - Seaborn version: 0.13.2
+2025-08-13 16:47:08,038 - INFO - SciPy version: 1.13.1
+2025-08-13 16:47:08,038 - INFO - Statsmodels version: 0.14.2
+2025-08-13 16:47:08,038 - INFO - Validating input files...
+2025-08-13 16:47:08,038 - INFO - All input files validated successfully
+2025-08-13 16:47:08,038 - INFO - Real data: data/sp500_data.csv
+2025-08-13 16:47:08,038 - INFO - Synthetic data directory: results
+2025-08-13 16:47:08,038 - INFO -   GARCH: garch_returns.npy
+2025-08-13 16:47:08,038 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 16:47:08,038 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 16:47:08,038 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 16:47:08,038 - INFO - Creating output directories...
+2025-08-13 16:47:08,038 - INFO - Initializing evaluation framework...
+2025-08-13 16:47:08,058 - INFO - Computing evaluation metrics...
+2025-08-13 17:26:39,160 - INFO - === BUILD LOG START ===
+2025-08-13 17:26:39,160 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 17:26:39,160 - INFO - OS: Darwin 24.0.0
+2025-08-13 17:26:39,160 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 17:26:39,160 - INFO - Timestamp: 2025-08-13T17:26:39.160674
+2025-08-13 17:26:39,160 - INFO - NumPy version: 1.26.4
+2025-08-13 17:26:39,160 - INFO - Pandas version: 2.2.2
+2025-08-13 17:26:39,160 - INFO - Matplotlib version: 3.8.4
+2025-08-13 17:26:39,160 - INFO - Seaborn version: 0.13.2
+2025-08-13 17:26:39,160 - INFO - SciPy version: 1.13.1
+2025-08-13 17:26:39,160 - INFO - Statsmodels version: 0.14.2
+2025-08-13 17:26:39,160 - INFO - Validating input files...
+2025-08-13 17:26:39,160 - INFO - All input files validated successfully
+2025-08-13 17:26:39,160 - INFO - Real data: data/sp500_data.csv
+2025-08-13 17:26:39,160 - INFO - Synthetic data directory: results
+2025-08-13 17:26:39,160 - INFO -   GARCH: garch_returns.npy
+2025-08-13 17:26:39,160 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 17:26:39,160 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 17:26:39,161 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 17:26:39,161 - INFO - Creating output directories...
+2025-08-13 17:26:39,161 - INFO - Initializing evaluation framework...
+2025-08-13 17:26:39,178 - INFO - Computing evaluation metrics...
+2025-08-13 17:29:23,262 - INFO - === BUILD LOG START ===
+2025-08-13 17:29:23,263 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 17:29:23,263 - INFO - OS: Darwin 24.0.0
+2025-08-13 17:29:23,263 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 17:29:23,263 - INFO - Timestamp: 2025-08-13T17:29:23.263134
+2025-08-13 17:29:23,263 - INFO - NumPy version: 1.26.4
+2025-08-13 17:29:23,263 - INFO - Pandas version: 2.2.2
+2025-08-13 17:29:23,263 - INFO - Matplotlib version: 3.8.4
+2025-08-13 17:29:23,263 - INFO - Seaborn version: 0.13.2
+2025-08-13 17:29:23,263 - INFO - SciPy version: 1.13.1
+2025-08-13 17:29:23,263 - INFO - Statsmodels version: 0.14.2
+2025-08-13 17:29:23,263 - INFO - Validating input files...
+2025-08-13 17:29:23,263 - INFO - All input files validated successfully
+2025-08-13 17:29:23,263 - INFO - Real data: data/sp500_data.csv
+2025-08-13 17:29:23,263 - INFO - Synthetic data directory: results
+2025-08-13 17:29:23,263 - INFO -   GARCH: garch_returns.npy
+2025-08-13 17:29:23,263 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 17:29:23,263 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 17:29:23,263 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 17:29:23,263 - INFO - Creating output directories...
+2025-08-13 17:29:23,263 - INFO - Initializing evaluation framework...
+2025-08-13 17:29:23,276 - INFO - Computing evaluation metrics...
+2025-08-13 17:38:00,579 - ERROR - Build failed with error: could not convert string to float: 'l'
+2025-08-13 17:38:00,580 - ERROR - Check the build log for details
+2025-08-13 17:38:38,727 - INFO - === BUILD LOG START ===
+2025-08-13 17:38:38,727 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 17:38:38,727 - INFO - OS: Darwin 24.0.0
+2025-08-13 17:38:38,727 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 17:38:38,727 - INFO - Timestamp: 2025-08-13T17:38:38.727959
+2025-08-13 17:38:38,727 - INFO - NumPy version: 1.26.4
+2025-08-13 17:38:38,728 - INFO - Pandas version: 2.2.2
+2025-08-13 17:38:38,728 - INFO - Matplotlib version: 3.8.4
+2025-08-13 17:38:38,728 - INFO - Seaborn version: 0.13.2
+2025-08-13 17:38:38,728 - INFO - SciPy version: 1.13.1
+2025-08-13 17:38:38,728 - INFO - Statsmodels version: 0.14.2
+2025-08-13 17:38:38,728 - INFO - Validating input files...
+2025-08-13 17:38:38,728 - INFO - All input files validated successfully
+2025-08-13 17:38:38,728 - INFO - Real data: data/sp500_data.csv
+2025-08-13 17:38:38,728 - INFO - Synthetic data directory: results
+2025-08-13 17:38:38,728 - INFO -   GARCH: garch_returns.npy
+2025-08-13 17:38:38,728 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 17:38:38,728 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 17:38:38,728 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 17:38:38,728 - INFO - Creating output directories...
+2025-08-13 17:38:38,728 - INFO - Initializing evaluation framework...
+2025-08-13 17:38:38,747 - INFO - Computing evaluation metrics...
+2025-08-13 19:21:51,605 - INFO - === BUILD LOG START ===
+2025-08-13 19:21:51,606 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 19:21:51,606 - INFO - OS: Darwin 24.0.0
+2025-08-13 19:21:51,606 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 19:21:51,606 - INFO - Timestamp: 2025-08-13T19:21:51.606459
+2025-08-13 19:21:51,606 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 19:21:51,606 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 19:21:51,606 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 19:21:51,606 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 19:21:51,606 - INFO - CPU cores: 8
+2025-08-13 19:21:51,606 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 19:21:51,606 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 19:21:51,606 - INFO - dtype: float32 for kernel math
+2025-08-13 19:21:51,606 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 19:21:51,606 - INFO - Unbiased U-statistic estimator
+2025-08-13 19:21:51,606 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 19:21:51,606 - INFO - NumPy version: 1.26.4
+2025-08-13 19:21:51,606 - INFO - Pandas version: 2.2.2
+2025-08-13 19:21:51,606 - INFO - Matplotlib version: 3.8.4
+2025-08-13 19:21:51,606 - INFO - Seaborn version: 0.13.2
+2025-08-13 19:21:51,606 - INFO - SciPy version: 1.13.1
+2025-08-13 19:21:51,606 - INFO - Statsmodels version: 0.14.2
+2025-08-13 19:21:51,606 - INFO - BLAS vendor: Could not detect
+2025-08-13 19:21:51,606 - INFO - Validating input files...
+2025-08-13 19:21:51,607 - INFO - All input files validated successfully
+2025-08-13 19:21:51,607 - INFO - Real data: data/sp500_data.csv
+2025-08-13 19:21:51,607 - INFO - Synthetic data directory: results
+2025-08-13 19:21:51,607 - INFO -   GARCH: garch_returns.npy
+2025-08-13 19:21:51,607 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 19:21:51,607 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 19:21:51,607 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 19:21:51,607 - INFO - Creating output directories...
+2025-08-13 19:21:51,607 - INFO - Initializing evaluation framework...
+2025-08-13 19:21:51,625 - INFO - Computing evaluation metrics...
+2025-08-13 19:21:56,694 - INFO - Saving evaluation results...
+2025-08-13 19:21:56,698 - INFO - Generating metrics summary...
+2025-08-13 19:22:14,569 - INFO - Initializing PDF builder...
+2025-08-13 19:22:14,570 - INFO - Building Final Results PDF...
+2025-08-13 19:22:14,779 - INFO - Final Results PDF created successfully: final_results_thesis/final_results_thesis.pdf
+2025-08-13 19:22:14,779 - INFO - Build completed successfully!
+2025-08-13 19:22:14,779 - INFO - === PERFORMANCE SUMMARY ===
+2025-08-13 19:22:14,779 - INFO - CPU core count: 8
+2025-08-13 19:22:14,779 - INFO - Effective thread settings:
+2025-08-13 19:22:14,779 - INFO -   OMP_NUM_THREADS: 1
+2025-08-13 19:22:14,779 - INFO -   MKL_NUM_THREADS: 1
+2025-08-13 19:22:14,779 - INFO -   OPENBLAS_NUM_THREADS: 1
+2025-08-13 19:22:14,779 - INFO - Build completed with performance optimizations
+2025-08-13 19:22:14,779 - INFO - Creating reproducibility documentation...
+2025-08-13 19:29:01,784 - INFO - === BUILD LOG START ===
+2025-08-13 19:29:01,785 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 19:29:01,785 - INFO - OS: Darwin 24.0.0
+2025-08-13 19:29:01,785 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 19:29:01,785 - INFO - Timestamp: 2025-08-13T19:29:01.785359
+2025-08-13 19:29:01,785 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 19:29:01,785 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 19:29:01,785 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 19:29:01,785 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 19:29:01,785 - INFO - CPU cores: 8
+2025-08-13 19:29:01,785 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 19:29:01,785 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 19:29:01,785 - INFO - dtype: float32 for kernel math
+2025-08-13 19:29:01,785 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 19:29:01,785 - INFO - Unbiased U-statistic estimator
+2025-08-13 19:29:01,785 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 19:29:01,785 - INFO - NumPy version: 1.26.4
+2025-08-13 19:29:01,785 - INFO - Pandas version: 2.2.2
+2025-08-13 19:29:01,785 - INFO - Matplotlib version: 3.8.4
+2025-08-13 19:29:01,785 - INFO - Seaborn version: 0.13.2
+2025-08-13 19:29:01,785 - INFO - SciPy version: 1.13.1
+2025-08-13 19:29:01,785 - INFO - Statsmodels version: 0.14.2
+2025-08-13 19:29:01,785 - INFO - BLAS vendor: Could not detect
+2025-08-13 19:29:01,785 - INFO - Validating input files...
+2025-08-13 19:29:01,785 - INFO - All input files validated successfully
+2025-08-13 19:29:01,785 - INFO - Real data: data/sp500_data.csv
+2025-08-13 19:29:01,785 - INFO - Synthetic data directory: results
+2025-08-13 19:29:01,785 - INFO -   GARCH: garch_returns.npy
+2025-08-13 19:29:01,785 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 19:29:01,785 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 19:29:01,785 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 19:29:01,785 - INFO - Creating output directories...
+2025-08-13 19:29:01,786 - INFO - Initializing evaluation framework...
+2025-08-13 19:29:01,805 - INFO - Computing evaluation metrics...
+2025-08-13 19:29:06,828 - INFO - Saving evaluation results...
+2025-08-13 19:29:06,831 - INFO - Generating metrics summary...
+2025-08-13 19:29:24,818 - INFO - Initializing PDF builder...
+2025-08-13 19:29:24,819 - INFO - Building Final Results PDF...
+2025-08-13 19:29:25,326 - ERROR - Build failed with error: 6 columns passed, passed data had 7 columns
+2025-08-13 19:29:25,326 - ERROR - Check the build log for details
+2025-08-13 19:29:43,800 - INFO - === BUILD LOG START ===
+2025-08-13 19:29:43,800 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 19:29:43,800 - INFO - OS: Darwin 24.0.0
+2025-08-13 19:29:43,800 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 19:29:43,800 - INFO - Timestamp: 2025-08-13T19:29:43.800871
+2025-08-13 19:29:43,800 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 19:29:43,800 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 19:29:43,800 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 19:29:43,800 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 19:29:43,800 - INFO - CPU cores: 8
+2025-08-13 19:29:43,800 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 19:29:43,800 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 19:29:43,801 - INFO - dtype: float32 for kernel math
+2025-08-13 19:29:43,801 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 19:29:43,801 - INFO - Unbiased U-statistic estimator
+2025-08-13 19:29:43,801 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 19:29:43,801 - INFO - NumPy version: 1.26.4
+2025-08-13 19:29:43,801 - INFO - Pandas version: 2.2.2
+2025-08-13 19:29:43,801 - INFO - Matplotlib version: 3.8.4
+2025-08-13 19:29:43,801 - INFO - Seaborn version: 0.13.2
+2025-08-13 19:29:43,801 - INFO - SciPy version: 1.13.1
+2025-08-13 19:29:43,801 - INFO - Statsmodels version: 0.14.2
+2025-08-13 19:29:43,801 - INFO - BLAS vendor: Could not detect
+2025-08-13 19:29:43,801 - INFO - Validating input files...
+2025-08-13 19:29:43,801 - INFO - All input files validated successfully
+2025-08-13 19:29:43,801 - INFO - Real data: data/sp500_data.csv
+2025-08-13 19:29:43,801 - INFO - Synthetic data directory: results
+2025-08-13 19:29:43,801 - INFO -   GARCH: garch_returns.npy
+2025-08-13 19:29:43,801 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 19:29:43,801 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 19:29:43,801 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 19:29:43,801 - INFO - Creating output directories...
+2025-08-13 19:29:43,801 - INFO - Initializing evaluation framework...
+2025-08-13 19:29:43,817 - INFO - Computing evaluation metrics...
+2025-08-13 19:29:48,830 - INFO - Saving evaluation results...
+2025-08-13 19:29:48,833 - INFO - Generating metrics summary...
+2025-08-13 19:30:06,772 - INFO - Initializing PDF builder...
+2025-08-13 19:30:06,773 - INFO - Building Final Results PDF...
+2025-08-13 19:30:07,821 - ERROR - Build failed with error: 'var_1'
+2025-08-13 19:30:07,821 - ERROR - Check the build log for details
+2025-08-13 19:32:35,835 - INFO - === BUILD LOG START ===
+2025-08-13 19:32:35,836 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 19:32:35,836 - INFO - OS: Darwin 24.0.0
+2025-08-13 19:32:35,836 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 19:32:35,836 - INFO - Timestamp: 2025-08-13T19:32:35.836331
+2025-08-13 19:32:35,836 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 19:32:35,836 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 19:32:35,836 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 19:32:35,836 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 19:32:35,836 - INFO - CPU cores: 8
+2025-08-13 19:32:35,836 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 19:32:35,836 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 19:32:35,836 - INFO - dtype: float32 for kernel math
+2025-08-13 19:32:35,836 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 19:32:35,836 - INFO - Unbiased U-statistic estimator
+2025-08-13 19:32:35,836 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 19:32:35,836 - INFO - NumPy version: 1.26.4
+2025-08-13 19:32:35,836 - INFO - Pandas version: 2.2.2
+2025-08-13 19:32:35,836 - INFO - Matplotlib version: 3.8.4
+2025-08-13 19:32:35,836 - INFO - Seaborn version: 0.13.2
+2025-08-13 19:32:35,836 - INFO - SciPy version: 1.13.1
+2025-08-13 19:32:35,836 - INFO - Statsmodels version: 0.14.2
+2025-08-13 19:32:35,836 - INFO - BLAS vendor: Could not detect
+2025-08-13 19:32:35,836 - INFO - Validating input files...
+2025-08-13 19:32:35,836 - INFO - All input files validated successfully
+2025-08-13 19:32:35,836 - INFO - Real data: data/sp500_data.csv
+2025-08-13 19:32:35,836 - INFO - Synthetic data directory: results
+2025-08-13 19:32:35,836 - INFO -   GARCH: garch_returns.npy
+2025-08-13 19:32:35,836 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 19:32:35,836 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 19:32:35,836 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 19:32:35,836 - INFO - Creating output directories...
+2025-08-13 19:32:35,836 - INFO - Initializing evaluation framework...
+2025-08-13 19:32:35,855 - INFO - Computing evaluation metrics...
+2025-08-13 19:32:40,865 - INFO - Saving evaluation results...
+2025-08-13 19:32:40,869 - INFO - Generating metrics summary...
+2025-08-13 19:32:58,877 - INFO - Initializing PDF builder...
+2025-08-13 19:32:58,878 - INFO - Building Final Results PDF...
+2025-08-13 19:33:00,363 - ERROR - Build failed with error: 6 columns passed, passed data had 7 columns
+2025-08-13 19:33:00,363 - ERROR - Check the build log for details
+2025-08-13 19:37:03,060 - INFO - === BUILD LOG START ===
+2025-08-13 19:37:03,061 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 19:37:03,061 - INFO - OS: Darwin 24.0.0
+2025-08-13 19:37:03,061 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 19:37:03,061 - INFO - Timestamp: 2025-08-13T19:37:03.061265
+2025-08-13 19:37:03,061 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 19:37:03,061 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 19:37:03,061 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 19:37:03,061 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 19:37:03,061 - INFO - CPU cores: 8
+2025-08-13 19:37:03,061 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 19:37:03,061 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 19:37:03,061 - INFO - dtype: float32 for kernel math
+2025-08-13 19:37:03,061 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 19:37:03,061 - INFO - Unbiased U-statistic estimator
+2025-08-13 19:37:03,061 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 19:37:03,061 - INFO - NumPy version: 1.26.4
+2025-08-13 19:37:03,061 - INFO - Pandas version: 2.2.2
+2025-08-13 19:37:03,061 - INFO - Matplotlib version: 3.8.4
+2025-08-13 19:37:03,061 - INFO - Seaborn version: 0.13.2
+2025-08-13 19:37:03,061 - INFO - SciPy version: 1.13.1
+2025-08-13 19:37:03,061 - INFO - Statsmodels version: 0.14.2
+2025-08-13 19:37:03,061 - INFO - BLAS vendor: Could not detect
+2025-08-13 19:37:03,061 - INFO - Validating input files...
+2025-08-13 19:37:03,061 - INFO - All input files validated successfully
+2025-08-13 19:37:03,061 - INFO - Real data: data/sp500_data.csv
+2025-08-13 19:37:03,061 - INFO - Synthetic data directory: results
+2025-08-13 19:37:03,061 - INFO -   GARCH: garch_returns.npy
+2025-08-13 19:37:03,061 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 19:37:03,061 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 19:37:03,061 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 19:37:03,061 - INFO - Creating output directories...
+2025-08-13 19:37:03,061 - INFO - Initializing evaluation framework...
+2025-08-13 19:37:03,078 - INFO - Computing evaluation metrics...
+2025-08-13 19:37:08,075 - INFO - Saving evaluation results...
+2025-08-13 19:37:08,081 - INFO - Generating metrics summary...
+2025-08-13 19:37:25,913 - INFO - Initializing PDF builder...
+2025-08-13 19:37:25,914 - INFO - Building Final Results PDF...
+2025-08-13 19:37:27,468 - ERROR - Build failed with error: 'overall_score'
+2025-08-13 19:37:27,468 - ERROR - Check the build log for details
+2025-08-13 19:38:37,664 - INFO - === BUILD LOG START ===
+2025-08-13 19:38:37,665 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 19:38:37,665 - INFO - OS: Darwin 24.0.0
+2025-08-13 19:38:37,665 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 19:38:37,665 - INFO - Timestamp: 2025-08-13T19:38:37.665118
+2025-08-13 19:38:37,665 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 19:38:37,665 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 19:38:37,665 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 19:38:37,665 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 19:38:37,665 - INFO - CPU cores: 8
+2025-08-13 19:38:37,665 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 19:38:37,665 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 19:38:37,665 - INFO - dtype: float32 for kernel math
+2025-08-13 19:38:37,665 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 19:38:37,665 - INFO - Unbiased U-statistic estimator
+2025-08-13 19:38:37,665 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 19:38:37,665 - INFO - NumPy version: 1.26.4
+2025-08-13 19:38:37,665 - INFO - Pandas version: 2.2.2
+2025-08-13 19:38:37,665 - INFO - Matplotlib version: 3.8.4
+2025-08-13 19:38:37,665 - INFO - Seaborn version: 0.13.2
+2025-08-13 19:38:37,665 - INFO - SciPy version: 1.13.1
+2025-08-13 19:38:37,665 - INFO - Statsmodels version: 0.14.2
+2025-08-13 19:38:37,665 - INFO - BLAS vendor: Could not detect
+2025-08-13 19:38:37,665 - INFO - Validating input files...
+2025-08-13 19:38:37,665 - INFO - All input files validated successfully
+2025-08-13 19:38:37,665 - INFO - Real data: data/sp500_data.csv
+2025-08-13 19:38:37,665 - INFO - Synthetic data directory: results
+2025-08-13 19:38:37,665 - INFO -   GARCH: garch_returns.npy
+2025-08-13 19:38:37,665 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 19:38:37,665 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 19:38:37,665 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 19:38:37,665 - INFO - Creating output directories...
+2025-08-13 19:38:37,665 - INFO - Initializing evaluation framework...
+2025-08-13 19:38:37,683 - INFO - Computing evaluation metrics...
+2025-08-13 19:38:42,690 - INFO - Saving evaluation results...
+2025-08-13 19:38:42,694 - INFO - Generating metrics summary...
+2025-08-13 19:39:00,680 - INFO - Initializing PDF builder...
+2025-08-13 19:39:00,680 - INFO - Building Final Results PDF...
+2025-08-13 19:39:02,393 - INFO - Final Results PDF created successfully: final_results_thesis/final_results_thesis.pdf
+2025-08-13 19:39:02,393 - INFO - Build completed successfully!
+2025-08-13 19:39:02,394 - INFO - === PERFORMANCE SUMMARY ===
+2025-08-13 19:39:02,394 - INFO - CPU core count: 8
+2025-08-13 19:39:02,394 - INFO - Effective thread settings:
+2025-08-13 19:39:02,394 - INFO -   OMP_NUM_THREADS: 1
+2025-08-13 19:39:02,394 - INFO -   MKL_NUM_THREADS: 1
+2025-08-13 19:39:02,394 - INFO -   OPENBLAS_NUM_THREADS: 1
+2025-08-13 19:39:02,394 - INFO - Build completed with performance optimizations
+2025-08-13 19:39:02,394 - INFO - Creating reproducibility documentation...
+2025-08-13 20:02:25,575 - INFO - === BUILD LOG START ===
+2025-08-13 20:02:25,575 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 20:02:25,575 - INFO - OS: Darwin 24.0.0
+2025-08-13 20:02:25,575 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 20:02:25,575 - INFO - Timestamp: 2025-08-13T20:02:25.575953
+2025-08-13 20:02:25,575 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 20:02:25,575 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 20:02:25,576 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 20:02:25,576 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 20:02:25,576 - INFO - CPU cores: 8
+2025-08-13 20:02:25,576 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 20:02:25,576 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 20:02:25,576 - INFO - dtype: float32 for kernel math
+2025-08-13 20:02:25,576 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 20:02:25,576 - INFO - Unbiased U-statistic estimator
+2025-08-13 20:02:25,576 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 20:02:25,576 - INFO - NumPy version: 1.26.4
+2025-08-13 20:02:25,576 - INFO - Pandas version: 2.2.2
+2025-08-13 20:02:25,576 - INFO - Matplotlib version: 3.8.4
+2025-08-13 20:02:25,576 - INFO - Seaborn version: 0.13.2
+2025-08-13 20:02:25,576 - INFO - SciPy version: 1.13.1
+2025-08-13 20:02:25,576 - INFO - Statsmodels version: 0.14.2
+2025-08-13 20:02:25,576 - INFO - BLAS vendor: Could not detect
+2025-08-13 20:02:25,576 - INFO - Validating input files...
+2025-08-13 20:02:25,576 - INFO - All input files validated successfully
+2025-08-13 20:02:25,576 - INFO - Real data: data/sp500_data.csv
+2025-08-13 20:02:25,576 - INFO - Synthetic data directory: results
+2025-08-13 20:02:25,576 - INFO -   GARCH: garch_returns.npy
+2025-08-13 20:02:25,576 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 20:02:25,576 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 20:02:25,576 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 20:02:25,576 - INFO - Creating output directories...
+2025-08-13 20:02:25,576 - INFO - Initializing evaluation framework...
+2025-08-13 20:02:25,594 - INFO - Computing evaluation metrics...
+2025-08-13 20:02:30,759 - INFO - Saving evaluation results...
+2025-08-13 20:02:30,763 - INFO - Generating metrics summary...
+2025-08-13 20:02:48,686 - INFO - Initializing PDF builder...
+2025-08-13 20:02:48,686 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 20:02:48,686 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 20:02:48,686 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 20:02:48,687 - INFO - Coverage constraint: ±10% of target
+2025-08-13 20:02:48,687 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 20:02:48,687 - INFO - Section 6: Robustness analysis data available
+2025-08-13 20:02:48,687 - INFO -   GARCH: 1 samples
+2025-08-13 20:02:48,687 - INFO -   DDPM: 5 samples
+2025-08-13 20:02:48,687 - INFO -   TimeGrad: 5 samples
+2025-08-13 20:02:48,687 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 20:02:48,687 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 20:02:48,687 - INFO - Confidence intervals: 95% level
+2025-08-13 20:02:48,687 - INFO - Section 7: Use-case panels implementation
+2025-08-13 20:02:48,687 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 20:02:48,687 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 20:02:48,687 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 20:02:48,687 - INFO - Building Final Results PDF...
+2025-08-13 20:02:51,123 - INFO - Final Results PDF created successfully: final_results_thesis/final_results_thesis.pdf
+2025-08-13 20:02:51,123 - INFO - Build completed successfully!
+2025-08-13 20:02:51,123 - INFO - === PERFORMANCE SUMMARY ===
+2025-08-13 20:02:51,123 - INFO - CPU core count: 8
+2025-08-13 20:02:51,123 - INFO - Effective thread settings:
+2025-08-13 20:02:51,123 - INFO -   OMP_NUM_THREADS: 1
+2025-08-13 20:02:51,123 - INFO -   MKL_NUM_THREADS: 1
+2025-08-13 20:02:51,123 - INFO -   OPENBLAS_NUM_THREADS: 1
+2025-08-13 20:02:51,123 - INFO - Build completed with performance optimizations
+2025-08-13 20:02:51,123 - INFO - Creating reproducibility documentation...
+2025-08-13 20:21:15,360 - INFO - === BUILD LOG START ===
+2025-08-13 20:21:15,360 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 20:21:15,360 - INFO - OS: Darwin 24.0.0
+2025-08-13 20:21:15,361 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 20:21:15,361 - INFO - Timestamp: 2025-08-13T20:21:15.361047
+2025-08-13 20:21:15,361 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 20:21:15,361 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 20:21:15,361 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 20:21:15,361 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 20:21:15,361 - INFO - CPU cores: 8
+2025-08-13 20:21:15,361 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 20:21:15,361 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 20:21:15,361 - INFO - dtype: float32 for kernel math
+2025-08-13 20:21:15,361 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 20:21:15,361 - INFO - Unbiased U-statistic estimator
+2025-08-13 20:21:15,361 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 20:21:15,361 - INFO - NumPy version: 1.26.4
+2025-08-13 20:21:15,361 - INFO - Pandas version: 2.2.2
+2025-08-13 20:21:15,361 - INFO - Matplotlib version: 3.8.4
+2025-08-13 20:21:15,361 - INFO - Seaborn version: 0.13.2
+2025-08-13 20:21:15,361 - INFO - SciPy version: 1.13.1
+2025-08-13 20:21:15,361 - INFO - Statsmodels version: 0.14.2
+2025-08-13 20:21:15,361 - INFO - BLAS vendor: Could not detect
+2025-08-13 20:21:15,361 - INFO - Validating input files...
+2025-08-13 20:21:15,361 - INFO - All input files validated successfully
+2025-08-13 20:21:15,361 - INFO - Real data: data/sp500_data.csv
+2025-08-13 20:21:15,361 - INFO - Synthetic data directory: results
+2025-08-13 20:21:15,361 - INFO -   GARCH: garch_returns.npy
+2025-08-13 20:21:15,361 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 20:21:15,361 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 20:21:15,361 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 20:21:15,361 - INFO - Creating output directories...
+2025-08-13 20:21:15,361 - INFO - Initializing evaluation framework...
+2025-08-13 20:21:15,380 - INFO - Computing evaluation metrics...
+2025-08-13 20:21:20,354 - INFO - Saving evaluation results...
+2025-08-13 20:21:20,358 - INFO - Generating metrics summary...
+2025-08-13 20:21:38,203 - INFO - Initializing PDF builder...
+2025-08-13 20:21:38,204 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 20:21:38,204 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 20:21:38,204 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 20:21:38,204 - INFO - Coverage constraint: ±10% of target
+2025-08-13 20:21:38,204 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 20:21:38,204 - INFO - Section 6: Robustness analysis data available
+2025-08-13 20:21:38,204 - INFO -   GARCH: 1 samples
+2025-08-13 20:21:38,204 - INFO -   DDPM: 5 samples
+2025-08-13 20:21:38,204 - INFO -   TimeGrad: 5 samples
+2025-08-13 20:21:38,204 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 20:21:38,204 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 20:21:38,204 - INFO - Confidence intervals: 95% level
+2025-08-13 20:21:38,204 - INFO - Section 7: Use-case panels implementation
+2025-08-13 20:21:38,204 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 20:21:38,204 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 20:21:38,204 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 20:21:38,204 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 20:21:38,204 - INFO - export_overleaf: True
+2025-08-13 20:21:38,204 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 20:21:38,204 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 20:21:38,204 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 20:21:38,204 - INFO - Building Final Results PDF...
+2025-08-13 20:21:40,647 - INFO - Final Results PDF created successfully: final_results_thesis/final_results_thesis.pdf
+2025-08-13 20:21:40,647 - INFO - Build completed successfully!
+2025-08-13 20:21:40,647 - INFO - Exporting to Overleaf format...
+2025-08-13 20:21:40,647 - ERROR - Overleaf export failed: No module named 'src'
+2025-08-13 20:21:40,647 - ERROR - Check the build log for details
+2025-08-13 20:21:40,647 - INFO - === PERFORMANCE SUMMARY ===
+2025-08-13 20:21:40,647 - INFO - CPU core count: 8
+2025-08-13 20:21:40,647 - INFO - Effective thread settings:
+2025-08-13 20:21:40,647 - INFO -   OMP_NUM_THREADS: 1
+2025-08-13 20:21:40,647 - INFO -   MKL_NUM_THREADS: 1
+2025-08-13 20:21:40,647 - INFO -   OPENBLAS_NUM_THREADS: 1
+2025-08-13 20:21:40,647 - INFO - Build completed with performance optimizations
+2025-08-13 20:21:40,647 - INFO - Creating reproducibility documentation...
+2025-08-13 20:22:32,596 - INFO - === BUILD LOG START ===
+2025-08-13 20:22:32,597 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 20:22:32,597 - INFO - OS: Darwin 24.0.0
+2025-08-13 20:22:32,597 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 20:22:32,597 - INFO - Timestamp: 2025-08-13T20:22:32.597184
+2025-08-13 20:22:32,597 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 20:22:32,597 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 20:22:32,597 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 20:22:32,597 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 20:22:32,597 - INFO - CPU cores: 8
+2025-08-13 20:22:32,597 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 20:22:32,597 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 20:22:32,597 - INFO - dtype: float32 for kernel math
+2025-08-13 20:22:32,597 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 20:22:32,597 - INFO - Unbiased U-statistic estimator
+2025-08-13 20:22:32,597 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 20:22:32,597 - INFO - NumPy version: 1.26.4
+2025-08-13 20:22:32,597 - INFO - Pandas version: 2.2.2
+2025-08-13 20:22:32,597 - INFO - Matplotlib version: 3.8.4
+2025-08-13 20:22:32,597 - INFO - Seaborn version: 0.13.2
+2025-08-13 20:22:32,597 - INFO - SciPy version: 1.13.1
+2025-08-13 20:22:32,597 - INFO - Statsmodels version: 0.14.2
+2025-08-13 20:22:32,597 - INFO - BLAS vendor: Could not detect
+2025-08-13 20:22:32,597 - INFO - Validating input files...
+2025-08-13 20:22:32,597 - INFO - All input files validated successfully
+2025-08-13 20:22:32,597 - INFO - Real data: data/sp500_data.csv
+2025-08-13 20:22:32,597 - INFO - Synthetic data directory: results
+2025-08-13 20:22:32,597 - INFO -   GARCH: garch_returns.npy
+2025-08-13 20:22:32,597 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 20:22:32,597 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 20:22:32,597 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 20:22:32,597 - INFO - Creating output directories...
+2025-08-13 20:22:32,597 - INFO - Initializing evaluation framework...
+2025-08-13 20:22:32,618 - INFO - Computing evaluation metrics...
+2025-08-13 20:22:37,560 - INFO - Saving evaluation results...
+2025-08-13 20:22:37,563 - INFO - Generating metrics summary...
+2025-08-13 20:22:55,358 - INFO - Initializing PDF builder...
+2025-08-13 20:22:55,358 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 20:22:55,358 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 20:22:55,358 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 20:22:55,358 - INFO - Coverage constraint: ±10% of target
+2025-08-13 20:22:55,358 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 20:22:55,358 - INFO - Section 6: Robustness analysis data available
+2025-08-13 20:22:55,358 - INFO -   GARCH: 1 samples
+2025-08-13 20:22:55,358 - INFO -   DDPM: 5 samples
+2025-08-13 20:22:55,358 - INFO -   TimeGrad: 5 samples
+2025-08-13 20:22:55,358 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 20:22:55,358 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 20:22:55,358 - INFO - Confidence intervals: 95% level
+2025-08-13 20:22:55,359 - INFO - Section 7: Use-case panels implementation
+2025-08-13 20:22:55,359 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 20:22:55,359 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 20:22:55,359 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 20:22:55,359 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 20:22:55,359 - INFO - export_overleaf: True
+2025-08-13 20:22:55,359 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 20:22:55,359 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 20:22:55,359 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 20:22:55,359 - INFO - Building Final Results PDF...
+2025-08-13 20:22:57,780 - INFO - Final Results PDF created successfully: final_results_thesis/final_results_thesis.pdf
+2025-08-13 20:22:57,780 - INFO - Build completed successfully!
+2025-08-13 20:22:57,781 - INFO - Exporting to Overleaf format...
+2025-08-13 20:22:57,784 - INFO - Starting Overleaf export...
+2025-08-13 20:22:57,789 - INFO - Overleaf export completed: 17 assets generated
+2025-08-13 20:22:57,789 - INFO - Overleaf export completed successfully!
+2025-08-13 20:22:57,789 - INFO - === PERFORMANCE SUMMARY ===
+2025-08-13 20:22:57,789 - INFO - CPU core count: 8
+2025-08-13 20:22:57,789 - INFO - Effective thread settings:
+2025-08-13 20:22:57,789 - INFO -   OMP_NUM_THREADS: 1
+2025-08-13 20:22:57,789 - INFO -   MKL_NUM_THREADS: 1
+2025-08-13 20:22:57,789 - INFO -   OPENBLAS_NUM_THREADS: 1
+2025-08-13 20:22:57,789 - INFO - Build completed with performance optimizations
+2025-08-13 20:22:57,789 - INFO - Creating reproducibility documentation...

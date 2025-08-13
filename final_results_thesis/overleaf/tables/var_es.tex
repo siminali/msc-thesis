@@ -1,0 +1,16 @@
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrrrrrrr}
+\toprule
+Model & VaR 1\% & ES 1\% & VaR 5\% & ES 5\% & VaR 95\% & ES 95\% & VaR 99\% & ES 99\% \\
+\midrule
+Real & -3.2562 & -3.7264 & -1.8056 & -2.5906 & 1.8306 & 2.3785 & 2.5820 & 3.1662 \\
+GARCH & -0.0326 & -0.0373 & -0.0181 & -0.0259 & 0.0183 & 0.0238 & 0.0258 & 0.0317 \\
+DDPM & -2.6676 & -2.9479 & -1.7862 & -2.3358 & 1.6849 & 2.1705 & 2.3444 & 2.8629 \\
+TimeGrad & -2.6912 & -3.0203 & -1.4927 & -2.1490 & 1.3603 & 1.8732 & 2.2521 & 2.7951 \\
+LLM-Conditioned & -3.2784 & -4.6104 & -1.5218 & -2.7151 & 1.5458 & 2.3904 & 2.6057 & 4.0904 \\
+\bottomrule
+\end{tabular}
+\caption{Value at Risk (VaR) and Expected Shortfall (ES) at different confidence levels. Negative values indicate downside risk.}
+\label{tab:var_es}
+\end{table}

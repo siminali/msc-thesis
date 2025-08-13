@@ -1,0 +1,6 @@
+LLM-Conditioned Diffusion Model Evaluation Results
+==================================================
+Real data statistics: {'mean': 0.0004377698233434395, 'std': 0.010888264601756459, 'skew': -0.7259082070770357, 'kurtosis': 13.19533293846844}
+Synthetic data statistics: {'mean': 0.0004664211, 'std': 0.010792701, 'skew': -0.4778094717063999, 'kurtosis': 12.401315532540737}
+KS statistic: 0.025602
+KS p-value: 0.018743

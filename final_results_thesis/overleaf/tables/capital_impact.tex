@@ -1,0 +1,15 @@
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+Model & ES 99\% & Abs Diff vs Real & \% Diff vs Real \\
+\midrule
+GARCH & 0.0317 & 3.1345 & 99.00\% \\
+DDPM & 2.8629 & 0.3033 & 9.58\% \\
+TimeGrad & 2.7951 & 0.3711 & 11.72\% \\
+LLM-Conditioned & 4.0904 & 0.9242 & 29.19\% \\
+\bottomrule
+\end{tabular}
+\caption{Capital Impact: Expected Shortfall at 99\% confidence level and differences versus Real data.}
+\label{tab:capital_impact}
+\end{table}

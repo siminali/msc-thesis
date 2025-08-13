@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrrrrr}
+\toprule
+Model & Level & Observed & Expected & Kupiec p-value & Independence p-value & Combined p-value \\
+\midrule
+GARCH & 1\% & 8 & 0.010 & 0.8705 & 1.0000 & 0.9868 \\
+GARCH & 5\% & 38 & 0.050 & 0.9667 & 0.1743 & 0.3971 \\
+DDPM & 1\% & 10 & 0.010 & 1.0000 & 1.0000 & 1.0000 \\
+DDPM & 5\% & 50 & 0.050 & 1.0000 & 0.0524 & 0.1524 \\
+TimeGrad & 1\% & 10 & 0.010 & 1.0000 & 1.0000 & 1.0000 \\
+TimeGrad & 5\% & 50 & 0.050 & 1.0000 & 0.7540 & 0.9521 \\
+LLM-Conditioned & 1\% & 10 & 0.010 & 1.0000 & 1.0000 & 1.0000 \\
+LLM-Conditioned & 5\% & 50 & 0.050 & 1.0000 & 0.2699 & 0.5440 \\
+\bottomrule
+\end{tabular}
+\caption{VaR Backtesting Results: Observed violations, expected rates, and test p-values. Violation intervals use Clopper-Pearson method.}
+\label{tab:backtesting}
+\end{table}

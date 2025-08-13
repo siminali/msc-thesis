@@ -15,13 +15,17 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from transformers import AutoTokenizer, AutoModel
-import requests
 from datetime import datetime, timedelta
 import json
 import os
 from tqdm import tqdm
 import warnings
+import scipy.stats
 warnings.filterwarnings('ignore')
+
+# Global constants for consistency
+SEQ_LEN = 60
+EMBEDDING_DIM = 768  # DistilBERT native dimension
 
 class LLMConditioningModule:
     """
@@ -30,57 +34,50 @@ class LLMConditioningModule:
     get latent embeddings, use as conditioning for diffusion model.
     """
     
-    def __init__(self, model_name="distilbert-base-uncased"):
+    def __init__(self, model_name="distilbert-base-uncased", device="cpu"):
         """
         Initialize LLM for text embedding generation.
         
         Args:
             model_name: Hugging Face model name for text processing
+            device: Device to run tokenizer and model on
         """
+        self.device = device
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModel.from_pretrained(model_name)
+        self.model = self.model.to(device)
         self.model.eval()
         
         # Freeze LLM parameters (we only use it for embeddings)
         for param in self.model.parameters():
             param.requires_grad = False
             
-        print(f"✅ LLM Conditioning Module initialized with {model_name}")
+        print(f"LLM Conditioning Module initialized with {model_name} on {device}")
     
     def get_market_sentiment_data(self, start_date, end_date):
         """
-        Fetch market sentiment data from various sources.
-        This simulates the internet data that would be fed into the LLM.
+        Generate synthetic market sentiment data for demonstration.
+        In practice, this would fetch real market news/sentiment data.
         
         Args:
-            start_date: Start date for data collection
-            end_date: End date for data collection
+            start_date: Start date for sentiment data
+            end_date: End date for sentiment data
             
         Returns:
-            List of text data representing market sentiment
+            List of sentiment strings indexed by date
         """
-        # Simulate market sentiment data from different sources
         sentiment_data = []
+        current_date = start_date
         
-        # Generate synthetic market sentiment text based on S&P 500 movements
-        # In practice, this would come from news APIs, social media, etc.
-        
-        # Example sentiment texts based on market conditions
+        # Base market sentiments
         base_sentiments = [
-            "Market shows strong bullish momentum with increasing trading volumes",
-            "Volatility spikes as investors react to economic uncertainty",
-            "Risk appetite increases as market participants seek higher returns",
-            "Market sentiment turns cautious amid geopolitical tensions",
-            "Trading activity remains subdued with low volatility environment",
-            "Institutional investors show confidence in market fundamentals",
-            "Retail investors drive market momentum with increased participation",
-            "Market volatility normalizes after recent turbulence",
-            "Risk-off sentiment prevails as safe-haven assets gain",
-            "Market participants remain optimistic about economic recovery"
+            "Market shows strong bullish momentum with positive earnings reports",
+            "Volatility increases as uncertainty grows in global markets",
+            "Central bank policy decisions drive market sentiment",
+            "Tech sector leads market gains on innovation news",
+            "Economic indicators suggest stable growth trajectory"
         ]
         
-        # Generate daily sentiment based on market conditions
-        current_date = start_date
         while current_date <= end_date:
             # Randomly select and modify sentiment based on date
             sentiment = np.random.choice(base_sentiments)
@@ -93,13 +90,14 @@ class LLMConditioningModule:
         
         return sentiment_data
     
-    def generate_embeddings(self, text_data, max_length=512):
+    def generate_embeddings(self, text_data, max_length=512, batch_size=32):
         """
         Generate embeddings from text data using the LLM.
         
         Args:
             text_data: List of text strings
             max_length: Maximum sequence length for tokenization
+            batch_size: Batch size for processing
             
         Returns:
             numpy array of embeddings
@@ -107,51 +105,69 @@ class LLMConditioningModule:
         embeddings = []
         
         with torch.no_grad():
-            for text in tqdm(text_data, desc="Generating LLM embeddings"):
-                # Tokenize text
+            # Process in batches
+            for i in tqdm(range(0, len(text_data), batch_size), desc="Generating LLM embeddings"):
+                batch_texts = text_data[i:i + batch_size]
+                
+                # Tokenize batch
                 inputs = self.tokenizer(
-                    text, 
+                    batch_texts, 
                     return_tensors="pt", 
                     max_length=max_length, 
                     truncation=True, 
                     padding=True
                 )
                 
+                # Move inputs to device
+                inputs = {k: v.to(self.device) for k, v in inputs.items()}
+                
                 # Generate embeddings
                 outputs = self.model(**inputs)
                 
                 # Use mean pooling over sequence length
-                embedding = outputs.last_hidden_state.mean(dim=1)  # [1, hidden_size]
-                embeddings.append(embedding.squeeze().numpy())
+                batch_embeddings = outputs.last_hidden_state.mean(dim=1)  # [batch_size, hidden_size]
+                embeddings.append(batch_embeddings.cpu().numpy())
         
-        return np.array(embeddings)
+        return np.vstack(embeddings)
     
-    def create_conditioning_vectors(self, start_date, end_date, embedding_dim=768):
+    def create_conditioning_vectors(self, returns_index, seq_len=SEQ_LEN, embedding_dim=EMBEDDING_DIM):
         """
         Create conditioning vectors for the diffusion model.
         
         Args:
-            start_date: Start date for conditioning data
-            end_date: End date for conditioning data
-            embedding_dim: Dimension of LLM embeddings
+            returns_index: Index of returns data (trading days)
+            seq_len: Length of training sequences
+            embedding_dim: Dimension of LLM embeddings (should be 768 for DistilBERT)
             
         Returns:
-            numpy array of conditioning vectors
+            numpy array of conditioning vectors with shape (num_sequences, embed_dim)
         """
-        # Get market sentiment data
+        # Get market sentiment data for the full date range
+        start_date = returns_index[0]
+        end_date = returns_index[-1]
         sentiment_data = self.get_market_sentiment_data(start_date, end_date)
         
         # Generate LLM embeddings
         embeddings = self.generate_embeddings(sentiment_data)
         
-        # Project to desired conditioning dimension if needed
-        if embeddings.shape[1] != embedding_dim:
-            # Simple linear projection (could be learned)
-            projection = np.random.randn(embeddings.shape[1], embedding_dim) * 0.1
-            embeddings = embeddings @ projection
+        # Create DataFrame of daily embeddings indexed by trading days
+        embedding_df = pd.DataFrame(embeddings, index=pd.date_range(start_date, end_date))
         
-        print(f"✅ Generated {len(embeddings)} conditioning vectors of dimension {embeddings.shape[1]}")
-        return embeddings
+        # Align with trading days using forward-fill and backfill
+        aligned_embeddings = embedding_df.reindex(returns_index, method='ffill').fillna(method='bfill')
+        
+        # Aggregate embeddings per training window
+        conditioning_vectors = []
+        for i in range(len(returns_index) - seq_len + 1):
+            window_embeddings = aligned_embeddings.iloc[i:i+seq_len].values
+            # Aggregate using mean (configurable method)
+            window_conditioning = window_embeddings.mean(axis=0)
+            conditioning_vectors.append(window_conditioning)
+        
+        conditioning_vectors = np.array(conditioning_vectors)
+        
+        print(f"Generated {len(conditioning_vectors)} conditioning vectors of dimension {conditioning_vectors.shape[1]}")
+        return conditioning_vectors
 
 class ConditionedDiffusionModel(nn.Module):
     """
@@ -159,7 +175,7 @@ class ConditionedDiffusionModel(nn.Module):
     Based on DDPM architecture but with conditioning capabilities.
     """
     
-    def __init__(self, sequence_length=60, conditioning_dim=768, hidden_dim=128):
+    def __init__(self, sequence_length=SEQ_LEN, conditioning_dim=EMBEDDING_DIM, hidden_dim=128):
         super(ConditionedDiffusionModel, self).__init__()
         
         self.sequence_length = sequence_length
@@ -187,7 +203,7 @@ class ConditionedDiffusionModel(nn.Module):
             nn.Linear(hidden_dim, 1)
         )
         
-        print(f"✅ Conditioned Diffusion Model initialized")
+        print(f"Conditioned Diffusion Model initialized")
         print(f"   - Sequence length: {sequence_length}")
         print(f"   - Conditioning dimension: {conditioning_dim}")
         print(f"   - Hidden dimension: {hidden_dim}")
@@ -225,21 +241,30 @@ class ConditionedDiffusionModel(nn.Module):
 class ConditionedDiffusionTrainer:
     """
     Trainer for the LLM-conditioned diffusion model.
-    Implements the training loop with proper conditioning.
+    Implements the training loop with proper conditioning and device safety.
     """
     
-    def __init__(self, model, num_timesteps=1000, beta_start=1e-4, beta_end=0.02):
+    def __init__(self, model, num_timesteps=1000, beta_start=1e-4, beta_end=0.02, device="cpu"):
         self.model = model
         self.num_timesteps = num_timesteps
+        self.device = device
         
-        # Linear noise schedule
-        self.betas = torch.linspace(beta_start, beta_end, num_timesteps)
+        # Move model to device
+        self.model = self.model.to(device)
+        
+        # Linear noise schedule on device
+        self.betas = torch.linspace(beta_start, beta_end, num_timesteps, device=device)
         self.alphas = 1 - self.betas
         self.alphas_cumprod = torch.cumprod(self.alphas, dim=0)
         
-        print(f"✅ Conditioned Diffusion Trainer initialized")
+        # Precompute values for sampling
+        self.sqrt_alphas_cumprod = torch.sqrt(self.alphas_cumprod)
+        self.sqrt_one_minus_alphas_cumprod = torch.sqrt(1 - self.alphas_cumprod)
+        
+        print(f"Conditioned Diffusion Trainer initialized")
         print(f"   - Number of timesteps: {num_timesteps}")
         print(f"   - Beta schedule: {beta_start:.6f} to {beta_end:.6f}")
+        print(f"   - Device: {device}")
     
     def add_noise(self, x_start, t):
         """
@@ -253,8 +278,8 @@ class ConditionedDiffusionTrainer:
             Noisy data and noise
         """
         noise = torch.randn_like(x_start)
-        sqrt_alphas_cumprod_t = self.alphas_cumprod[t].sqrt().view(-1, 1, 1)
-        sqrt_one_minus_alphas_cumprod_t = (1 - self.alphas_cumprod[t]).sqrt().view(-1, 1, 1)
+        sqrt_alphas_cumprod_t = self.sqrt_alphas_cumprod[t].view(-1, 1, 1)
+        sqrt_one_minus_alphas_cumprod_t = self.sqrt_one_minus_alphas_cumprod[t].view(-1, 1, 1)
         
         x_noisy = sqrt_alphas_cumprod_t * x_start + sqrt_one_minus_alphas_cumprod_t * noise
         return x_noisy, noise
@@ -274,7 +299,7 @@ class ConditionedDiffusionTrainer:
         batch_size = x.shape[0]
         
         # Sample random timesteps
-        t = torch.randint(0, self.num_timesteps, (batch_size,), device=x.device)
+        t = torch.randint(0, self.num_timesteps, (batch_size,), device=self.device)
         
         # Add noise
         x_noisy, noise = self.add_noise(x, t)
@@ -295,14 +320,64 @@ class ConditionedDiffusionTrainer:
         
         return loss.item()
     
-    def sample(self, conditioning, num_samples=1, device='cpu'):
+    def p_sample(self, x, t, conditioning, sampler="ddpm"):
+        """
+        Sample from the posterior distribution.
+        
+        Args:
+            x: Current noisy sample [batch_size, sequence_length, 1]
+            t: Current timestep (Python integer)
+            conditioning: Conditioning vectors [batch_size, conditioning_dim]
+            sampler: Sampling method ("ddpm" or "ddim")
+            
+        Returns:
+            Denoised sample [batch_size, sequence_length, 1]
+        """
+        batch_size = x.shape[0]
+        
+        # Compute all timestep-dependent scalars as batch-shaped tensors [B,1,1]
+        alpha_t = self.alphas[t].view(1, 1, 1)
+        beta_t = self.betas[t].view(1, 1, 1)
+        alpha_bar_t = self.alphas_cumprod[t].view(1, 1, 1)
+        alpha_bar_tm1 = self.alphas_cumprod[t-1].view(1, 1, 1) if t > 0 else torch.ones(1, 1, 1, device=self.device)
+        
+        if sampler == "ddpm":
+            # DDPM posterior sampling
+            # Compute x0_hat (predicted x0) using the predicted noise
+            predicted_noise = self.model(x, (t / self.num_timesteps) * torch.ones(batch_size, 1, device=self.device), conditioning)
+            x0_hat = (x - torch.sqrt(1 - alpha_bar_t) * predicted_noise) / torch.sqrt(alpha_bar_t)
+            
+            # Posterior mean: mu_t = (1/sqrt(alpha_t)) * (x_t - (beta_t/sqrt(1-alpha_bar_t)) * epsilon_theta)
+            mean = (1 / torch.sqrt(alpha_t)) * (x - (beta_t / torch.sqrt(1 - alpha_bar_t)) * predicted_noise)
+            
+            if t > 0:
+                # Posterior variance: tilde_beta_t = (1 - alpha_bar_{t-1})/(1 - alpha_bar_t) * beta_t
+                tilde_beta_t = (1 - alpha_bar_tm1) / (1 - alpha_bar_t) * beta_t
+                
+                # Add noise for stochastic sampling
+                noise = torch.randn_like(x)
+                x = mean + torch.sqrt(tilde_beta_t) * noise
+            else:
+                # For t == 0, return the posterior mean without noise (same formula as t > 0)
+                x = mean
+        
+        elif sampler == "ddim":
+            # DDIM deterministic sampling
+            predicted_noise = self.model(x, (t / self.num_timesteps) * torch.ones(batch_size, 1, device=self.device), conditioning)
+            
+            # DDIM update: x_{t-1} = sqrt(alpha_bar_{t-1}) * (x_t/sqrt(alpha_bar_t) - sqrt(1/alpha_bar_t - 1) * epsilon_theta) + sqrt(1 - alpha_bar_{t-1}) * epsilon_theta
+            x = torch.sqrt(alpha_bar_tm1) * (x / torch.sqrt(alpha_bar_t) - torch.sqrt(1/alpha_bar_t - 1) * predicted_noise) + torch.sqrt(1 - alpha_bar_tm1) * predicted_noise
+        
+        return x
+    
+    def sample(self, conditioning, num_samples=1, sampler="ddpm"):
         """
         Generate samples using the trained model.
         
         Args:
             conditioning: Conditioning vectors [num_samples, conditioning_dim]
             num_samples: Number of samples to generate
-            device: Device to run on
+            sampler: Sampling method ("ddpm" or "ddim")
             
         Returns:
             Generated sequences [num_samples, sequence_length, 1]
@@ -311,80 +386,83 @@ class ConditionedDiffusionTrainer:
         
         with torch.no_grad():
             # Start from pure noise
-            x = torch.randn(num_samples, self.model.sequence_length, 1, device=device)
+            x = torch.randn(num_samples, self.model.sequence_length, 1, device=self.device)
             
             # Reverse diffusion process
             for t in tqdm(reversed(range(self.num_timesteps)), desc="Generating samples"):
-                t_normalized = torch.full((num_samples,), t / self.num_timesteps, device=device)
-                
-                # Predict noise
-                predicted_noise = self.model(x, t_normalized.unsqueeze(-1), conditioning)
-                
-                # Remove predicted noise
-                alpha_t = self.alphas[t]
-                alpha_cumprod_t = self.alphas_cumprod[t]
-                beta_t = self.betas[t]
-                
-                if t > 0:
-                    noise = torch.randn_like(x)
-                else:
-                    noise = torch.zeros_like(x)
-                
-                x = (1 / alpha_t.sqrt()) * (x - (beta_t / (1 - alpha_cumprod_t).sqrt()) * predicted_noise) + beta_t.sqrt() * noise
+                x = self.p_sample(x, t, conditioning, sampler)
         
         return x
 
 def load_and_prepare_data():
-    """Load and prepare S&P 500 data for training."""
-    print("📊 Loading S&P 500 data...")
+    """Load and prepare financial returns data."""
+    print("Loading financial data...")
     
-    # Load data
-    data = pd.read_csv("data/sp500_data.csv", index_col=0, parse_dates=True)
+    # Robust data file path handling with environment variable support
+    data_path = os.getenv('SP500_DATA_PATH', "../data/sp500_data.csv")
+    
+    # Try multiple fallback paths
+    fallback_paths = [
+        data_path,
+        "data/sp500_data.csv",
+        "../data/sp500_data.csv",
+        "../../data/sp500_data.csv"
+    ]
+    
+    data = None
+    for path in fallback_paths:
+        if os.path.exists(path):
+            try:
+                data = pd.read_csv(path, index_col=0, parse_dates=True)
+                print(f"Data loaded from: {path}")
+                break
+            except Exception as e:
+                print(f"Failed to load from {path}: {e}")
+                continue
+    
+    if data is None:
+        raise FileNotFoundError(
+            f"Could not find sp500_data.csv in any of the following paths: {fallback_paths}. "
+            "Please set SP500_DATA_PATH environment variable or ensure the file exists."
+        )
+    
+    # Ensure index is datetime
     data.index = pd.to_datetime(data.index)
     
-    # Handle potential header row
-    if data.index[0] == 'Ticker':
-        data = data.iloc[1:]
-        data.index = pd.to_datetime(data.index)
+    # Calculate log returns for more stable statistical properties in diffusion training
+    # Log returns are additive and have better statistical properties for time series modeling
+    returns = np.log(data['Close'] / data['Close'].shift(1)).dropna()
     
-    data['Close'] = pd.to_numeric(data['Close'], errors='coerce')
-    data = data[['Close']]
-    
-    # Compute log returns
-    returns = np.log(data['Close'] / data['Close'].shift(1)).dropna() * 100
-    
-    print(f"✅ Data loaded: {len(returns)} observations")
-    print(f"   Date range: {returns.index[0]} to {returns.index[-1]}")
-    
+    print(f"Loaded {len(returns)} days of return data")
+    print(f"Date range: {returns.index[0]} to {returns.index[-1]}")
     return returns
 
-def create_sequences(returns, sequence_length=60):
+def create_sequences(returns, seq_len=SEQ_LEN):
     """Create sequences for training."""
-    print("🔄 Creating training sequences...")
+    print(f"Creating sequences of length {seq_len}...")
     
-    # Create sequences
-    X = []
-    for i in range(len(returns) - sequence_length):
-        X.append(returns.iloc[i:i+sequence_length].values)
+    sequences = []
+    for i in range(len(returns) - seq_len + 1):
+        seq = returns.iloc[i:i+seq_len].values
+        sequences.append(seq)
     
-    X = np.array(X)
+    X = np.array(sequences)
     X = X[..., np.newaxis]  # Add channel dimension
-    
-    print(f"✅ Created {len(X)} sequences of length {sequence_length}")
+    print(f"Created {len(X)} sequences")
     return X
 
-def train_conditioned_diffusion_model(X, conditioning_vectors, num_epochs=50, batch_size=32):
+def train_conditioned_diffusion_model(X, conditioning_vectors, num_epochs=50, batch_size=32, device="cpu"):
     """Train the LLM-conditioned diffusion model."""
-    print("🎯 Training LLM-conditioned diffusion model...")
+    print("Training LLM-conditioned diffusion model...")
     
     # Initialize model and trainer
     model = ConditionedDiffusionModel(
-        sequence_length=60,
+        sequence_length=SEQ_LEN,
         conditioning_dim=conditioning_vectors.shape[1],
         hidden_dim=128
     )
     
-    trainer = ConditionedDiffusionTrainer(model, num_timesteps=1000)
+    trainer = ConditionedDiffusionTrainer(model, num_timesteps=1000, device=device)
     
     # Prepare data
     dataset = TensorDataset(
@@ -403,6 +481,10 @@ def train_conditioned_diffusion_model(X, conditioning_vectors, num_epochs=50, ba
         epoch_losses = []
         
         for batch_x, batch_conditioning in dataloader:
+            # Move to device
+            batch_x = batch_x.to(device)
+            batch_conditioning = batch_conditioning.to(device)
+            
             loss = trainer.train_step(batch_x, batch_conditioning, optimizer)
             epoch_losses.append(loss)
         
@@ -413,122 +495,184 @@ def train_conditioned_diffusion_model(X, conditioning_vectors, num_epochs=50, ba
         if epoch % 10 == 0:
             print(f"   Epoch {epoch}: Loss = {avg_loss:.6f}")
     
-    print("✅ LLM-conditioned diffusion training completed!")
+    print("LLM-conditioned diffusion training completed!")
     return model, trainer, losses
 
-def generate_conditioned_samples(model, trainer, conditioning_vectors, num_samples=1000):
+def generate_conditioned_samples(model, trainer, conditioning_vectors, num_samples=1000, sampler="ddpm"):
     """Generate samples using the trained model."""
-    print("🎨 Generating conditioned synthetic data...")
+    print("Generating conditioned synthetic data...")
     
-    # Convert conditioning vectors to tensor
-    conditioning_tensor = torch.tensor(conditioning_vectors[:num_samples], dtype=torch.float32)
+    # Ensure conditioning vectors are on the same device as the trainer
+    device = trainer.device
+    conditioning_tensor = torch.tensor(conditioning_vectors[:num_samples], dtype=torch.float32, device=device)
     
     # Generate samples
-    samples = trainer.sample(conditioning_tensor, num_samples=num_samples)
-    samples = samples.squeeze(-1).numpy()  # Remove channel dimension
+    samples = trainer.sample(conditioning_tensor, num_samples=num_samples, sampler=sampler)
+    samples = samples.squeeze(-1).cpu().numpy()  # Remove channel dimension and move to CPU
     
-    print(f"✅ Generated {len(samples)} conditioned synthetic sequences")
+    print(f"Generated {len(samples)} conditioned synthetic sequences")
     return samples
 
-def evaluate_conditioned_performance(real_data, synthetic_data, model_name="LLM-Conditioned"):
+def evaluate_conditioned_performance(real_returns, synthetic_data, conditioning_vectors):
     """Evaluate the performance of the conditioned model."""
-    print(f"📈 Evaluating {model_name} performance...")
-    
-    # Import scipy stats
-    from scipy import stats as scipy_stats
-    
-    # Flatten data for evaluation
-    real_flat = real_data.flatten()
-    synthetic_flat = synthetic_data.flatten()
+    print("Evaluating conditioned model performance...")
     
     # Basic statistics
-    stats_dict = {
-        'Model': model_name,
-        'Mean': np.mean(synthetic_flat),
-        'Std Dev': np.std(synthetic_flat),
-        'Skewness': scipy_stats.skew(synthetic_flat),
-        'Kurtosis': scipy_stats.kurtosis(synthetic_flat),
-        'Min': np.min(synthetic_flat),
-        'Max': np.max(synthetic_flat)
+    real_stats = {
+        'mean': np.mean(real_returns),
+        'std': np.std(real_returns),
+        'skew': scipy.stats.skew(real_returns),
+        'kurtosis': scipy.stats.kurtosis(real_returns)
     }
     
-    # Distribution similarity (KS test)
-    ks_stat, ks_pvalue = scipy_stats.ks_2samp(real_flat, synthetic_flat)
+    synthetic_stats = {
+        'mean': np.mean(synthetic_data),
+        'std': np.std(synthetic_data),
+        'skew': scipy.stats.skew(synthetic_data.flatten()),
+        'kurtosis': scipy.stats.kurtosis(synthetic_data.flatten())
+    }
     
-    print(f"✅ {model_name} Evaluation Results:")
-    print(f"   KS Statistic: {ks_stat:.4f} (p-value: {ks_pvalue:.4f})")
-    print(f"   Real vs Synthetic Mean: {np.mean(real_flat):.4f} vs {stats_dict['Mean']:.4f}")
-    print(f"   Real vs Synthetic Std: {np.std(real_flat):.4f} vs {stats_dict['Std Dev']:.4f}")
+    # KS test
+    ks_stat, ks_pvalue = scipy.stats.ks_2samp(real_returns, synthetic_data.flatten())
     
-    return stats_dict, ks_stat, ks_pvalue
+    # Controllability check
+    print("\nControllability Check:")
+    
+    # Use L2 norm of embeddings as volatility proxy (placeholder - can be replaced with realized volatility)
+    # TODO: Replace with realized volatility over the input window if that data becomes available
+    embedding_norms = np.linalg.norm(conditioning_vectors, axis=1)
+    
+    # Split into top and bottom volatility buckets
+    split_point = np.median(embedding_norms)
+    low_vol_indices = embedding_norms <= split_point
+    high_vol_indices = embedding_norms > split_point
+    
+    if np.sum(low_vol_indices) > 0 and np.sum(high_vol_indices) > 0:
+        low_vol_samples = synthetic_data[low_vol_indices]
+        high_vol_samples = synthetic_data[high_vol_indices]
+        
+        low_vol_std = np.std(low_vol_samples)
+        high_vol_std = np.std(high_vol_samples)
+        
+        print(f"   Low volatility bucket (n={np.sum(low_vol_indices)}): std = {low_vol_std:.6f}")
+        print(f"   High volatility bucket (n={np.sum(high_vol_indices)}): std = {high_vol_std:.6f}")
+        print(f"   Volatility ratio (high/low): {high_vol_std/low_vol_std:.3f}")
+    
+    # Print KS test results
+    print(f"\nKS Test Results:")
+    print(f"   KS statistic: {ks_stat:.6f}")
+    print(f"   p-value: {ks_pvalue:.6f}")
+    
+    return real_stats, synthetic_stats, ks_stat, ks_pvalue
 
-def save_conditioned_results(synthetic_data, stats, model_name="llm_conditioned"):
-    """Save results for the conditioned model."""
-    print("💾 Saving conditioned results...")
+def save_conditioned_results(synthetic_data, stats, losses, model, trainer):
+    """Save results and training artifacts."""
+    print("Saving results...")
     
     # Create results directory
-    os.makedirs(f"results/{model_name}_evaluation", exist_ok=True)
+    results_dir = "results/llm_conditioned_evaluation"
+    os.makedirs(results_dir, exist_ok=True)
     
     # Save synthetic data
-    np.save(f"results/{model_name}_returns.npy", synthetic_data)
+    np.save(f"{results_dir}/llm_conditioned_returns.npy", synthetic_data)
     
-    # Convert numpy types to native Python types for JSON serialization
-    json_stats = {}
-    for key, value in stats.items():
-        if isinstance(value, (np.integer, np.floating)):
-            json_stats[key] = float(value)
-        else:
-            json_stats[key] = value
+    # Save training losses
+    np.save(f"{results_dir}/losses.npy", losses)
     
-    # Save statistics
-    import json
-    with open(f"results/{model_name}_evaluation/{model_name}_stats.json", 'w') as f:
-        json.dump(json_stats, f, indent=2)
+    # Save evaluation stats
+    with open(f"{results_dir}/evaluation_stats.txt", "w") as f:
+        f.write("LLM-Conditioned Diffusion Model Evaluation Results\n")
+        f.write("=" * 50 + "\n")
+        f.write(f"Real data statistics: {stats[0]}\n")
+        f.write(f"Synthetic data statistics: {stats[1]}\n")
+        f.write(f"KS statistic: {stats[2]:.6f}\n")
+        f.write(f"KS p-value: {stats[3]:.6f}\n")
     
-    print(f"✅ {model_name} results saved to results/ directory")
+    # Plot loss curve
+    plt.figure(figsize=(10, 6))
+    plt.plot(losses)
+    plt.title("Training Loss Curve")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.grid(True)
+    plt.savefig(f"{results_dir}/loss_curve.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    # Plot sample sequences with clean grid layout
+    num_samples = min(5, len(synthetic_data))
+    fig, axes = plt.subplots(num_samples, 1, figsize=(12, 2*num_samples))
+    
+    if num_samples == 1:
+        axes = [axes]
+    
+    for i in range(num_samples):
+        axes[i].plot(synthetic_data[i], linewidth=1.5)
+        axes[i].set_title(f"Sample Sequence {i+1}", fontsize=12)
+        axes[i].set_ylabel("Returns", fontsize=10)
+        axes[i].grid(True, alpha=0.3)
+        axes[i].set_xlim(0, len(synthetic_data[i])-1)
+    
+    # Only show x-label for bottom subplot
+    axes[-1].set_xlabel("Time Step", fontsize=10)
+    
+    plt.tight_layout()
+    plt.savefig(f"{results_dir}/sample_sequences.png", dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    print("Results saved successfully!")
 
 def main():
     """Main function to run the LLM-conditioned diffusion model."""
-    print("🚀 LLM-Conditioned Diffusion Model for Financial Data Synthesis")
+    print("LLM-Conditioned Diffusion Model for Financial Data Synthesis")
     print("Based on supervisor feedback: Using LLM embeddings as conditioning vectors")
     print("=" * 80)
     
+    # Set reproducibility seeds
+    torch.manual_seed(42)
+    np.random.seed(42)
+    
     # Load and prepare data
     returns = load_and_prepare_data()
-    X = create_sequences(returns)
     
-    # Initialize LLM conditioning module
-    llm_conditioner = LLMConditioningModule()
+    # Compute statistics for standardization
+    mu = returns.mean()
+    sigma = returns.std()
+    print(f"Returns statistics - Mean: {mu:.6f}, Std: {sigma:.6f}")
+    
+    # Standardize returns
+    returns_standardized = (returns - mu) / sigma
+    
+    # Create sequences
+    X = create_sequences(returns_standardized)
+    
+    # Initialize LLM conditioning module with device parameter
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    llm_conditioner = LLMConditioningModule(device=device)
     
     # Generate conditioning vectors
-    start_date = returns.index[0]
-    end_date = returns.index[-1]
-    conditioning_vectors = llm_conditioner.create_conditioning_vectors(start_date, end_date)
+    conditioning_vectors = llm_conditioner.create_conditioning_vectors(returns.index)
     
     # Ensure conditioning vectors match data length
-    if len(conditioning_vectors) > len(X):
-        conditioning_vectors = conditioning_vectors[:len(X)]
-    elif len(conditioning_vectors) < len(X):
-        # Pad with last conditioning vector
-        last_conditioning = conditioning_vectors[-1:]
-        padding_needed = len(X) - len(conditioning_vectors)
-        padding = np.tile(last_conditioning, (padding_needed, 1))
-        conditioning_vectors = np.vstack([conditioning_vectors, padding])
+    assert len(conditioning_vectors) == len(X), f"Conditioning vectors length {len(conditioning_vectors)} must match sequences length {len(X)}"
     
     # Train the conditioned model
-    model, trainer, losses = train_conditioned_diffusion_model(X, conditioning_vectors)
+    model, trainer, losses = train_conditioned_diffusion_model(X, conditioning_vectors, device=device)
     
-    # Generate synthetic data
-    synthetic_data = generate_conditioned_samples(model, trainer, conditioning_vectors)
+    # Generate synthetic data using the same subset of conditioning vectors for consistency
+    num_samples = min(1000, len(conditioning_vectors))
+    synthetic_data_standardized = generate_conditioned_samples(model, trainer, conditioning_vectors[:num_samples], num_samples=num_samples, sampler="ddpm")
     
-    # Evaluate performance
-    stats, ks_stat, ks_pvalue = evaluate_conditioned_performance(returns.values, synthetic_data)
+    # De-standardize samples
+    synthetic_data = synthetic_data_standardized * sigma + mu
+    
+    # Evaluate performance using the same subset
+    stats = evaluate_conditioned_performance(returns.values, synthetic_data, conditioning_vectors[:num_samples])
     
     # Save results
-    save_conditioned_results(synthetic_data, stats)
+    save_conditioned_results(synthetic_data, stats, losses, model, trainer)
     
-    print("\n🎉 LLM-conditioned diffusion model completed successfully!")
-    print("📁 Results saved in: results/llm_conditioned_evaluation/")
+    print("\nLLM-conditioned diffusion model completed successfully!")
+    print("Results saved in: results/llm_conditioned_evaluation/")
     
     return model, trainer, synthetic_data, stats
 
