@@ -67,6 +67,9 @@ class OverleafExporter:
             self._export_evt_tailindex_table()
             self._export_capital_impact_table()
             self._export_ranking_table()
+            self._export_prediction_error_table()
+            self._export_per_regime_table()
+            self._export_compute_profile_table()
             
             # Export figures
             self._export_distribution_figures()
@@ -75,6 +78,7 @@ class OverleafExporter:
             self._export_volatility_figures()
             self._export_tail_figures()
             self._export_conditioning_figures()
+            self._export_enhanced_figures()
             
             # Copy result files
             self._copy_result_files()
@@ -409,23 +413,80 @@ Model & KS Mean±Std & KS 95\% CI & MMD Mean±Std & MMD 95\% CI & Kurt Mean±Std
             'tag': 'robustness'
         })
     
-    def _export_evt_tailindex_table(self):
-        """Export EVT tail index table"""
-        # Note: EVT analysis would need additional computation
+    def _export_prediction_error_table(self):
+        """Export prediction error metrics table"""
+        if 'prediction_error_metrics' not in self.results:
+            return
+        
+        metrics = self.results['prediction_error_metrics']
+        
+        # Create LaTeX table
         latex_content = r"""\begin{table}[htbp]
 \centering
-\begin{tabular}{lrr}
+\begin{tabular}{lrrrrr}
 \toprule
-Model & Hill Tail Index & 95\% CI \\
-\midrule
-Real & N/A & N/A \\
-GARCH & N/A & N/A \\
-DDPM & N/A & N/A \\
-TimeGrad & N/A & N/A \\
-LLM-Conditioned & N/A & N/A \\
+Model & Mean Error & MAE & MSE & RMSE & MAPE \\
+\midrule"""
+        
+        # Add data rows
+        for model_name in self.evaluator.models:
+            if model_name in metrics:
+                stats = metrics[model_name]
+                latex_content += f"\n{model_name} & {stats['mean_error']:.4f} & {stats['mae']:.4f} & "
+                latex_content += f"{stats['mse']:.4f} & {stats['rmse']:.4f} & {stats['mape']:.2f} \\\\"
+        
+        latex_content += r"""
 \bottomrule
 \end{tabular}
-\caption{Extreme Value Theory: Hill tail index estimates for the left tail with 95\% confidence intervals.}
+\caption{Prediction Error Metrics: Mean error, Mean Absolute Error (MAE), Mean Square Error (MSE), Root Mean Square Error (RMSE), and Mean Absolute Percentage Error (MAPE) for synthetic vs real data.}
+\label{tab:prediction_error_metrics}
+\end{table}"""
+        
+        # Save table
+        table_path = os.path.join(self.tables_dir, 'prediction_error_metrics.tex')
+        with open(table_path, 'w') as f:
+            f.write(latex_content)
+        
+        self.assets.append({
+            'path': 'tables/prediction_error_metrics.tex',
+            'type': 'table',
+            'label': 'tab:prediction_error_metrics',
+            'caption': 'Prediction Error Metrics: Mean error, MAE, MSE, RMSE, and MAPE for synthetic vs real data.',
+            'tag': 'prediction'
+        })
+    
+    def _export_evt_tailindex_table(self):
+        """Export EVT Hill tail index table"""
+        if 'evt_hill_tail_indices' not in self.results:
+            return
+        
+        evt_data = self.results['evt_hill_tail_indices']
+        
+        # Create LaTeX table
+        latex_content = r"""\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrrr}
+\toprule
+Model & Left Tail Hill & Right Tail Hill & Left Count & Right Count \\
+\midrule"""
+        
+        # Add data rows
+        models = [model for model in evt_data.keys() if model != 'regime_thresholds']
+        for model_name in models:
+            if model_name in evt_data:
+                stats = evt_data[model_name]
+                left_hill = stats.get('left_tail_hill', np.nan)
+                right_hill = stats.get('right_tail_hill', np.nan)
+                left_count = stats.get('left_tail_count', 0)
+                right_count = stats.get('right_tail_count', 0)
+                
+                latex_content += f"\n{model_name} & {left_hill:.4f} & {right_hill:.4f} & "
+                latex_content += f"{left_count} & {right_count} \\\\"
+        
+        latex_content += r"""
+\bottomrule
+\end{tabular}
+\caption{Extreme Value Theory: Hill tail indices for left (losses) and right (gains) tails with sample counts.}
 \label{tab:evt_tailindex}
 \end{table}"""
         
@@ -438,8 +499,108 @@ LLM-Conditioned & N/A & N/A \\
             'path': 'tables/evt_tailindex.tex',
             'type': 'table',
             'label': 'tab:evt_tailindex',
-            'caption': 'Extreme Value Theory: Hill tail index estimates for the left tail with 95% confidence intervals.',
-            'tag': 'tails'
+            'caption': 'Extreme Value Theory: Hill tail indices for left (losses) and right (gains) tails with sample counts.',
+            'tag': 'evt'
+        })
+    
+    def _export_per_regime_table(self):
+        """Export per-regime metrics table"""
+        if 'per_regime_metrics' not in self.results:
+            return
+        
+        regime_data = self.results['per_regime_metrics']
+        
+        # Create LaTeX table
+        latex_content = r"""\begin{table}[htbp]
+\centering
+\begin{tabular}{llrrr}
+\toprule
+Model & Regime & KS Statistic & KS P-Value & Sample Size \\
+\midrule"""
+        
+        # Add data rows
+        models = [model for model in regime_data.keys() if model != 'regime_thresholds']
+        regimes = ['low_volatility', 'medium_volatility', 'high_volatility']
+        
+        for model_name in models:
+            for regime in regimes:
+                if model_name in regime_data and regime in regime_data[model_name]:
+                    regime_metrics = regime_data[model_name][regime]
+                    ks_stat = regime_metrics.get('ks_statistic', np.nan)
+                    ks_pval = regime_metrics.get('ks_pvalue', np.nan)
+                    sample_size = regime_metrics.get('sample_size', 0)
+                    
+                    regime_name = regime.replace('_', ' ').title()
+                    latex_content += f"\n{model_name} & {regime_name} & {ks_stat:.4f} & "
+                    latex_content += f"{ks_pval:.4f} & {sample_size} \\\\"
+        
+        latex_content += r"""
+\bottomrule
+\end{tabular}
+\caption{Per-Regime Model Performance: KS statistics and p-values across volatility regimes (low, medium, high).}
+\label{tab:per_regime_metrics}
+\end{table}"""
+        
+        # Save table
+        table_path = os.path.join(self.tables_dir, 'per_regime_metrics.tex')
+        with open(table_path, 'w') as f:
+            f.write(latex_content)
+        
+        self.assets.append({
+            'path': 'tables/per_regime_metrics.tex',
+            'type': 'table',
+            'label': 'tab:per_regime_metrics',
+            'caption': 'Per-Regime Model Performance: KS statistics and p-values across volatility regimes (low, medium, high).',
+            'tag': 'regime'
+        })
+    
+    def _export_compute_profile_table(self):
+        """Export compute profile table"""
+        if 'compute_profile' not in self.results:
+            return
+        
+        compute_data = self.results['compute_profile']
+        
+        # Create LaTeX table
+        latex_content = r"""\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrrrrl}
+\toprule
+Model & Parameters & Train Time (s) & Infer Time (s) & Peak VRAM (MB) & Total VRAM (MB) & GPU Model \\
+\midrule"""
+        
+        # Add data rows
+        for model_name in self.evaluator.models:
+            if model_name in compute_data:
+                profile = compute_data[model_name]
+                params = profile.get('parameters', np.nan)
+                train_time = profile.get('training_time_seconds', np.nan)
+                infer_time = profile.get('inference_time_seconds', np.nan)
+                peak_vram = profile.get('peak_vram_mb', np.nan)
+                total_vram = profile.get('total_gpu_vram_mb', np.nan)
+                gpu_model = profile.get('gpu_model', 'Unknown')
+                
+                latex_content += f"\n{model_name} & {params:,} & {train_time:.1f} & "
+                latex_content += f"{infer_time:.3f} & {peak_vram:.0f} & {total_vram:.0f} & {gpu_model} \\\\"
+        
+        latex_content += r"""
+\bottomrule
+\end{tabular}
+\caption{Compute Profile: Model parameters, training/inference times, and GPU memory usage.}
+\label{tab:compute_profile}
+\end{table}"""
+        
+        # Save table
+        table_path = os.path.join(self.tables_dir, 'compute_profile.tex')
+        with open(table_path, 'w') as f:
+            f.write(latex_content)
+        
+        self.assets.append({
+            'path': 'tables/compute_profile.tex',
+            'type': 'table',
+            'label': 'tab:compute_profile',
+            'caption': 'Compute Profile: Model parameters, training/inference times, and GPU memory usage.',
+            'tag': 'compute'
         })
     
     def _export_capital_impact_table(self):
@@ -698,6 +859,50 @@ Model & Distribution Score & Risk Score & Temporal Score & Robustness Score & Fi
             note_path = os.path.join(self.notes_dir, 'conditioning_requirements.txt')
             with open(note_path, 'w') as f:
                 f.write(note_content)
+    
+    def _export_enhanced_figures(self):
+        """Export enhanced figure stubs"""
+        # Prediction error metrics
+        self._export_figure_stub('prediction_error_metrics', 'Prediction Error Metrics Comparison')
+        
+        # EVT Hill tail indices
+        self._export_figure_stub('evt_hill_tail_indices', 'Extreme Value Theory: Hill Tail Indices')
+        
+        # Per-regime analysis
+        self._export_figure_stub('per_regime_analysis', 'Per-Regime Model Performance')
+        
+        # Enhanced distribution comparison
+        self._export_figure_stub('enhanced_distribution_comparison', 'Enhanced Distribution Comparison')
+        
+        # Tail distribution analysis
+        self._export_figure_stub('tail_distribution_analysis', 'Tail Distribution Analysis (Log Scale)')
+        
+        # Uncertainty plots (one per model)
+        for model_name in self.evaluator.models:
+            uncertainty_filename = f"uncertainty_{model_name.lower().replace('-', '_')}"
+            self._export_figure_stub(uncertainty_filename, f'Uncertainty Estimates: {model_name}')
+    
+    def _export_figure_stub(self, filename, caption):
+        """Export a single figure stub"""
+        latex_content = f"""\\begin{{figure}}[htbp]
+\\centering
+\\includegraphics[width=0.8\\textwidth]{{figures/{filename}.pdf}}
+\\caption{{{caption}}}
+\\label{{fig:{filename.replace('_', '')}}}
+\\end{{figure}}"""
+        
+        # Save stub
+        stub_path = os.path.join(self.figures_dir, f'{filename}.tex')
+        with open(stub_path, 'w') as f:
+            f.write(latex_content)
+        
+        self.assets.append({
+            'path': f'figures/{filename}.tex',
+            'type': 'figure',
+            'label': f'fig:{filename.replace("_", "")}',
+            'caption': caption,
+            'tag': 'enhanced'
+        })
     
     def _copy_result_files(self):
         """Copy result files to Overleaf directory"""

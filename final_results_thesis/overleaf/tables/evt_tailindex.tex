@@ -1,16 +1,16 @@
 \begin{table}[htbp]
 \centering
-\begin{tabular}{lrr}
+\begin{tabular}{lrrrr}
 \toprule
-Model & Hill Tail Index & 95\% CI \\
+Model & Left Tail Hill & Right Tail Hill & Left Count & Right Count \\
 \midrule
-Real & N/A & N/A \\
-GARCH & N/A & N/A \\
-DDPM & N/A & N/A \\
-TimeGrad & N/A & N/A \\
-LLM-Conditioned & N/A & N/A \\
+Real & nan & -0.9280 & 378 & 378 \\
+GARCH & nan & -0.1816 & 76 & 76 \\
+DDPM & nan & -0.8272 & 6000 & 6000 \\
+TimeGrad & nan & -0.7598 & 6000 & 6000 \\
+LLM-Conditioned & nan & -0.9414 & 6000 & 6000 \\
 \bottomrule
 \end{tabular}
-\caption{Extreme Value Theory: Hill tail index estimates for the left tail with 95\% confidence intervals.}
+\caption{Extreme Value Theory: Hill tail indices for left (losses) and right (gains) tails with sample counts.}
 \label{tab:evt_tailindex}
 \end{table}

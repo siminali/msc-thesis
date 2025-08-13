@@ -24,3 +24,29 @@
 2025-08-13 20:22:27,382 - INFO - Validating input files...
 2025-08-13 20:22:27,382 - ERROR - Build failed with error: Real S&P 500 data not found at data/sp500_data.csv. Please ensure the CSV file exists with Date and Close columns.
 2025-08-13 20:22:27,382 - ERROR - Check the build log for details
+2025-08-13 21:04:49,278 - INFO - === BUILD LOG START ===
+2025-08-13 21:04:49,278 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:04:49,278 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:04:49,278 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding/src
+2025-08-13 21:04:49,278 - INFO - Timestamp: 2025-08-13T21:04:49.278746
+2025-08-13 21:04:49,278 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:04:49,278 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:04:49,278 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:04:49,278 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:04:49,278 - INFO - CPU cores: 8
+2025-08-13 21:04:49,278 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:04:49,278 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:04:49,278 - INFO - dtype: float32 for kernel math
+2025-08-13 21:04:49,278 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:04:49,278 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:04:49,278 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:04:49,278 - INFO - NumPy version: 1.26.4
+2025-08-13 21:04:49,278 - INFO - Pandas version: 2.2.2
+2025-08-13 21:04:49,279 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:04:49,279 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:04:49,279 - INFO - SciPy version: 1.13.1
+2025-08-13 21:04:49,279 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:04:49,279 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:04:49,279 - INFO - Validating input files...
+2025-08-13 21:04:49,279 - ERROR - Build failed with error: Real S&P 500 data not found at data/sp500_data.csv. Please ensure the CSV file exists with Date and Close columns.
+2025-08-13 21:04:49,279 - ERROR - Check the build log for details

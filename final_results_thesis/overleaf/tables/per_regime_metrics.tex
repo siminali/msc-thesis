@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+\centering
+\begin{tabular}{llrrr}
+\toprule
+Model & Regime & KS Statistic & KS P-Value & Sample Size \\
+\midrule
+GARCH & Low Volatility & 0.5926 & 0.0000 & 243 \\
+GARCH & Medium Volatility & 0.4980 & 0.0000 & 249 \\
+GARCH & High Volatility & 0.5638 & 0.0000 & 243 \\
+DDPM & Low Volatility & 0.2428 & 0.0000 & 243 \\
+DDPM & Medium Volatility & 0.0763 & 0.4640 & 249 \\
+DDPM & High Volatility & 0.1235 & 0.0492 & 243 \\
+TimeGrad & Low Volatility & 0.1358 & 0.0225 & 243 \\
+TimeGrad & Medium Volatility & 0.1084 & 0.1070 & 249 \\
+TimeGrad & High Volatility & 0.2181 & 0.0000 & 243 \\
+LLM-Conditioned & Low Volatility & 0.1029 & 0.1528 & 243 \\
+LLM-Conditioned & Medium Volatility & 0.0643 & 0.6839 & 249 \\
+LLM-Conditioned & High Volatility & 0.1852 & 0.0005 & 243 \\
+\bottomrule
+\end{tabular}
+\caption{Per-Regime Model Performance: KS statistics and p-values across volatility regimes (low, medium, high).}
+\label{tab:per_regime_metrics}
+\end{table}

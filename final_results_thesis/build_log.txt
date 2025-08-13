@@ -575,3 +575,727 @@
 2025-08-13 20:22:57,789 - INFO -   OPENBLAS_NUM_THREADS: 1
 2025-08-13 20:22:57,789 - INFO - Build completed with performance optimizations
 2025-08-13 20:22:57,789 - INFO - Creating reproducibility documentation...
+2025-08-13 21:04:54,938 - INFO - === BUILD LOG START ===
+2025-08-13 21:04:54,938 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:04:54,938 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:04:54,938 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:04:54,938 - INFO - Timestamp: 2025-08-13T21:04:54.938565
+2025-08-13 21:04:54,938 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:04:54,938 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:04:54,938 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:04:54,938 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:04:54,938 - INFO - CPU cores: 8
+2025-08-13 21:04:54,938 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:04:54,938 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:04:54,938 - INFO - dtype: float32 for kernel math
+2025-08-13 21:04:54,938 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:04:54,938 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:04:54,938 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:04:54,938 - INFO - NumPy version: 1.26.4
+2025-08-13 21:04:54,938 - INFO - Pandas version: 2.2.2
+2025-08-13 21:04:54,938 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:04:54,938 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:04:54,938 - INFO - SciPy version: 1.13.1
+2025-08-13 21:04:54,938 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:04:54,939 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:04:54,939 - INFO - Validating input files...
+2025-08-13 21:04:54,939 - INFO - All input files validated successfully
+2025-08-13 21:04:54,939 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:04:54,939 - INFO - Synthetic data directory: results
+2025-08-13 21:04:54,939 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:04:54,939 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:04:54,939 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:04:54,939 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:04:54,939 - INFO - Creating output directories...
+2025-08-13 21:04:54,939 - INFO - Initializing evaluation framework...
+2025-08-13 21:04:54,956 - INFO - Computing evaluation metrics...
+2025-08-13 21:04:55,769 - ERROR - Build failed with error: operands could not be broadcast together with shapes (1000,60) (1000,) 
+2025-08-13 21:04:55,769 - ERROR - Check the build log for details
+2025-08-13 21:06:42,792 - INFO - === BUILD LOG START ===
+2025-08-13 21:06:42,793 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:06:42,793 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:06:42,793 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:06:42,793 - INFO - Timestamp: 2025-08-13T21:06:42.793332
+2025-08-13 21:06:42,793 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:06:42,793 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:06:42,793 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:06:42,793 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:06:42,793 - INFO - CPU cores: 8
+2025-08-13 21:06:42,793 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:06:42,793 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:06:42,793 - INFO - dtype: float32 for kernel math
+2025-08-13 21:06:42,793 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:06:42,793 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:06:42,793 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:06:42,793 - INFO - NumPy version: 1.26.4
+2025-08-13 21:06:42,793 - INFO - Pandas version: 2.2.2
+2025-08-13 21:06:42,793 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:06:42,793 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:06:42,793 - INFO - SciPy version: 1.13.1
+2025-08-13 21:06:42,793 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:06:42,793 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:06:42,793 - INFO - Validating input files...
+2025-08-13 21:06:42,793 - INFO - All input files validated successfully
+2025-08-13 21:06:42,793 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:06:42,793 - INFO - Synthetic data directory: results
+2025-08-13 21:06:42,793 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:06:42,793 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:06:42,793 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:06:42,793 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:06:42,793 - INFO - Creating output directories...
+2025-08-13 21:06:42,793 - INFO - Initializing evaluation framework...
+2025-08-13 21:06:42,811 - INFO - Computing evaluation metrics...
+2025-08-13 21:06:43,458 - ERROR - Build failed with error: a must be 1-dimensional
+2025-08-13 21:06:43,458 - ERROR - Check the build log for details
+2025-08-13 21:07:06,892 - INFO - === BUILD LOG START ===
+2025-08-13 21:07:06,892 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:07:06,892 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:07:06,892 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:07:06,893 - INFO - Timestamp: 2025-08-13T21:07:06.893002
+2025-08-13 21:07:06,893 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:07:06,893 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:07:06,893 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:07:06,893 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:07:06,893 - INFO - CPU cores: 8
+2025-08-13 21:07:06,893 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:07:06,893 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:07:06,893 - INFO - dtype: float32 for kernel math
+2025-08-13 21:07:06,893 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:07:06,893 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:07:06,893 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:07:06,893 - INFO - NumPy version: 1.26.4
+2025-08-13 21:07:06,893 - INFO - Pandas version: 2.2.2
+2025-08-13 21:07:06,893 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:07:06,893 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:07:06,893 - INFO - SciPy version: 1.13.1
+2025-08-13 21:07:06,893 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:07:06,893 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:07:06,893 - INFO - Validating input files...
+2025-08-13 21:07:06,893 - INFO - All input files validated successfully
+2025-08-13 21:07:06,893 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:07:06,893 - INFO - Synthetic data directory: results
+2025-08-13 21:07:06,893 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:07:06,893 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:07:06,893 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:07:06,893 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:07:06,893 - INFO - Creating output directories...
+2025-08-13 21:07:06,893 - INFO - Initializing evaluation framework...
+2025-08-13 21:07:06,910 - INFO - Computing evaluation metrics...
+2025-08-13 21:08:41,630 - ERROR - Build failed with error: boolean index did not match indexed array along dimension 0; dimension is 3772 but corresponding boolean dimension is 3753
+2025-08-13 21:08:41,631 - ERROR - Check the build log for details
+2025-08-13 21:09:50,321 - INFO - === BUILD LOG START ===
+2025-08-13 21:09:50,322 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:09:50,322 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:09:50,322 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:09:50,322 - INFO - Timestamp: 2025-08-13T21:09:50.322313
+2025-08-13 21:09:50,322 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:09:50,322 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:09:50,322 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:09:50,322 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:09:50,322 - INFO - CPU cores: 8
+2025-08-13 21:09:50,322 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:09:50,322 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:09:50,322 - INFO - dtype: float32 for kernel math
+2025-08-13 21:09:50,322 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:09:50,322 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:09:50,322 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:09:50,322 - INFO - NumPy version: 1.26.4
+2025-08-13 21:09:50,322 - INFO - Pandas version: 2.2.2
+2025-08-13 21:09:50,322 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:09:50,322 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:09:50,322 - INFO - SciPy version: 1.13.1
+2025-08-13 21:09:50,322 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:09:50,322 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:09:50,322 - INFO - Validating input files...
+2025-08-13 21:09:50,322 - INFO - All input files validated successfully
+2025-08-13 21:09:50,322 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:09:50,322 - INFO - Synthetic data directory: results
+2025-08-13 21:09:50,322 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:09:50,322 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:09:50,322 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:09:50,322 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:09:50,322 - INFO - Creating output directories...
+2025-08-13 21:09:50,322 - INFO - Initializing evaluation framework...
+2025-08-13 21:09:50,340 - INFO - Computing evaluation metrics...
+2025-08-13 21:11:28,894 - INFO - Saving evaluation results...
+2025-08-13 21:11:28,945 - INFO - Generating metrics summary...
+2025-08-13 21:11:46,729 - INFO - Initializing PDF builder...
+2025-08-13 21:11:46,729 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 21:11:46,729 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 21:11:46,729 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 21:11:46,729 - INFO - Coverage constraint: ±10% of target
+2025-08-13 21:11:46,729 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 21:11:46,729 - INFO - Section 6: Robustness analysis data available
+2025-08-13 21:11:46,729 - INFO -   GARCH: 1 samples
+2025-08-13 21:11:46,729 - INFO -   DDPM: 5 samples
+2025-08-13 21:11:46,729 - INFO -   TimeGrad: 5 samples
+2025-08-13 21:11:46,729 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 21:11:46,729 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 21:11:46,729 - INFO - Confidence intervals: 95% level
+2025-08-13 21:11:46,729 - INFO - Section 7: Use-case panels implementation
+2025-08-13 21:11:46,729 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 21:11:46,729 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 21:11:46,729 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 21:11:46,729 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 21:11:46,730 - INFO - export_overleaf: True
+2025-08-13 21:11:46,730 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 21:11:46,730 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 21:11:46,730 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 21:11:46,730 - INFO - Building Final Results PDF...
+2025-08-13 21:11:49,701 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,702 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,702 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,702 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,702 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,737 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,737 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,737 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,737 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,737 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,766 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,766 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,766 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,766 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:49,767 - WARNING - posx and posy should be finite values
+2025-08-13 21:11:50,526 - INFO - Final Results PDF created successfully: final_results_thesis/final_results_thesis.pdf
+2025-08-13 21:11:50,526 - INFO - Build completed successfully!
+2025-08-13 21:11:50,526 - INFO - Exporting to Overleaf format...
+2025-08-13 21:11:50,531 - INFO - Starting Overleaf export...
+2025-08-13 21:11:50,539 - INFO - Overleaf export completed: 29 assets generated
+2025-08-13 21:11:50,539 - INFO - Overleaf export completed successfully!
+2025-08-13 21:11:50,539 - INFO - === PERFORMANCE SUMMARY ===
+2025-08-13 21:11:50,539 - INFO - CPU core count: 8
+2025-08-13 21:11:50,539 - INFO - Effective thread settings:
+2025-08-13 21:11:50,539 - INFO -   OMP_NUM_THREADS: 1
+2025-08-13 21:11:50,539 - INFO -   MKL_NUM_THREADS: 1
+2025-08-13 21:11:50,539 - INFO -   OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:11:50,539 - INFO - Build completed with performance optimizations
+2025-08-13 21:11:50,539 - INFO - Creating reproducibility documentation...
+2025-08-13 21:25:26,540 - INFO - === BUILD LOG START ===
+2025-08-13 21:25:26,540 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:25:26,540 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:25:26,540 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:25:26,540 - INFO - Timestamp: 2025-08-13T21:25:26.540587
+2025-08-13 21:25:26,540 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:25:26,540 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:25:26,540 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:25:26,540 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:25:26,540 - INFO - CPU cores: 8
+2025-08-13 21:25:26,540 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:25:26,540 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:25:26,540 - INFO - dtype: float32 for kernel math
+2025-08-13 21:25:26,540 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:25:26,540 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:25:26,540 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:25:26,540 - INFO - NumPy version: 1.26.4
+2025-08-13 21:25:26,540 - INFO - Pandas version: 2.2.2
+2025-08-13 21:25:26,541 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:25:26,541 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:25:26,541 - INFO - SciPy version: 1.13.1
+2025-08-13 21:25:26,541 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:25:26,541 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:25:26,541 - INFO - Validating input files...
+2025-08-13 21:25:26,541 - INFO - All input files validated successfully
+2025-08-13 21:25:26,541 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:25:26,541 - INFO - Synthetic data directory: results
+2025-08-13 21:25:26,541 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:25:26,541 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:25:26,541 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:25:26,541 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:25:26,541 - INFO - Creating output directories...
+2025-08-13 21:25:26,541 - INFO - Initializing evaluation framework...
+2025-08-13 21:25:26,559 - INFO - Computing evaluation metrics...
+2025-08-13 21:27:10,054 - INFO - Saving evaluation results...
+2025-08-13 21:27:10,149 - INFO - Generating metrics summary...
+2025-08-13 21:27:28,060 - INFO - Initializing PDF builder...
+2025-08-13 21:27:28,061 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 21:27:28,061 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 21:27:28,061 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 21:27:28,061 - INFO - Coverage constraint: ±10% of target
+2025-08-13 21:27:28,061 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 21:27:28,061 - INFO - Section 6: Robustness analysis data available
+2025-08-13 21:27:28,061 - INFO -   GARCH: 1 samples
+2025-08-13 21:27:28,061 - INFO -   DDPM: 5 samples
+2025-08-13 21:27:28,061 - INFO -   TimeGrad: 5 samples
+2025-08-13 21:27:28,061 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 21:27:28,061 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 21:27:28,061 - INFO - Confidence intervals: 95% level
+2025-08-13 21:27:28,061 - INFO - Section 7: Use-case panels implementation
+2025-08-13 21:27:28,061 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 21:27:28,061 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 21:27:28,061 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 21:27:28,061 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 21:27:28,061 - INFO - export_overleaf: True
+2025-08-13 21:27:28,061 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 21:27:28,061 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 21:27:28,061 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 21:27:28,061 - INFO - Building Final Results PDF...
+2025-08-13 21:27:31,603 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,603 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,603 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,603 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,603 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,636 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,637 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,637 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,637 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,637 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,663 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,663 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,664 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,664 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,664 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,678 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,679 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,679 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,679 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,679 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,711 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,711 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,711 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,711 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:31,711 - WARNING - posx and posy should be finite values
+2025-08-13 21:27:32,060 - ERROR - Build failed with error: 0
+2025-08-13 21:27:32,060 - ERROR - Check the build log for details
+2025-08-13 21:27:58,856 - INFO - === BUILD LOG START ===
+2025-08-13 21:27:58,856 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:27:58,856 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:27:58,856 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:27:58,856 - INFO - Timestamp: 2025-08-13T21:27:58.856658
+2025-08-13 21:27:58,856 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:27:58,856 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:27:58,856 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:27:58,856 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:27:58,856 - INFO - CPU cores: 8
+2025-08-13 21:27:58,856 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:27:58,856 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:27:58,856 - INFO - dtype: float32 for kernel math
+2025-08-13 21:27:58,856 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:27:58,856 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:27:58,856 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:27:58,856 - INFO - NumPy version: 1.26.4
+2025-08-13 21:27:58,856 - INFO - Pandas version: 2.2.2
+2025-08-13 21:27:58,856 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:27:58,856 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:27:58,856 - INFO - SciPy version: 1.13.1
+2025-08-13 21:27:58,857 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:27:58,857 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:27:58,857 - INFO - Validating input files...
+2025-08-13 21:27:58,857 - INFO - All input files validated successfully
+2025-08-13 21:27:58,857 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:27:58,857 - INFO - Synthetic data directory: results
+2025-08-13 21:27:58,857 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:27:58,857 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:27:58,857 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:27:58,857 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:27:58,857 - INFO - Creating output directories...
+2025-08-13 21:27:58,857 - INFO - Initializing evaluation framework...
+2025-08-13 21:27:58,867 - INFO - Computing evaluation metrics...
+2025-08-13 21:29:41,988 - INFO - Saving evaluation results...
+2025-08-13 21:29:42,067 - INFO - Generating metrics summary...
+2025-08-13 21:30:02,725 - INFO - Initializing PDF builder...
+2025-08-13 21:30:02,725 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 21:30:02,725 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 21:30:02,725 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 21:30:02,725 - INFO - Coverage constraint: ±10% of target
+2025-08-13 21:30:02,725 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 21:30:02,725 - INFO - Section 6: Robustness analysis data available
+2025-08-13 21:30:02,725 - INFO -   GARCH: 1 samples
+2025-08-13 21:30:02,725 - INFO -   DDPM: 5 samples
+2025-08-13 21:30:02,726 - INFO -   TimeGrad: 5 samples
+2025-08-13 21:30:02,726 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 21:30:02,726 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 21:30:02,726 - INFO - Confidence intervals: 95% level
+2025-08-13 21:30:02,726 - INFO - Section 7: Use-case panels implementation
+2025-08-13 21:30:02,726 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 21:30:02,726 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 21:30:02,726 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 21:30:02,726 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 21:30:02,726 - INFO - export_overleaf: True
+2025-08-13 21:30:02,726 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 21:30:02,726 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 21:30:02,726 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 21:30:02,727 - INFO - Building Final Results PDF...
+2025-08-13 21:30:06,278 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,278 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,278 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,278 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,278 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,310 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,310 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,310 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,310 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,310 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,336 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,336 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,337 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,337 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,337 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,350 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,351 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,351 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,351 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,351 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,382 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,382 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,382 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,382 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,383 - WARNING - posx and posy should be finite values
+2025-08-13 21:30:06,674 - ERROR - Build failed with error: 0
+2025-08-13 21:30:06,674 - ERROR - Check the build log for details
+2025-08-13 21:31:05,128 - INFO - === BUILD LOG START ===
+2025-08-13 21:31:05,129 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:31:05,129 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:31:05,129 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:31:05,129 - INFO - Timestamp: 2025-08-13T21:31:05.129195
+2025-08-13 21:31:05,129 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:31:05,129 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:31:05,129 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:31:05,129 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:31:05,129 - INFO - CPU cores: 8
+2025-08-13 21:31:05,129 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:31:05,129 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:31:05,129 - INFO - dtype: float32 for kernel math
+2025-08-13 21:31:05,129 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:31:05,129 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:31:05,129 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:31:05,129 - INFO - NumPy version: 1.26.4
+2025-08-13 21:31:05,129 - INFO - Pandas version: 2.2.2
+2025-08-13 21:31:05,129 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:31:05,129 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:31:05,129 - INFO - SciPy version: 1.13.1
+2025-08-13 21:31:05,129 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:31:05,129 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:31:05,129 - INFO - Validating input files...
+2025-08-13 21:31:05,129 - INFO - All input files validated successfully
+2025-08-13 21:31:05,129 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:31:05,129 - INFO - Synthetic data directory: results
+2025-08-13 21:31:05,129 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:31:05,129 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:31:05,129 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:31:05,129 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:31:05,129 - INFO - Creating output directories...
+2025-08-13 21:31:05,129 - INFO - Initializing evaluation framework...
+2025-08-13 21:31:05,147 - INFO - Computing evaluation metrics...
+2025-08-13 21:32:47,274 - INFO - Saving evaluation results...
+2025-08-13 21:32:47,623 - INFO - Generating metrics summary...
+2025-08-13 21:33:05,434 - INFO - Initializing PDF builder...
+2025-08-13 21:33:05,434 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 21:33:05,434 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 21:33:05,434 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 21:33:05,434 - INFO - Coverage constraint: ±10% of target
+2025-08-13 21:33:05,434 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 21:33:05,434 - INFO - Section 6: Robustness analysis data available
+2025-08-13 21:33:05,434 - INFO -   GARCH: 1 samples
+2025-08-13 21:33:05,434 - INFO -   DDPM: 5 samples
+2025-08-13 21:33:05,434 - INFO -   TimeGrad: 5 samples
+2025-08-13 21:33:05,434 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 21:33:05,434 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 21:33:05,434 - INFO - Confidence intervals: 95% level
+2025-08-13 21:33:05,434 - INFO - Section 7: Use-case panels implementation
+2025-08-13 21:33:05,434 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 21:33:05,434 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 21:33:05,434 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 21:33:05,434 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 21:33:05,434 - INFO - export_overleaf: True
+2025-08-13 21:33:05,434 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 21:33:05,434 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 21:33:05,434 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 21:33:05,434 - INFO - Building Final Results PDF...
+2025-08-13 21:33:08,921 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,922 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,922 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,922 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,922 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,954 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,954 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,954 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,954 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,954 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,981 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,981 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,981 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,981 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,981 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,995 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,995 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,995 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,995 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:08,996 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:09,029 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:09,029 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:09,029 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:09,029 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:09,029 - WARNING - posx and posy should be finite values
+2025-08-13 21:33:09,331 - ERROR - Build failed with error: 0
+2025-08-13 21:33:09,331 - ERROR - Check the build log for details
+2025-08-13 21:33:31,242 - INFO - === BUILD LOG START ===
+2025-08-13 21:33:31,242 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:33:31,242 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:33:31,242 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:33:31,242 - INFO - Timestamp: 2025-08-13T21:33:31.242717
+2025-08-13 21:33:31,242 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:33:31,242 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:33:31,242 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:33:31,242 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:33:31,242 - INFO - CPU cores: 8
+2025-08-13 21:33:31,242 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:33:31,242 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:33:31,242 - INFO - dtype: float32 for kernel math
+2025-08-13 21:33:31,242 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:33:31,242 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:33:31,242 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:33:31,242 - INFO - NumPy version: 1.26.4
+2025-08-13 21:33:31,242 - INFO - Pandas version: 2.2.2
+2025-08-13 21:33:31,243 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:33:31,243 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:33:31,243 - INFO - SciPy version: 1.13.1
+2025-08-13 21:33:31,243 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:33:31,243 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:33:31,243 - INFO - Validating input files...
+2025-08-13 21:33:31,243 - INFO - All input files validated successfully
+2025-08-13 21:33:31,243 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:33:31,243 - INFO - Synthetic data directory: results
+2025-08-13 21:33:31,243 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:33:31,243 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:33:31,243 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:33:31,243 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:33:31,243 - INFO - Creating output directories...
+2025-08-13 21:33:31,243 - INFO - Initializing evaluation framework...
+2025-08-13 21:33:31,252 - INFO - Computing evaluation metrics...
+2025-08-13 21:35:14,356 - INFO - Saving evaluation results...
+2025-08-13 21:35:14,437 - INFO - Generating metrics summary...
+2025-08-13 21:35:32,109 - INFO - Initializing PDF builder...
+2025-08-13 21:35:32,109 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 21:35:32,109 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 21:35:32,109 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 21:35:32,109 - INFO - Coverage constraint: ±10% of target
+2025-08-13 21:35:32,109 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 21:35:32,109 - INFO - Section 6: Robustness analysis data available
+2025-08-13 21:35:32,109 - INFO -   GARCH: 1 samples
+2025-08-13 21:35:32,109 - INFO -   DDPM: 5 samples
+2025-08-13 21:35:32,109 - INFO -   TimeGrad: 5 samples
+2025-08-13 21:35:32,109 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 21:35:32,109 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 21:35:32,110 - INFO - Confidence intervals: 95% level
+2025-08-13 21:35:32,110 - INFO - Section 7: Use-case panels implementation
+2025-08-13 21:35:32,110 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 21:35:32,110 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 21:35:32,110 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 21:35:32,110 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 21:35:32,110 - INFO - export_overleaf: True
+2025-08-13 21:35:32,110 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 21:35:32,110 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 21:35:32,110 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 21:35:32,110 - INFO - Building Final Results PDF...
+2025-08-13 21:35:35,605 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,606 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,606 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,606 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,606 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,638 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,638 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,638 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,639 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,639 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,665 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,665 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,665 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,665 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,665 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,679 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,679 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,679 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,679 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,680 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,711 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,711 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,711 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,712 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:35,712 - WARNING - posx and posy should be finite values
+2025-08-13 21:35:36,007 - ERROR - Build failed with error: 0
+2025-08-13 21:35:36,007 - ERROR - Check the build log for details
+2025-08-13 21:36:44,060 - INFO - === BUILD LOG START ===
+2025-08-13 21:36:44,060 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:36:44,060 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:36:44,060 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:36:44,060 - INFO - Timestamp: 2025-08-13T21:36:44.060880
+2025-08-13 21:36:44,060 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:36:44,061 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:36:44,061 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:36:44,061 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:36:44,061 - INFO - CPU cores: 8
+2025-08-13 21:36:44,061 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:36:44,061 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:36:44,061 - INFO - dtype: float32 for kernel math
+2025-08-13 21:36:44,061 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:36:44,061 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:36:44,061 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:36:44,061 - INFO - NumPy version: 1.26.4
+2025-08-13 21:36:44,061 - INFO - Pandas version: 2.2.2
+2025-08-13 21:36:44,061 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:36:44,061 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:36:44,061 - INFO - SciPy version: 1.13.1
+2025-08-13 21:36:44,061 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:36:44,061 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:36:44,061 - INFO - Validating input files...
+2025-08-13 21:36:44,061 - INFO - All input files validated successfully
+2025-08-13 21:36:44,061 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:36:44,061 - INFO - Synthetic data directory: results
+2025-08-13 21:36:44,061 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:36:44,061 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:36:44,061 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:36:44,061 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:36:44,061 - INFO - Creating output directories...
+2025-08-13 21:36:44,061 - INFO - Initializing evaluation framework...
+2025-08-13 21:36:44,070 - INFO - Computing evaluation metrics...
+2025-08-13 21:38:30,474 - INFO - Saving evaluation results...
+2025-08-13 21:38:30,555 - INFO - Generating metrics summary...
+2025-08-13 21:38:48,551 - INFO - Initializing PDF builder...
+2025-08-13 21:38:48,551 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 21:38:48,551 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 21:38:48,551 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 21:38:48,551 - INFO - Coverage constraint: ±10% of target
+2025-08-13 21:38:48,551 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 21:38:48,552 - INFO - Section 6: Robustness analysis data available
+2025-08-13 21:38:48,552 - INFO -   GARCH: 1 samples
+2025-08-13 21:38:48,552 - INFO -   DDPM: 5 samples
+2025-08-13 21:38:48,552 - INFO -   TimeGrad: 5 samples
+2025-08-13 21:38:48,552 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 21:38:48,552 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 21:38:48,552 - INFO - Confidence intervals: 95% level
+2025-08-13 21:38:48,552 - INFO - Section 7: Use-case panels implementation
+2025-08-13 21:38:48,552 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 21:38:48,552 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 21:38:48,552 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 21:38:48,552 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 21:38:48,552 - INFO - export_overleaf: True
+2025-08-13 21:38:48,552 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 21:38:48,552 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 21:38:48,552 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 21:38:48,553 - INFO - Building Final Results PDF...
+2025-08-13 21:38:52,174 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,175 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,175 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,175 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,175 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,208 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,208 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,208 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,208 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,208 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,235 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,235 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,235 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,236 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,236 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,250 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,250 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,250 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,250 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,250 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,283 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,283 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,283 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,283 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,283 - WARNING - posx and posy should be finite values
+2025-08-13 21:38:52,581 - ERROR - Build failed with error: 0
+2025-08-13 21:38:52,581 - ERROR - Check the build log for details
+2025-08-13 21:39:57,728 - INFO - === BUILD LOG START ===
+2025-08-13 21:39:57,728 - INFO - Python version: 3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]
+2025-08-13 21:39:57,728 - INFO - OS: Darwin 24.0.0
+2025-08-13 21:39:57,729 - INFO - Working directory: /Users/siminali/Desktop/Thesis Coding
+2025-08-13 21:39:57,729 - INFO - Timestamp: 2025-08-13T21:39:57.729057
+2025-08-13 21:39:57,729 - INFO - === PERFORMANCE SETTINGS ===
+2025-08-13 21:39:57,729 - INFO - OMP_NUM_THREADS: 1
+2025-08-13 21:39:57,729 - INFO - MKL_NUM_THREADS: 1
+2025-08-13 21:39:57,729 - INFO - OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:39:57,729 - INFO - CPU cores: 8
+2025-08-13 21:39:57,729 - INFO - === MMD BOOTSTRAP SETTINGS ===
+2025-08-13 21:39:57,729 - INFO - B=300, subsample_size=400, n_jobs=-1, CI=95%
+2025-08-13 21:39:57,729 - INFO - dtype: float32 for kernel math
+2025-08-13 21:39:57,729 - INFO - RBF kernel with median heuristic bandwidth
+2025-08-13 21:39:57,729 - INFO - Unbiased U-statistic estimator
+2025-08-13 21:39:57,729 - INFO - Cached Gram matrices with joblib parallelization
+2025-08-13 21:39:57,729 - INFO - NumPy version: 1.26.4
+2025-08-13 21:39:57,729 - INFO - Pandas version: 2.2.2
+2025-08-13 21:39:57,729 - INFO - Matplotlib version: 3.8.4
+2025-08-13 21:39:57,729 - INFO - Seaborn version: 0.13.2
+2025-08-13 21:39:57,729 - INFO - SciPy version: 1.13.1
+2025-08-13 21:39:57,729 - INFO - Statsmodels version: 0.14.2
+2025-08-13 21:39:57,729 - INFO - BLAS vendor: Could not detect
+2025-08-13 21:39:57,729 - INFO - Validating input files...
+2025-08-13 21:39:57,729 - INFO - All input files validated successfully
+2025-08-13 21:39:57,729 - INFO - Real data: data/sp500_data.csv
+2025-08-13 21:39:57,729 - INFO - Synthetic data directory: results
+2025-08-13 21:39:57,729 - INFO -   GARCH: garch_returns.npy
+2025-08-13 21:39:57,729 - INFO -   DDPM: ddpm_returns.npy
+2025-08-13 21:39:57,729 - INFO -   TimeGrad: timegrad_returns.npy
+2025-08-13 21:39:57,729 - INFO -   LLM-Conditioned: llm_conditioned_returns.npy
+2025-08-13 21:39:57,729 - INFO - Creating output directories...
+2025-08-13 21:39:57,729 - INFO - Initializing evaluation framework...
+2025-08-13 21:39:57,741 - INFO - Computing evaluation metrics...
+2025-08-13 21:41:41,257 - INFO - Saving evaluation results...
+2025-08-13 21:41:41,308 - INFO - Generating metrics summary...
+2025-08-13 21:41:59,360 - INFO - Initializing PDF builder...
+2025-08-13 21:41:59,360 - INFO - === SECTION 5-7 IMPLEMENTATION SETTINGS ===
+2025-08-13 21:41:59,360 - INFO - Section 5: Conditioning analysis data available
+2025-08-13 21:41:59,360 - INFO - Target volatility bins: Low/Medium/High (33rd/67th percentiles)
+2025-08-13 21:41:59,360 - INFO - Coverage constraint: ±10% of target
+2025-08-13 21:41:59,360 - INFO - Regime labels: Not available (explicit metadata required)
+2025-08-13 21:41:59,360 - INFO - Section 6: Robustness analysis data available
+2025-08-13 21:41:59,360 - INFO -   GARCH: 1 samples
+2025-08-13 21:41:59,360 - INFO -   DDPM: 5 samples
+2025-08-13 21:41:59,360 - INFO -   TimeGrad: 5 samples
+2025-08-13 21:41:59,360 - INFO -   LLM-Conditioned: 5 samples
+2025-08-13 21:41:59,360 - INFO - Bootstrap settings: Reusing from earlier computation
+2025-08-13 21:41:59,360 - INFO - Confidence intervals: 95% level
+2025-08-13 21:41:59,360 - INFO - Section 7: Use-case panels implementation
+2025-08-13 21:41:59,360 - INFO -   Hedge Funds: Condition→Response analysis from Section 5
+2025-08-13 21:41:59,361 - INFO -   Credit/Insurance: EVT analysis requires additional computation
+2025-08-13 21:41:59,361 - INFO -   Traditional Banks: VaR backtesting from Section 3
+2025-08-13 21:41:59,361 - INFO - === OVERLEAF EXPORT SETTINGS ===
+2025-08-13 21:41:59,361 - INFO - export_overleaf: True
+2025-08-13 21:41:59,361 - INFO - Overleaf export enabled - will generate LaTeX tables and figure stubs
+2025-08-13 21:41:59,361 - INFO - Output directory: final_results_thesis/overleaf/
+2025-08-13 21:41:59,361 - INFO - Format: booktabs tables, vector PDF figures, LaTeX stubs with captions and labels
+2025-08-13 21:41:59,361 - INFO - Building Final Results PDF...
+2025-08-13 21:42:02,877 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,877 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,878 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,878 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,878 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,910 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,911 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,911 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,911 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,911 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,938 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,938 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,938 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,938 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,938 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,952 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,953 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,953 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,953 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,953 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,984 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,985 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,985 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,985 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:02,985 - WARNING - posx and posy should be finite values
+2025-08-13 21:42:04,121 - INFO - Final Results PDF created successfully: final_results_thesis/final_results_thesis.pdf
+2025-08-13 21:42:04,121 - INFO - Build completed successfully!
+2025-08-13 21:42:04,121 - INFO - Exporting to Overleaf format...
+2025-08-13 21:42:04,126 - INFO - Starting Overleaf export...
+2025-08-13 21:42:04,134 - INFO - Overleaf export completed: 29 assets generated
+2025-08-13 21:42:04,134 - INFO - Overleaf export completed successfully!
+2025-08-13 21:42:04,134 - INFO - === PERFORMANCE SUMMARY ===
+2025-08-13 21:42:04,134 - INFO - CPU core count: 8
+2025-08-13 21:42:04,134 - INFO - Effective thread settings:
+2025-08-13 21:42:04,134 - INFO -   OMP_NUM_THREADS: 1
+2025-08-13 21:42:04,134 - INFO -   MKL_NUM_THREADS: 1
+2025-08-13 21:42:04,134 - INFO -   OPENBLAS_NUM_THREADS: 1
+2025-08-13 21:42:04,134 - INFO - Build completed with performance optimizations
+2025-08-13 21:42:04,134 - INFO - Creating reproducibility documentation...

@@ -67,6 +67,10 @@ class FinalResultsPDFBuilder:
             self._create_ranking_section(pdf)
             self._create_limitations_section(pdf)
             
+            # Create enhanced visualizations for new computational outputs
+            self._create_enhanced_visualizations_section(pdf)
+            self._create_enhanced_visualizations(pdf)
+            
             # Appendices
             self._create_appendix_a(pdf)
             self._create_appendix_b(pdf)
@@ -147,7 +151,8 @@ class FinalResultsPDFBuilder:
             '6. Robustness and Stability',
             '7. Use-Case Panels',
             '8. Overall Ranking and Model Selection',
-            '9. Limitations and Future Work',
+            '9. Enhanced Computational Analysis',
+            '10. Limitations and Future Work',
             'Appendix A: Additional Figures',
             'Appendix B: Methodological Details'
         ]
@@ -156,7 +161,14 @@ class FinalResultsPDFBuilder:
         for i, section in enumerate(sections):
             ax.text(0.05, y_pos, section, fontsize=12, ha='left', va='top', 
                     transform=ax.transAxes)
-            ax.text(0.8, y_pos, f'{i+2}', fontsize=12, ha='right', va='top', 
+            # Adjust page numbers for enhanced visualizations section
+            if i < 8:  # Sections 1-8
+                page_num = i + 2
+            elif i == 8:  # Section 9: Enhanced Computational Analysis
+                page_num = 11  # This will be after the ranking section
+            else:  # Sections 10+ and appendices
+                page_num = i + 3
+            ax.text(0.8, y_pos, f'{page_num}', fontsize=12, ha='right', va='top', 
                     transform=ax.transAxes)
             y_pos -= 0.06
         
@@ -1412,3 +1424,546 @@ class FinalResultsPDFBuilder:
         
         pdf.savefig(fig, bbox_inches='tight')
         plt.close(fig)
+
+    def _create_enhanced_visualizations_section(self, pdf):
+        """Create section title page for enhanced visualizations"""
+        fig, ax = plt.subplots(figsize=(8.5, 11))
+        ax.axis('off')
+        ax.text(0.5, 0.5, 'Enhanced Computational Analysis\n\nAdvanced Metrics and Visualizations\n\n• Prediction Error Metrics\n• Uncertainty Estimation\n• EVT Tail Analysis\n• Per-Regime Performance\n• Compute Profile Comparison\n• Enhanced Distribution Analysis', 
+                fontsize=18, ha='center', va='center', transform=ax.transAxes)
+        pdf.savefig(fig, bbox_inches='tight')
+        plt.close(fig)
+        
+        # Add narrative explanation page
+        fig, ax = plt.subplots(figsize=(8.5, 11))
+        ax.axis('off')
+        
+        title = "Enhanced Computational Analysis: Advanced Metrics and Visualizations"
+        ax.text(0.5, 0.95, title, fontsize=16, fontweight='bold', 
+                ha='center', va='top', transform=ax.transAxes)
+        
+        explanation = [
+            "This section presents advanced computational outputs that provide deeper insights into model performance:",
+            "",
+            "• Prediction Error Metrics: Mean Absolute Error (MAE), Root Mean Square Error (RMSE),",
+            "  Mean Absolute Percentage Error (MAPE), and Mean Error across all models",
+            "",
+            "• Uncertainty Estimation: Bootstrap-based prediction intervals (5-95%) and median",
+            "  ribbons showing the range of possible outcomes for each model",
+            "",
+            "• EVT Tail Analysis: Hill tail indices for extreme value theory analysis of left",
+            "  and right tails, with sample counts for statistical significance",
+            "",
+            "• Per-Regime Performance: Kolmogorov-Smirnov statistics across low, medium, and",
+            "  high volatility regimes to assess conditional performance",
+            "",
+            "• Compute Profile: Model parameters, training/inference times, VRAM usage, and",
+            "  GPU specifications for practical deployment considerations",
+            "",
+            "• Enhanced Distribution Analysis: Line plot histograms and log-scaled tail analysis",
+            "  for detailed distribution comparison and extreme value assessment"
+        ]
+        
+        y_pos = 0.85
+        for line in explanation:
+            ax.text(0.05, y_pos, line, fontsize=10, ha='left', va='top', 
+                    transform=ax.transAxes, wrap=True)
+            y_pos -= 0.04
+        
+        pdf.savefig(fig, bbox_inches='tight')
+        plt.close(fig)
+    
+    def _create_enhanced_visualizations(self, pdf):
+        """Create enhanced visualizations for the new computational outputs and embed them in PDF"""
+        print("Creating enhanced visualizations and embedding in PDF...")
+        
+        # Create prediction error metrics plots and embed in PDF
+        self._create_prediction_error_plots(pdf)
+        
+        # Create uncertainty estimation plots and embed in PDF
+        self._create_uncertainty_plots(pdf)
+        
+        # Create EVT Hill tail index plots and embed in PDF
+        self._create_evt_tail_plots(pdf)
+        
+        # Create per-regime analysis plots and embed in PDF
+        self._create_per_regime_plots(pdf)
+        
+        # Create compute profile table and embed in PDF
+        self._create_compute_profile_table(pdf)
+        
+        # Create enhanced distribution histograms and embed in PDF
+        self._create_enhanced_distribution_plots(pdf)
+    
+    def _create_prediction_error_plots(self, pdf):
+        """Create prediction error metrics plots and embed in PDF"""
+        if 'prediction_error_metrics' not in self.results:
+            return
+        
+        metrics = self.results['prediction_error_metrics']
+        
+        # Create comparison bar plot
+        fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+        fig.suptitle('Prediction Error Metrics Comparison', fontsize=16, fontweight='bold')
+        
+        # MAE comparison
+        mae_values = [metrics.get(model, {}).get('mae', np.nan) for model in self.evaluator.models]
+        axes[0, 0].bar(range(len(mae_values)), mae_values, color=self.colors[:len(mae_values)])
+        axes[0, 0].set_title('Mean Absolute Error (MAE)')
+        axes[0, 0].set_ylabel('MAE (%)')
+        axes[0, 0].set_xticks(range(len(mae_values)))
+        axes[0, 0].set_xticklabels(list(self.evaluator.models.keys()), rotation=45)
+        
+        # RMSE comparison
+        rmse_values = [metrics.get(model, {}).get('rmse', np.nan) for model in self.evaluator.models]
+        axes[0, 1].bar(range(len(rmse_values)), rmse_values, color=self.colors[:len(rmse_values)])
+        axes[0, 1].set_title('Root Mean Square Error (RMSE)')
+        axes[0, 1].set_ylabel('RMSE (%)')
+        axes[0, 1].set_xticks(range(len(rmse_values)))
+        axes[0, 1].set_xticklabels(list(self.evaluator.models.keys()), rotation=45)
+        
+        # MAPE comparison
+        mape_values = [metrics.get(model, {}).get('mape', np.nan) for model in self.evaluator.models]
+        axes[1, 0].bar(range(len(mape_values)), mape_values, color=self.colors[:len(mape_values)])
+        axes[1, 0].set_title('Mean Absolute Percentage Error (MAPE)')
+        axes[1, 0].set_ylabel('MAPE (%)')
+        axes[1, 0].set_xticks(range(len(mape_values)))
+        axes[1, 0].set_xticklabels(list(self.evaluator.models.keys()), rotation=45)
+        
+        # Mean Error comparison
+        mean_error_values = [metrics.get(model, {}).get('mean_error', np.nan) for model in self.evaluator.models]
+        axes[1, 1].bar(range(len(mean_error_values)), mean_error_values, color=self.colors[:len(mean_error_values)])
+        axes[1, 1].set_title('Mean Error')
+        axes[1, 1].set_ylabel('Mean Error (%)')
+        axes[1, 1].set_xticks(range(len(mean_error_values)))
+        axes[1, 1].set_xticklabels(list(self.evaluator.models.keys()), rotation=45)
+        
+        plt.tight_layout()
+        
+        # Save plot
+        plot_path = os.path.join(self.figures_dir, "prediction_error_metrics.pdf")
+        plt.savefig(plot_path, format='pdf', bbox_inches='tight', dpi=300)
+        
+        # Embed in PDF
+        pdf.savefig(fig, bbox_inches='tight')
+        plt.close()
+        
+        # Save data as CSV
+        table_data = []
+        for model in self.evaluator.models:
+            if model in metrics:
+                row = {
+                    'Model': model,
+                    'Mean_Error': metrics[model].get('mean_error', np.nan),
+                    'MAE': metrics[model].get('mae', np.nan),
+                    'MSE': metrics[model].get('mse', np.nan),
+                    'RMSE': metrics[model].get('rmse', np.nan),
+                    'MAPE': metrics[model].get('mape', np.nan)
+                }
+                table_data.append(row)
+        
+        df = pd.DataFrame(table_data)
+        table_path = os.path.join(self.tables_dir, "prediction_error_metrics.csv")
+        df.to_csv(table_path, index=False)
+        
+        print(f"  Prediction error plots saved to {plot_path}")
+        print(f"  Prediction error table saved to {table_path}")
+    
+    def _create_uncertainty_plots(self, pdf):
+        """Create uncertainty estimation plots with median ribbons and embed in PDF"""
+        if 'uncertainty_estimates' not in self.results:
+            return
+        
+        metrics = self.results['uncertainty_estimates']
+        
+        # Create uncertainty ribbon plot for each model
+        for model_name in self.evaluator.models:
+            if model_name not in metrics:
+                continue
+            
+            fig, ax = plt.subplots(figsize=(10, 6))
+            
+            # Get uncertainty bands
+            median = metrics[model_name]['median']
+            p5 = metrics[model_name]['p5']
+            p95 = metrics[model_name]['p95']
+            
+            # Create time index
+            time_index = range(len(median))
+            
+            # Plot uncertainty bands
+            ax.fill_between(time_index, p5, p95, alpha=0.3, color=self.colors[0], label='90% Prediction Interval')
+            ax.fill_between(time_index, p5, p95, alpha=0.5, color=self.colors[0], label='50% Prediction Interval')
+            ax.plot(time_index, median, color='red', linewidth=2, label='Median')
+            
+            ax.set_title(f'Uncertainty Estimates: {model_name}', fontsize=14, fontweight='bold')
+            ax.set_xlabel('Time Step')
+            ax.set_ylabel('Returns (%)')
+            ax.legend()
+            ax.grid(True, alpha=0.3)
+            
+            plt.tight_layout()
+            
+            # Save plot
+            plot_path = os.path.join(self.figures_dir, f"uncertainty_{model_name.lower().replace('-', '_')}.pdf")
+            plt.savefig(plot_path, format='pdf', bbox_inches='tight', dpi=300)
+            
+            # Embed in PDF
+            pdf.savefig(fig, bbox_inches='tight')
+            plt.close()
+        
+        print("  Uncertainty plots created for all models")
+    
+    def _create_evt_tail_plots(self, pdf):
+        """Create EVT Hill tail index plots and embed in PDF"""
+        if 'evt_hill_tail_indices' not in self.results:
+            return
+        
+        evt_data = self.results['evt_hill_tail_indices']
+        
+        # Create left tail (losses) comparison
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+        fig.suptitle('Extreme Value Theory: Hill Tail Indices', fontsize=16, fontweight='bold')
+        
+        # Left tail (losses)
+        models = list(evt_data.keys())
+        if 'regime_thresholds' in models:
+            models.remove('regime_thresholds')
+        
+        left_hill_values = [evt_data.get(model, {}).get('left_tail_hill', np.nan) for model in models]
+        left_counts = [evt_data.get(model, {}).get('left_tail_count', 0) for model in models]
+        
+        bars1 = ax1.bar(range(len(left_hill_values)), left_hill_values, color=self.colors[:len(left_hill_values)])
+        ax1.set_title('Left Tail (Losses) Hill Index')
+        ax1.set_ylabel('Hill Index')
+        ax1.set_xticks(range(len(left_hill_values)))
+        ax1.set_xticklabels(models, rotation=45)
+        
+        # Add sample count annotations
+        for i, (bar, count) in enumerate(zip(bars1, left_counts)):
+            ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01, 
+                    f'n={count}', ha='center', va='bottom', fontsize=8)
+        
+        # Right tail (gains)
+        right_hill_values = [evt_data.get(model, {}).get('right_tail_hill', np.nan) for model in models]
+        right_counts = [evt_data.get(model, {}).get('right_tail_count', 0) for model in models]
+        
+        bars2 = ax2.bar(range(len(right_hill_values)), right_hill_values, color=self.colors[:len(right_hill_values)])
+        ax2.set_title('Right Tail (Gains) Hill Index')
+        ax2.set_ylabel('Hill Index')
+        ax2.set_xticks(range(len(right_hill_values)))
+        ax2.set_xticklabels(models, rotation=45)
+        
+        # Add sample count annotations
+        for i, (bar, count) in enumerate(zip(bars2, right_counts)):
+            ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.01, 
+                    f'n={count}', ha='center', va='bottom', fontsize=8)
+        
+        plt.tight_layout()
+        
+        # Save plot
+        plot_path = os.path.join(self.figures_dir, "evt_hill_tail_indices.pdf")
+        plt.savefig(plot_path, format='pdf', bbox_inches='tight', dpi=300)
+        
+        # Embed in PDF
+        pdf.savefig(fig, bbox_inches='tight')
+        plt.close()
+        
+        # Save data as CSV
+        table_data = []
+        for model in models:
+            if model in evt_data:
+                row = {
+                    'Model': model,
+                    'Left_Tail_Hill_Index': evt_data[model].get('left_tail_hill', np.nan),
+                    'Right_Tail_Hill_Index': evt_data[model].get('right_tail_hill', np.nan),
+                    'Left_Tail_Threshold': evt_data[model].get('left_tail_threshold', np.nan),
+                    'Right_Tail_Threshold': evt_data[model].get('right_tail_threshold', np.nan),
+                    'Left_Tail_Count': evt_data[model].get('left_tail_count', 0),
+                    'Right_Tail_Count': evt_data[model].get('right_tail_count', 0)
+                }
+                table_data.append(row)
+        
+        df = pd.DataFrame(table_data)
+        table_path = os.path.join(self.tables_dir, "evt_hill_tail_indices.csv")
+        df.to_csv(table_path, index=False)
+        
+        print(f"  EVT Hill tail index plot saved to {plot_path}")
+        print(f"  EVT Hill tail index table saved to {table_path}")
+    
+    def _create_per_regime_plots(self, pdf):
+        """Create per-regime analysis plots and embed in PDF"""
+        if 'per_regime_metrics' not in self.results:
+            return
+        
+        regime_data = self.results['per_regime_metrics']
+        
+        # Create regime comparison plots
+        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        fig.suptitle('Per-Regime Model Performance', fontsize=16, fontweight='bold')
+        
+        regimes = ['low_volatility', 'medium_volatility', 'high_volatility']
+        models = [model for model in regime_data.keys() if model != 'regime_thresholds']
+        
+        # KS statistics by regime
+        for i, regime in enumerate(regimes):
+            row, col = i // 2, i % 2
+            ks_values = [regime_data.get(model, {}).get(regime, {}).get('ks_statistic', np.nan) for model in models]
+            
+            bars = axes[row, col].bar(range(len(ks_values)), ks_values, color=self.colors[:len(ks_values)])
+            axes[row, col].set_title(f'{regime.replace("_", " ").title()}: KS Statistic')
+            axes[row, col].set_ylabel('KS Statistic')
+            axes[row, col].set_xticks(range(len(ks_values)))
+            axes[row, col].set_xticklabels(models, rotation=45)
+            
+            # Add sample size annotations
+            for j, (bar, model) in enumerate(zip(bars, models)):
+                sample_size = regime_data.get(model, {}).get(regime, {}).get('sample_size', 0)
+                axes[row, col].text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.001, 
+                                   f'n={sample_size}', ha='center', va='bottom', fontsize=8)
+        
+        plt.tight_layout()
+        
+        # Save plot
+        plot_path = os.path.join(self.figures_dir, "per_regime_analysis.pdf")
+        plt.savefig(plot_path, format='pdf', bbox_inches='tight', dpi=300)
+        
+        # Embed in PDF
+        pdf.savefig(fig, bbox_inches='tight')
+        plt.close()
+        
+        # Save data as CSV
+        table_data = []
+        for model in models:
+            for regime in regimes:
+                if model in regime_data and regime in regime_data[model]:
+                    regime_metrics = regime_data[model][regime]
+                    row = {
+                        'Model': model,
+                        'Regime': regime.replace('_', ' ').title(),
+                        'KS_Statistic': regime_metrics.get('ks_statistic', np.nan),
+                        'KS_PValue': regime_metrics.get('ks_pvalue', np.nan),
+                        'MMD_Value': regime_metrics.get('mmd_value', np.nan),
+                        'Sample_Size': regime_metrics.get('sample_size', 0)
+                    }
+                    table_data.append(row)
+        
+        df = pd.DataFrame(table_data)
+        table_path = os.path.join(self.tables_dir, "per_regime_metrics.csv")
+        df.to_csv(table_path, index=False)
+        
+        print(f"  Per-regime analysis plot saved to {plot_path}")
+        print(f"  Per-regime metrics table saved to {table_path}")
+    
+    def _create_compute_profile_table(self, pdf):
+        """Create compute profile table and embed in PDF"""
+        if 'compute_profile' not in self.results:
+            return
+        
+        compute_data = self.results['compute_profile']
+        
+        # Create table data
+        table_data = []
+        for model in self.evaluator.models:
+            if model in compute_data:
+                profile = compute_data[model]
+                row = {
+                    'Model': model,
+                    'Parameters': profile.get('parameters', np.nan),
+                    'Training_Time_Seconds': profile.get('training_time_seconds', np.nan),
+                    'Inference_Time_Seconds': profile.get('inference_time_seconds', np.nan),
+                    'Peak_VRAM_MB': profile.get('peak_vram_mb', np.nan),
+                    'Total_GPU_VRAM_MB': profile.get('total_gpu_vram_mb', np.nan),
+                    'GPU_Model': profile.get('gpu_model', 'Unknown'),
+                    'Model_Type': profile.get('model_type', 'Unknown')
+                }
+                table_data.append(row)
+        
+        df = pd.DataFrame(table_data)
+        table_path = os.path.join(self.tables_dir, "compute_profile.csv")
+        df.to_csv(table_path, index=False)
+        
+        # Create visual table for PDF only if we have data
+        print(f"Debug: table_data length: {len(table_data)}, df.columns length: {len(df.columns)}")
+        print(f"Debug: table_data type: {type(table_data)}, df.columns type: {type(df.columns)}")
+        if len(table_data) > 0 and len(df.columns) > 0:
+            # Ensure table_data has the right structure
+            print(f"Debug: First row of table_data: {table_data[0] if table_data else 'None'}")
+            print(f"Debug: df.columns: {list(df.columns)}")
+            
+            # Convert list of dictionaries to list of lists for matplotlib table
+            if isinstance(table_data[0], dict):
+                # Convert dict format to list format
+                table_data_list = []
+                for row_dict in table_data:
+                    row_list = [row_dict.get(col, '') for col in df.columns]
+                    table_data_list.append(row_list)
+                print(f"Debug: Converted table_data_list has {len(table_data_list)} rows, first row has {len(table_data_list[0])} elements")
+                
+                fig, ax = plt.subplots(figsize=(12, 8))
+                ax.axis('off')
+                
+                # Create table
+                table = ax.table(cellText=table_data_list, colLabels=df.columns, 
+                                cellLoc='center', loc='center')
+                table.auto_set_font_size(False)
+                table.set_fontsize(8)
+                table.scale(1.2, 1.5)
+                
+                # Style table
+                for i in range(len(df.columns)):
+                    table[(0, i)].set_facecolor('#4CAF50')
+                    table[(0, i)].set_text_props(weight='bold', color='white')
+                
+                ax.set_title('Compute Profile Comparison', fontsize=14, pad=20)
+                
+                # Embed in PDF
+                pdf.savefig(fig, bbox_inches='tight')
+                plt.close()
+            else:
+                print(f"Debug: Unexpected data format - table_data[0] is {type(table_data[0])}")
+                # Create a note page if format is unexpected
+                fig, ax = plt.subplots(figsize=(8.5, 11))
+                ax.axis('off')
+                ax.text(0.5, 0.5, 'Compute Profile Comparison\n\nUnexpected data format detected.\n\nThis section would typically include:\n• Model parameters count\n• Training/inference times\n• VRAM usage\n• GPU specifications', 
+                        fontsize=16, ha='center', va='center', transform=ax.transAxes)
+                pdf.savefig(fig, bbox_inches='tight')
+                plt.close()
+        else:
+            # Create a note page if no compute profile data
+            fig, ax = plt.subplots(figsize=(8.5, 11))
+            ax.axis('off')
+            ax.text(0.5, 0.5, 'Compute Profile Comparison\n\nNo compute profile data available.\n\nThis section would typically include:\n• Model parameters count\n• Training/inference times\n• VRAM usage\n• GPU specifications', 
+                    fontsize=16, ha='center', va='center', transform=ax.transAxes)
+            pdf.savefig(fig, bbox_inches='tight')
+            plt.close()
+        
+        print(f"  Compute profile table saved to {table_path}")
+        print(f"  Compute profile table embedded in PDF")
+    
+    def _create_enhanced_distribution_plots(self, pdf):
+        """Create enhanced distribution histograms with line plots and log scaling option and embed in PDF"""
+        if 'basic_statistics' not in self.results:
+            return
+        
+        # Create enhanced distribution comparison plots
+        fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+        fig.suptitle('Enhanced Distribution Comparison: Real vs Synthetic Data', fontsize=16, fontweight='bold')
+        
+        models = list(self.evaluator.models.keys())
+        
+        for i, model in enumerate(models):
+            if model not in self.evaluator.synthetic_returns:
+                continue
+            
+            row, col = i // 2, i % 2
+            ax = axes[row, col]
+            
+            # Get data
+            real_data = self.evaluator.real_test
+            synthetic_data = self.evaluator.synthetic_returns[model][:, 0]  # First sample
+            
+            # Create histogram bins
+            all_data = np.concatenate([real_data, synthetic_data])
+            bins = np.linspace(np.min(all_data), np.max(all_data), 50)
+            
+            # Plot histograms as line plots
+            real_hist, _ = np.histogram(real_data, bins=bins, density=True)
+            synthetic_hist, _ = np.histogram(synthetic_data, bins=bins, density=True)
+            
+            bin_centers = (bins[:-1] + bins[1:]) / 2
+            
+            ax.plot(bin_centers, real_hist, 'k-', linewidth=2, label='Real Data')
+            ax.plot(bin_centers, synthetic_hist, color=self.colors[i], linewidth=2, label=f'{model}')
+            
+            ax.set_title(f'{model} vs Real Data Distribution')
+            ax.set_xlabel('Returns (%)')
+            ax.set_ylabel('Density')
+            ax.legend()
+            ax.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        
+        # Save plot
+        plot_path = os.path.join(self.figures_dir, "enhanced_distribution_comparison.pdf")
+        plt.savefig(plot_path, format='pdf', bbox_inches='tight', dpi=300)
+        
+        # Embed in PDF
+        pdf.savefig(fig, bbox_inches='tight')
+        plt.close()
+        
+        # Create tail-focused plot with log scaling
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+        fig.suptitle('Tail Distribution Analysis (Log Scale)', fontsize=16, fontweight='bold')
+        
+        # Left tail (losses)
+        for i, model in enumerate(models):
+            if model not in self.evaluator.synthetic_returns:
+                continue
+            
+            real_data = self.evaluator.real_test
+            synthetic_data = self.evaluator.synthetic_returns[model][:, 0]
+            
+            # Focus on left tail (bottom 20%)
+            left_threshold = np.percentile(real_data, 20)
+            real_left = real_data[real_data <= left_threshold]
+            synthetic_left = synthetic_data[synthetic_data <= left_threshold]
+            
+            # Create histogram bins for left tail
+            left_bins = np.linspace(np.min(real_left), left_threshold, 30)
+            real_left_hist, _ = np.histogram(real_left, bins=left_bins, density=True)
+            synthetic_left_hist, _ = np.histogram(synthetic_left, bins=left_bins, density=True)
+            
+            bin_centers = (left_bins[:-1] + left_bins[1:]) / 2
+            
+            ax1.plot(bin_centers, real_left_hist, 'k-', linewidth=2, label='Real Data')
+            ax1.plot(bin_centers, synthetic_left_hist, color=self.colors[i], linewidth=2, label=f'{model}')
+        
+        ax1.set_title('Left Tail (Losses)')
+        ax1.set_xlabel('Returns (%)')
+        ax1.set_ylabel('Density (Log Scale)')
+        ax1.set_yscale('log')
+        ax1.legend()
+        ax1.grid(True, alpha=0.3)
+        
+        # Right tail (gains)
+        for i, model in enumerate(models):
+            if model not in self.evaluator.synthetic_returns:
+                continue
+            
+            real_data = self.evaluator.real_test
+            synthetic_data = self.evaluator.synthetic_returns[model][:, 0]
+            
+            # Focus on right tail (top 20%)
+            right_threshold = np.percentile(real_data, 80)
+            real_right = real_data[real_data >= right_threshold]
+            synthetic_right = synthetic_data[synthetic_data >= right_threshold]
+            
+            # Create histogram bins for right tail
+            right_bins = np.linspace(right_threshold, np.max(real_right), 30)
+            real_right_hist, _ = np.histogram(real_right, bins=right_bins, density=True)
+            synthetic_right_hist, _ = np.histogram(synthetic_right, bins=right_bins, density=True)
+            
+            bin_centers = (right_bins[:-1] + right_bins[1:]) / 2
+            
+            ax2.plot(bin_centers, real_right_hist, 'k-', linewidth=2, label='Real Data')
+            ax2.plot(bin_centers, synthetic_right_hist, color=self.colors[i], linewidth=2, label=f'{model}')
+        
+        ax2.set_title('Right Tail (Gains)')
+        ax2.set_xlabel('Returns (%)')
+        ax2.set_ylabel('Density (Log Scale)')
+        ax2.set_yscale('log')
+        ax2.legend()
+        ax2.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        
+        # Save plot
+        plot_path = os.path.join(self.figures_dir, "tail_distribution_analysis.pdf")
+        plt.savefig(plot_path, format='pdf', bbox_inches='tight', dpi=300)
+        
+        # Embed in PDF
+        pdf.savefig(fig, bbox_inches='tight')
+        plt.close()
+        
+        print("  Enhanced distribution plots created")

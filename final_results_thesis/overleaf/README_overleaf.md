@@ -11,9 +11,12 @@ This directory contains LaTeX tables and figure stubs for integration into Overl
 - **tab:temporal_tests**: Temporal Dependence Tests: Autocorrelation Function (ACF) and Partial Autocorrelation Function (PACF) at key lags.
 - **tab:volatility_metrics**: Volatility Metrics: Mean rolling 20-day volatility, ACF at lag 1, persistence proxy, and volatility-of-volatility.
 - **tab:robustness_bootstrap**: Robustness Analysis: Bootstrap statistics with mean ± standard deviation and 95% confidence intervals across multiple runs.
-- **tab:evt_tailindex**: Extreme Value Theory: Hill tail index estimates for the left tail with 95% confidence intervals.
+- **tab:evt_tailindex**: Extreme Value Theory: Hill tail indices for left (losses) and right (gains) tails with sample counts.
 - **tab:capital_impact**: Capital Impact: Expected Shortfall at 99% confidence level and differences versus Real data.
 - **tab:ranking_table**: Overall Ranking: Component scores and final ranking across all evaluation dimensions.
+- **tab:prediction_error_metrics**: Prediction Error Metrics: Mean error, MAE, MSE, RMSE, and MAPE for synthetic vs real data.
+- **tab:per_regime_metrics**: Per-Regime Model Performance: KS statistics and p-values across volatility regimes (low, medium, high).
+- **tab:compute_profile**: Compute Profile: Model parameters, training/inference times, and GPU memory usage.
 
 ## Figure Stubs
 

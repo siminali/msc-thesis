@@ -1,0 +1,15 @@
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lrrrrr}
+\toprule
+Model & Mean Error & MAE & MSE & RMSE & MAPE \\
+\midrule
+GARCH & -0.0333 & 0.8107 & 1.3702 & 1.1706 & 102.73 \\
+DDPM & -0.0689 & 1.1250 & 2.2167 & 1.4889 & 833.50 \\
+TimeGrad & 0.0123 & 1.0698 & 2.0432 & 1.4294 & 866.52 \\
+LLM-Conditioned & 0.0011 & 1.1165 & 2.3783 & 1.5422 & 752.46 \\
+\bottomrule
+\end{tabular}
+\caption{Prediction Error Metrics: Mean error, Mean Absolute Error (MAE), Mean Square Error (MSE), Root Mean Square Error (RMSE), and Mean Absolute Percentage Error (MAPE) for synthetic vs real data.}
+\label{tab:prediction_error_metrics}
+\end{table}
