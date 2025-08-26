@@ -1,0 +1,43 @@
+Overview
+
+This project builds generative diffusion models that create realistic, synthetic daily return sequences for financial risk management. It offers three flavours: (1) an unconditional baseline; (2) a controllable model conditioned on market regime and target volatility; and (3) a news‑aware model that uses language‑model embeddings of daily news to influence the behaviour of generated returns. The goal is simple: produce realistic synthetic data that helps stress‑test portfolios, check risk models, and explore what might happen under different conditions—without relying solely on one realised market history.
+
+Key Ideas
+
+- Diffusion models: modern generative models that iteratively “denoise” random noise into realistic time series.
+- Conditioning: adding controls so the model responds to user‑set inputs—here, market regime (up/down, low/high volatility), a target volatility level (σ*), or semantic signals from news.
+- Risk metrics (VaR/ES): Value at Risk and Expected Shortfall summarise tail risk. We assess whether synthetic data has sensible tail behaviour and whether the models’ risk predictions are well calibrated.
+
+Contributions
+
+- Benchmarks vs classical models: alongside diffusion models, the repository includes GARCH/TimeGrad‑style baselines (and comparisons) to show where generative models help.
+- Two‑level conditioning: a transparent, explicitly conditioned model (regime + σ*) and a semantic, LLM‑conditioned variant using news embeddings.
+- Rigorous evaluation: KS and Wasserstein distances, stylised facts (tails, ACF/PACF), VaR/ES back‑testing (Kupiec coverage; a simple independence ratio), and controllability diagnostics (target vs realised volatility with reliability curves).
+- Report‑ready outputs: figures, LaTeX tables, and consolidated metrics suitable for thesis or supervisory review. Assumption: references to Diebold–Mariano tests and bootstrap CIs are roadmap items rather than current code paths.
+
+How to Use
+
+- Install dependencies:
+  pip install -r requirements_llm_refactored.txt
+- Train models:
+  python src/train_all.py
+  # or select models
+  python src/train_all.py --models explicit llm
+- Evaluate results (auto‑discovers checkpoints):
+  python run_comprehensive_evaluation.py
+  # or per‑model with a robust evaluator
+  python src/unified_evaluator_gpt5.py --models_dir results --results_dir results/separate_eval_gpt5
+- Where to look:
+  results/<model>/<run_id>/: checkpoints, training history, figures, tables
+  results/comparisons/ or results/separate_eval_gpt5/: evaluation figures, tables, and summaries
+
+Interpretation
+
+- Accuracy of VaR/ES: compare curves and exceedance timelines; good models do not chronically under‑ or over‑estimate tail risk.
+- KS/Wasserstein: lower distances suggest synthetic data looks like real data distributionally.
+- Controllability: in explicitly conditioned runs, points close to the y=x line (target vs realised σ*) and near‑identity reliability curves indicate the model obeys the requested volatility. LLM‑conditioned diagnostics (MAE/R², bucket comparisons) indicate sensitivity to news signals.
+- Robustness: the evaluation includes stylised facts (tails, autocorrelation) and a COVID‑2020 case study to see performance in stress periods.
+
+Conclusion
+
+The project shows how generative AI can enhance financial risk management by producing realistic, controllable synthetic data. Diffusion models can replicate key empirical features of returns, target specific conditions (regime, volatility), and react to information proxies such as news. This makes stress testing broader and faster, helps benchmark classical models, and provides more transparent, reproducible evidence for decision‑makers. Future extensions include formal statistical tests (e.g., Diebold–Mariano), bootstrap confidence intervals, richer attention‑based conditioning, and multi‑asset generalisation.
