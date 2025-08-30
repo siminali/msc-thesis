@@ -70,6 +70,8 @@ class OverleafExporter:
             self._export_prediction_error_table()
             self._export_per_regime_table()
             self._export_compute_profile_table()
+            # Export DM tables if available
+            self._export_dm_tables_if_available()
             
             # Export figures
             self._export_distribution_figures()
@@ -204,8 +206,20 @@ Model & VaR 1\% & ES 1\% & VaR 5\% & ES 5\% & VaR 95\% & ES 95\% & VaR 99\% & ES
                 metrics = risk_metrics[model_name]
                 latex_content += f"\n{model_name} & {metrics['var_1']:.4f} & {metrics['es_1']:.4f} & "
                 latex_content += f"{metrics['var_5']:.4f} & {metrics['es_5']:.4f} & "
-                latex_content += f"{metrics['var_95']:.4f} & {metrics['es_95']:.4f} & "
-                latex_content += f"{metrics['var_99']:.4f} & {metrics['es_99']:.4f} \\\\"
+                # ES CI columns if present
+                if 'es_95_ci_low' in metrics and 'es_95_ci_high' in metrics and 'es_99_ci_low' in metrics and 'es_99_ci_high' in metrics:
+                    latex_content = latex_content.replace("\\begin{tabular}{lrrrrrrrr}", "\\begin{tabular}{lrrrrrrrrrr}")
+                    latex_content = latex_content.replace(
+                        "Model & VaR 1\\% & ES 1\\% & VaR 5\\% & ES 5\\% & VaR 95\\% & ES 95\\% & VaR 99\\% & ES 99\\% \\\\",
+                        "Model & VaR 1\\% & ES 1\\% & VaR 5\\% & ES 5\\% & VaR 95\\% & ES 95\\% & ES 95\\% CI & VaR 99\\% & ES 99\\% & ES 99\\% CI \\\\"
+                    )
+                    latex_content += f"{metrics['var_95']:.4f} & {metrics['es_95']:.4f} & "
+                    latex_content += f"[{metrics['es_95_ci_low']:.4f}, {metrics['es_95_ci_high']:.4f}] & "
+                    latex_content += f"{metrics['var_99']:.4f} & {metrics['es_99']:.4f} & "
+                    latex_content += f"[{metrics['es_99_ci_low']:.4f}, {metrics['es_99_ci_high']:.4f}] \\\\"
+                else:
+                    latex_content += f"{metrics['var_95']:.4f} & {metrics['es_95']:.4f} & "
+                    latex_content += f"{metrics['var_99']:.4f} & {metrics['es_99']:.4f} \\\\"
         
         latex_content += r"""
 \bottomrule
@@ -980,6 +994,47 @@ This directory contains LaTeX tables and figure stubs for integration into Overl
         manifest_path = os.path.join(self.overleaf_dir, 'manifest.json')
         with open(manifest_path, 'w') as f:
             json.dump(manifest, f, indent=2)
+    
+    def _export_dm_tables_if_available(self):
+        """Export DM test LaTeX tables if evaluator produced them (files under outputs/metrics)."""
+        metrics_dir = os.path.join(self.outputs_dir, 'metrics')
+        if not os.path.isdir(metrics_dir):
+            return
+        for fname in os.listdir(metrics_dir):
+            if not fname.startswith('dm_tests_') or not fname.endswith('.csv'):
+                continue
+            alpha_str = fname.split('_')[-1].split('.')[0]
+            path = os.path.join(metrics_dir, fname)
+            try:
+                df = pd.read_csv(path)
+            except Exception:
+                continue
+            models = sorted(set(df['model_1']).union(set(df['model_2'])))
+            stat_mat = {m: {n: (0.0 if m == n else np.nan) for n in models} for m in models}
+            p_mat = {m: {n: (1.0 if m == n else np.nan) for n in models} for m in models}
+            for _, row in df.iterrows():
+                m1, m2 = str(row['model_1']), str(row['model_2'])
+                stat, p = float(row['dm_stat']), float(row['p_value'])
+                stat_mat[m1][m2] = stat
+                stat_mat[m2][m1] = -stat
+                p_mat[m1][m2] = p
+                p_mat[m2][m1] = p
+            def to_latex(matrix: dict, title: str, label: str) -> str:
+                header = " & " + " & ".join(models) + " \\\\" 
+                lines = ["\\begin{table}[htbp]", "\\centering", "\\begin{tabular}{l" + "r"*len(models) + "}", "\\toprule", title, "\\midrule"]
+                lines.append(header)
+                for m in models:
+                    row_vals = [f"{matrix[m][n]:.4f}" if np.isfinite(matrix[m][n]) else "--" for n in models]
+                    lines.append(f"{m} & " + " & ".join(row_vals) + " \\\\")
+                lines += ["\\bottomrule", "\\end{tabular}", f"\\caption{{{title}}}", f"\\label{{{label}}}", "\\end{table}"]
+                return "\n".join(lines)
+            stat_tex = to_latex(stat_mat, f"DM Statistics (alpha={int(alpha_str)}\\%)", f"tab:dm_stat_{alpha_str}")
+            p_tex = to_latex(p_mat, f"DM p-values (alpha={int(alpha_str)}\\%)", f"tab:dm_p_{alpha_str}")
+            for content, suffix in [(stat_tex, f"dm_tests_alpha{alpha_str}_stat.tex"), (p_tex, f"dm_tests_alpha{alpha_str}_p.tex")]:
+                out_path = os.path.join(self.tables_dir, suffix)
+                with open(out_path, 'w') as f:
+                    f.write(content)
+                self.assets.append({'path': f'tables/{suffix}', 'type': 'table', 'label': f'tab:dm_{suffix}', 'caption': f'DM results alpha={alpha_str}%', 'tag': 'dm'})
     
     def _write_error_log(self):
         """Write error log to notes directory"""

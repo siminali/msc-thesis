@@ -41,6 +41,11 @@ import torch.nn.functional as F
 from statsmodels.tsa.stattools import acf, pacf
 from statsmodels.stats.diagnostic import acorr_ljungbox
 
+try:
+    from utils.es_bootstrap import bootstrap_es_ci
+except Exception:
+    bootstrap_es_ci = None  # type: ignore
+
 # Add src to path for imports
 sys.path.append(str(Path(__file__).parent))
 
@@ -82,7 +87,11 @@ DEFAULT_CONFIG = {
     'ablation_samples': 500,     # Samples for ablation studies
     'correlation_lags': 10,      # Lags for correlation analysis
     'outlier_threshold': 3.0,    # Standard deviations for outlier detection
-    'volatility_percentiles': [10, 25, 50, 75, 90]  # For regime analysis
+    'volatility_percentiles': [10, 25, 50, 75, 90],  # For regime analysis
+    # ES bootstrap (optional)
+    'es_bootstrap_B': 1000,
+    'es_bootstrap_block': None,
+    'es_ci': 0.95,
 }
 
 class UnifiedEvaluator:
@@ -523,6 +532,23 @@ class UnifiedEvaluator:
                     metrics[f'es_{int(var_level*100)}'] = float(es)
                 else:
                     metrics[f'es_{int(var_level*100)}'] = np.nan
+            
+            # Optional ES bootstrap CIs
+            if bootstrap_es_ci is not None:
+                try:
+                    es_point, lo, hi = bootstrap_es_ci(flat_samples, level=0.95, B=int(self.config.get('es_bootstrap_B', 1000)), block_size=(int(self.config['es_bootstrap_block']) if self.config.get('es_bootstrap_block', None) is not None else None), ci=float(self.config.get('es_ci', 0.95)), random_state=int(self.config.get('seed', 42)))
+                    metrics['es_95'] = float(es_point)
+                    metrics['es_95_ci_low'] = float(lo)
+                    metrics['es_95_ci_high'] = float(hi)
+                except Exception:
+                    pass
+                try:
+                    es_point, lo, hi = bootstrap_es_ci(flat_samples, level=0.99, B=int(self.config.get('es_bootstrap_B', 1000)), block_size=(int(self.config['es_bootstrap_block']) if self.config.get('es_bootstrap_block', None) is not None else None), ci=float(self.config.get('es_ci', 0.95)), random_state=int(self.config.get('seed', 42)))
+                    metrics['es_99'] = float(es_point)
+                    metrics['es_99_ci_low'] = float(lo)
+                    metrics['es_99_ci_high'] = float(hi)
+                except Exception:
+                    pass
             
             # Advanced backtesting
             var_95 = metrics['var_95']
@@ -1408,7 +1434,11 @@ def main():
     parser.add_argument('--ablation_samples', type=int, default=500, help='Samples for ablation studies')
     parser.add_argument('--correlation_lags', type=int, default=10, help='Lags for correlation analysis')
     parser.add_argument('--outlier_threshold', type=float, default=3.0, help='Standard deviations for outlier detection')
-    
+    # ES bootstrap options
+    parser.add_argument('--es-bootstrap-B', type=int, default=1000, help='Bootstrap replicates for ES CI')
+    parser.add_argument('--es-bootstrap-block', type=int, default=None, help='Moving-block bootstrap block size (None for IID)')
+    parser.add_argument('--es-ci', type=float, default=0.95, help='ES CI confidence level')
+
     args = parser.parse_args()
     
     # Update config

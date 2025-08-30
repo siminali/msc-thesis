@@ -21,7 +21,18 @@ from scipy.stats import anderson, kstest
 from statsmodels.tsa.stattools import acf, pacf
 from statsmodels.stats.diagnostic import acorr_ljungbox
 import warnings
+import json
+from typing import Dict, List, Tuple
 warnings.filterwarnings('ignore')
+try:
+    # Optional imports for added functionality
+    from utils.dm import diebold_mariano, _quantile_loss
+    from utils.es_bootstrap import bootstrap_es_ci
+except Exception:
+    # Defer import errors until feature flags are used
+    diebold_mariano = None  # type: ignore
+    _quantile_loss = None  # type: ignore
+    bootstrap_es_ci = None  # type: ignore
 
 # Try to import tqdm for progress bars
 try:
@@ -38,6 +49,23 @@ try:
 except ImportError:
     JOBLIB_AVAILABLE = False
     print("Warning: joblib not available. Install with 'pip install joblib' for parallelization.")
+
+def _sanitize_for_json(obj):
+    import numpy as _np
+    import pandas as _pd
+    if isinstance(obj, dict):
+        return {k: _sanitize_for_json(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [ _sanitize_for_json(v) for v in obj ]
+    if isinstance(obj, _np.ndarray):
+        return obj.tolist()
+    if isinstance(obj, (_np.floating,)):
+        return float(obj)
+    if isinstance(obj, (_np.integer,)):
+        return int(obj)
+    if isinstance(obj, _pd.Timestamp):
+        return obj.isoformat()
+    return obj
 
 class FinalResultsEvaluator:
     """
@@ -71,6 +99,10 @@ class FinalResultsEvaluator:
         self.synthetic_returns = {}
         self.test_split_ratio = 0.2
         self.random_seed = 42
+        # Optional feature configs (set by CLI entrypoint)
+        self._dm_levels: List[float] = []  # e.g., [0.01, 0.05]
+        self._compute_dm: bool = False
+        self._es_bootstrap_cfg: Dict[str, float] = {}  # keys: B, block_size (or None), ci
         
         # Performance optimization: cache computed values
         self._cache = {}
@@ -397,9 +429,79 @@ class FinalResultsEvaluator:
         for model_name, synthetic_data in self.synthetic_returns.items():
             # Use first sample for risk metrics
             sample_returns = synthetic_data[:, 0]
-            risk_metrics[model_name] = self._compute_risk_for_data(sample_returns)
+            metrics = self._compute_risk_for_data(sample_returns)
+            # Optional ES bootstrap CIs
+            if self._es_bootstrap_cfg and bootstrap_es_ci is not None:
+                try:
+                    for level in [0.95, 0.99]:
+                        es_point, lo, hi = bootstrap_es_ci(
+                            sample_returns,
+                            level=level,
+                            B=int(self._es_bootstrap_cfg.get('B', 1000)),
+                            block_size=int(self._es_bootstrap_cfg['block_size']) if self._es_bootstrap_cfg.get('block_size', None) is not None else None,
+                            ci=float(self._es_bootstrap_cfg.get('ci', 0.95)),
+                            random_state=self.random_seed,
+                        )
+                        key = f"es_{int(level*100)}"
+                        metrics[key] = float(es_point)
+                        metrics[f"{key}_ci_low"] = float(lo)
+                        metrics[f"{key}_ci_high"] = float(hi)
+                except Exception:
+                    pass
+            risk_metrics[model_name] = metrics
         
         return risk_metrics
+
+    def compute_dm_tests(self, outputs_dir: str) -> Dict[str, Dict[str, Dict[str, float]]]:
+        """
+        Compute Diebold–Mariano pairwise tests across models for each alpha in self._dm_levels.
+        Saves CSV and JSON under outputs_dir/metrics/.
+        Returns nested dict: {alpha: {(m1,m2): {stat, p}}}
+        """
+        results: Dict[str, Dict[str, Dict[str, float]]] = {}
+        if not self._compute_dm or not self._dm_levels or diebold_mariano is None or _quantile_loss is None:
+            return results
+        os.makedirs(os.path.join(outputs_dir, 'metrics'), exist_ok=True)
+        # Prepare per-time VaR forecasts q_t^model from synthetic sample distributions
+        model_names = list(self.models.keys())
+        # Skip if insufficient synthetic data shape
+        for alpha in self._dm_levels:
+            # Compute per-time quantile loss series per model
+            per_model_loss: Dict[str, np.ndarray] = {}
+            for m in model_names:
+                if m not in self.synthetic_returns:
+                    continue
+                arr = self.synthetic_returns[m]  # shape [n_samples, n_test]
+                if arr.ndim != 2 or arr.shape[1] != len(self.real_test):
+                    continue
+                q = np.quantile(arr, q=(1.0 - alpha), axis=0)
+                loss = _quantile_loss(self.real_test, q, alpha)
+                per_model_loss[m] = loss
+            # Pairwise DM
+            alpha_key = f"alpha_{int(alpha*100)}"
+            results_alpha: Dict[str, Dict[str, float]] = {}
+            names = list(per_model_loss.keys())
+            for i in range(len(names)):
+                for j in range(i + 1, len(names)):
+                    m1, m2 = names[i], names[j]
+                    stat, p = diebold_mariano(per_model_loss[m1], per_model_loss[m2], h=1, alternative="two-sided", small_sample=True)
+                    results_alpha[f"{m1}__vs__{m2}"] = {"dm_stat": float(stat), "p_value": float(p)}
+            results[alpha_key] = results_alpha
+            # Persist
+            try:
+                df_rows = []
+                for k, v in results_alpha.items():
+                    m1, m2 = k.split("__vs__")
+                    df_rows.append({"model_1": m1, "model_2": m2, "dm_stat": v["dm_stat"], "p_value": v["p_value"]})
+                df = pd.DataFrame(df_rows)
+                csv_path = os.path.join(outputs_dir, 'metrics', f'dm_tests_{int(alpha*100)}.csv')
+                json_path = os.path.join(outputs_dir, 'metrics', f'dm_tests_{int(alpha*100)}.json')
+                df.to_csv(csv_path, index=False)
+                with open(json_path, 'w') as f:
+                    json.dump(results_alpha, f, indent=2)
+            except Exception:
+                pass
+        return results
     
     def _compute_risk_for_data(self, data):
         """Compute risk metrics for a single dataset"""
@@ -1401,3 +1503,45 @@ class FinalResultsEvaluator:
         df.to_csv(filename, index=False)
         
         return df
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description='Final Results Evaluator with optional DM tests and ES CIs')
+    parser.add_argument('--real', required=False, default='data/sp500_data.csv')
+    parser.add_argument('--synthetic_dir', required=False, default='results')
+    parser.add_argument('--models', nargs='+', default=['GARCH', 'DDPM', 'TimeGrad', 'LLM-Conditioned'])
+    parser.add_argument('--output_dir', default='final_results_thesis')
+    # DM flags
+    parser.add_argument('--compute-dm', action='store_true', default=False)
+    parser.add_argument('--dm-levels', nargs='+', type=float, default=[0.01, 0.05])
+    # ES CI flags
+    parser.add_argument('--es-bootstrap-B', type=int, default=1000)
+    parser.add_argument('--es-bootstrap-block', type=int, default=None)
+    parser.add_argument('--es-ci', type=float, default=0.95)
+    args = parser.parse_args()
+
+    # Build models mapping to filenames (expects <model>_samples.npy where available)
+    models_map = {m: f"{m.lower().replace('-', '_')}_samples.npy" for m in args.models}
+
+    evaluator = FinalResultsEvaluator(args.real, args.synthetic_dir, models_map)
+    evaluator._compute_dm = bool(args.compute_dm)
+    evaluator._dm_levels = list(args.dm_levels) if args.compute_dm else []
+    if args.es_bootstrap_B or args.es_ci or args.es_bootstrap_block is not None:
+        evaluator._es_bootstrap_cfg = {
+            'B': int(args.es_bootstrap_B),
+            'ci': float(args.es_ci),
+            'block_size': (int(args.es_bootstrap_block) if args.es_bootstrap_block is not None else None),
+        }
+
+    results = evaluator.compute_all_metrics()
+
+    # Save primary outputs
+    out_dir = os.path.join(args.output_dir)
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, 'evaluation_results.json'), 'w') as f:
+        json.dump(_sanitize_for_json(results), f, indent=2)
+    # DM tests (optional)
+    if evaluator._compute_dm:
+        _ = evaluator.compute_dm_tests(out_dir)
+
+    print(f"✅ Final results evaluation complete. Outputs in {out_dir}")

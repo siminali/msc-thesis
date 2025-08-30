@@ -1,0 +1,3 @@
+zero_conditioned σ_w ≈ 1.15× real
+explicit_conditioned σ_w ≈ 2.67× real
+llm_conditioned σ_w ≈ 20.78× real
