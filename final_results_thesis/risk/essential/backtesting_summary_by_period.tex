@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering
+\caption{Backtesting summary by regime (Calm, COVID, Post).}
+\begin{tabular}{lrrrrrrrrrrrr}
+\toprule
+Model & Calm_Coverage95 & Calm_ESerr95 & Calm_Coverage99 & Calm_ESerr99 & COVID_Coverage95 & COVID_ESerr95 & COVID_Coverage99 & COVID_ESerr99 & Post_Coverage95 & Post_ESerr95 & Post_Coverage99 & Post_ESerr99 \\
+\midrule
+Real & 5.04 & 2.215 & 1.06 & 3.315 & nan & nan & nan & nan & nan & nan & nan & nan \\
+LLM & 5.04 & 2.050 & 1.06 & 3.355 & nan & nan & nan & nan & nan & nan & nan & nan \\
+Explicit & 5.04 & 4.810 & 1.06 & 8.019 & nan & nan & nan & nan & nan & nan & nan & nan \\
+Real & nan & nan & nan & nan & 6.45 & 8.996 & 1.61 & 12.765 & nan & nan & nan & nan \\
+LLM & nan & nan & nan & nan & 6.45 & 3.873 & 1.61 & 8.116 & nan & nan & nan & nan \\
+Explicit & nan & nan & nan & nan & 6.45 & 4.167 & 1.61 & 5.496 & nan & nan & nan & nan \\
+Real & nan & nan & nan & nan & nan & nan & nan & nan & 5.17 & 2.872 & 1.19 & 3.875 \\
+LLM & nan & nan & nan & nan & nan & nan & nan & nan & 5.17 & 2.101 & 1.19 & 3.417 \\
+Explicit & nan & nan & nan & nan & nan & nan & nan & nan & 5.17 & 5.263 & 1.19 & 8.264 \\
+\bottomrule
+\end{tabular}
+\end{table}

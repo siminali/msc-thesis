@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Statistical Evaluation Results}
+\label{tab:statistical_evaluation}
+\begin{tabular}{l|r|r|r|r|r|r|r|r}
+\toprule
+Model & KS_Mean & KS_Std & MMD_Mean & MMD_Std & Kurtosis_Mean & Kurtosis_Std & VaR_1_Percent & VaR_5_Percent \\
+\midrule
+GARCH & 0.0706 & 0.0053 & 0.007433 & 0.001627 & 1.52 & 0.42 & -3.096 & -1.730 \\
+DDPM & 0.0942 & 0.0107 & 0.015959 & 0.001648 & 0.16 & 0.12 & -2.493 & -1.675 \\
+TimeGrad & 0.0534 & 0.0133 & 0.001411 & 0.001346 & 1.95 & 0.55 & -2.380 & -1.459 \\
+LLM-Conditioned & 0.0492 & 0.0087 & 0.001716 & 0.000736 & 24.33 & 15.72 & -3.182 & -1.563 \\
+\bottomrule
+\end{tabular}
+\end{table}

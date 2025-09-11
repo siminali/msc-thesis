@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+\centering
+\caption{Regime-wise performance (Explicit model)}
+\label{tab:regime_performance}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Regime} & \textbf{KS Stat.} & \textbf{Wasserstein} & \textbf{VaR 1\% Breach} & \textbf{ES Error} \\
+ & (\(\downarrow\)) & (\(\downarrow\)) & \textbf{Rate (\%)} & (\(\downarrow\)) \\
+\midrule
+Up-Low & 1.0000 & 28.9192 & 106.1 & 35.2929 \\
+Up-High & 1.0000 & 28.7562 & 104.2 & 35.3791 \\
+Down-Low & 1.0000 & 28.0805 & 104.2 & 35.3431 \\
+Down-High & 1.0000 & 28.1065 & 100.0 & 35.1169 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textbf{KS Stat.}: Kolmogorov-Smirnov test statistic (lower is better)
+\item \textbf{Wasserstein}: Wasserstein distance between distributions (lower is better)
+\item \textbf{VaR 1\% Breach Rate}: Percentage of VaR violations relative to expected (100\% = perfect)
+\item \textbf{ES Error}: Absolute difference in Expected Shortfall from real data
+\end{tablenotes}
+\end{table}

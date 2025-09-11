@@ -1,0 +1,14 @@
+\begin{table}
+\caption{Comprehensive Model Specifications and Performance}
+\label{tab:model_specifications}
+\begin{tabular}{l|r|r|r|r|r|p{4cm}}
+\toprule
+Model & Parameters & Training_Time_Hours & Peak_VRAM_MB & KS_Statistic & KS_p_value & Description \\
+\midrule
+GARCH & 3 & 0.0 & 0 & 0.5215 & 0.0000 & GARCH(1,1) baseline model \\
+DDPM & 32,060 & 1.0 & 512 & 0.0902 & 0.0000 & Basic DDPM without conditioning \\
+TimeGrad & 25,153 & 2.0 & 1,024 & 0.0292 & 0.0047 & Autoregressive diffusion model \\
+LLM-Conditioned & 66,000,000 & 3.0 & 2,048 & 0.0197 & 0.1238 & Novel LLM-conditioned diffusion model \\
+\bottomrule
+\end{tabular}
+\end{table}

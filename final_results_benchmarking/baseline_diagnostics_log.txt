@@ -1,0 +1,36 @@
+2025-09-06 15:53:43,830 - INFO - === BASELINE DIAGNOSTICS GENERATOR START ===
+2025-09-06 15:53:43,830 - INFO - Output directory: /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking
+2025-09-06 15:53:43,830 - INFO - Models included: ['GARCH', 'TimeGrad', 'Zero-DDPM']
+2025-09-06 15:53:43,843 - INFO - Real data loaded: 755 test samples
+2025-09-06 15:53:43,844 - INFO - GARCH loaded: 755 samples
+2025-09-06 15:53:43,845 - INFO - TimeGrad loaded: 696 samples
+2025-09-06 15:53:43,845 - INFO - Zero-DDPM loaded: 409 samples
+2025-09-06 15:53:43,845 - INFO - Starting plot generation...
+2025-09-06 15:53:43,845 - INFO - Generating distribution comparison plot...
+2025-09-06 15:53:44,547 - INFO - Distribution comparison saved to /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking/figures/section 1/distribution_comparison.pdf
+2025-09-06 15:53:44,548 - INFO - Generating CDF comparison plot...
+2025-09-06 15:53:44,552 - ERROR - Error in plot generation: x and y can be no greater than 2D, but have shapes (696, 60, 1) and (696,)
+2025-09-06 15:54:13,205 - INFO - === BASELINE DIAGNOSTICS GENERATOR START ===
+2025-09-06 15:54:13,205 - INFO - Output directory: /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking
+2025-09-06 15:54:13,205 - INFO - Models included: ['GARCH', 'TimeGrad', 'Zero-DDPM']
+2025-09-06 15:54:13,217 - INFO - Real data loaded: 755 test samples
+2025-09-06 15:54:13,218 - INFO - GARCH raw shape: (755,)
+2025-09-06 15:54:13,218 - INFO - GARCH loaded: 755 processed samples
+2025-09-06 15:54:13,218 - INFO - TimeGrad raw shape: (696, 60, 1)
+2025-09-06 15:54:13,218 - INFO - TimeGrad loaded: 1000 processed samples
+2025-09-06 15:54:13,219 - INFO - Zero-DDPM raw shape: (409, 60)
+2025-09-06 15:54:13,219 - INFO - Zero-DDPM loaded: 1000 processed samples
+2025-09-06 15:54:13,219 - INFO - Starting plot generation...
+2025-09-06 15:54:13,219 - INFO - Generating distribution comparison plot...
+2025-09-06 15:54:13,848 - INFO - Distribution comparison saved to /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking/figures/section 1/distribution_comparison.pdf
+2025-09-06 15:54:13,848 - INFO - Generating CDF comparison plot...
+2025-09-06 15:54:14,342 - INFO - CDF comparison saved to /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking/figures/section 1/cdf_comparison.pdf
+2025-09-06 15:54:14,342 - INFO - Generating ACF comparison plot...
+2025-09-06 15:54:15,079 - INFO - ACF comparison saved to /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking/figures/section 1/acf_comparison.pdf
+2025-09-06 15:54:15,079 - INFO - Generating rolling volatility plot...
+2025-09-06 15:54:15,585 - INFO - Rolling volatility plot saved to /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking/figures/section 1/rolling_volatility.pdf
+2025-09-06 15:54:15,585 - INFO - Generating uncertainty estimate plots...
+2025-09-06 15:54:16,021 - INFO - Uncertainty plot for GARCH saved to /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking/figures/section 1/uncertainty_garch.pdf
+2025-09-06 15:54:16,445 - INFO - Uncertainty plot for TimeGrad saved to /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking/figures/section 1/uncertainty_timegrad.pdf
+2025-09-06 15:54:16,944 - INFO - Uncertainty plot for Zero-DDPM saved to /Users/siminali/Desktop/Thesis Coding/final_results_benchmarking/figures/section 1/uncertainty_zero_ddpm.pdf
+2025-09-06 15:54:16,944 - INFO - All plots generated successfully!

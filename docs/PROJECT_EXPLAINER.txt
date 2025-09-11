@@ -1,10 +1,10 @@
 1. Executive Summary
 
-This repository delivers a unified, thesis‑ready framework for training, conditioning, and evaluating diffusion models that synthesise realistic financial return sequences for risk management and research. It brings together three variants: an unconditional (zero‑conditioned) baseline, a transparent explicitly conditioned model (market regime + target volatility), and a news‑aware LLM‑conditioned model that uses sentence‑embedding signals derived from daily news. Collectively, these models aim to generate synthetic returns that are distributionally faithful, controllable, and useful for stress testing and risk assessment.
+This repository delivers a comprehensive, thesis‑ready framework for training, conditioning, and systematically evaluating diffusion models that synthesise realistic financial return sequences for risk management and research. It brings together three variants: an unconditional (zero‑conditioned) baseline, a transparent explicitly conditioned model (market regime + target volatility), and a news‑aware LLM‑conditioned model that uses sentence‑embedding signals derived from daily news. The framework includes a complete experimental pipeline featuring pre-COVID training (2010-2019), out-of-sample stress testing (Experiment A), controllability assessment (Experiment B), and professional report generation. Collectively, these models and experiments aim to generate synthetic returns that are distributionally faithful, controllable, and rigorously validated for stress testing and risk assessment.
 
 Why this matters: risk teams and researchers need realistic, controllable synthetic data to test portfolio behaviour under varying market regimes and news conditions. Standard historical bootstrapping is constrained by a single realised path. Classical models (e.g., GARCH) capture volatility clustering but struggle with broader controllability and multi‑factor conditions. Generative diffusion models can replicate stylised facts, target volatility or regimes, and respond—at least partially—to semantic signals (news). That translates into safer, faster experimentation; more robust back‑tests; and auditable, reproducible evidence.
 
-The repository prioritises reproducibility (global seeding; deterministic CUDA flags; shared preprocessing); comparability (shared hyper‑parameters and CLI interfaces across models); and completeness (thesis‑grade figures, LaTeX tables, and consolidated metrics). You can: train all models with one command; evaluate them side‑by‑side with unified scripts; and export publication‑ready outputs. The evaluation suite spans distributional fidelity (e.g., KS, simple MMD proxy, Wasserstein where available), risk back‑testing (VaR/ES, Kupiec coverage, a simple Christoffersen‑style independence ratio), controllability (target vs realised volatility, reliability curves), stylised facts (tails, ACF/PACF), and an illustrative COVID‑2020 case study.
+The repository prioritises reproducibility (global seeding; deterministic CUDA flags; shared preprocessing); comparability (shared hyper‑parameters and CLI interfaces across models); systematic validation (hygiene checks, checkpoint verification, audit trails); and completeness (thesis‑grade figures, LaTeX tables, professional PDF reports, and consolidated metrics). You can: train all models with one command; run systematic experiments with standardized protocols; evaluate them side‑by‑side with unified scripts; and export publication‑ready outputs. The evaluation suite spans distributional fidelity (e.g., KS, simple MMD proxy, Wasserstein where available), risk back‑testing (VaR/ES, Kupiec coverage, a simple Christoffersen‑style independence ratio), controllability (target vs realised volatility, reliability curves), stylised facts (tails, ACF/PACF), systematic stress testing across multiple crisis periods, and comprehensive out-of-sample validation.
 
 Where uncertainty remains, the repository is explicit: certain metrics (e.g., Diebold–Mariano tests, bootstrap confidence intervals) are referenced conceptually for completeness but are not fully implemented in code. Where this happens, we mark it clearly and offer suggested extensions. The end result is a practical, extensible foundation for thesis work and real‑world risk analysis that blends clarity, rigour, and accessibility.
 
@@ -17,12 +17,24 @@ Where uncertainty remains, the repository is explicit: certain metrics (e.g., Di
   pip install -r requirements_llm_refactored.txt
 
 2.2 Minimal Commands
+- Train pre-COVID models (recommended for experiments):
+  python train_precovid_simplified.py --models all
+
 - Train all three models with shared configuration:
   python src/train_all.py
 
 - Train a subset:
   python src/train_all.py --models zero
   python src/train_all.py --models explicit llm
+
+- Run systematic experiments:
+  # Experiment A: Out-of-sample stress testing
+  python experiment_A_evaluator_v2.py --window covid_crash --num-paths 1000
+  # Experiment B: Controllability testing  
+  python experiment_B_evaluator_v2.py --window covid_crash --num-paths 1000
+
+- Generate professional reports:
+  python report_compiler.py --expdir results/addons/period_slices/A_v15
 
 - Run comprehensive evaluation (auto‑discovers latest checkpoints):
   python run_comprehensive_evaluation.py
@@ -37,14 +49,22 @@ Where uncertainty remains, the repository is explicit: certain metrics (e.g., Di
 If missing, set environment variable SP500_DATA_PATH or pass --data-path (where supported).
 
 2.4 Checkpoints and results
-- Training outputs:
+- Pre-COVID training outputs:
+  checkpoints/precovid/<model_type>/20100101-20191231/
+    best.pt, last.pt, meta.json, conditioning_spec.json
+- Full-period training outputs:
   results/<model_name>/<run_id>/
     checkpoints/best_model.pth
     training_history.(csv|json)
     figures/, tables/, metadata.json, README_RUN.md
-- Evaluation outputs:
+- Systematic experiment outputs:
+  results/addons/period_slices/A_v15/ (Experiment A stress testing)
+  results/addons/period_slices/B_v10/ (Experiment B controllability)
+  results/addons/period_slices/<exp>/report_<exp>.pdf (professional reports)
+- Comprehensive evaluation outputs:
   results/comparisons/ (comprehensive pipeline)
   results/separate_eval_gpt5/ (unified evaluator)
+  final_results_benchmarking/figures/ (publication-ready figures)
   results/<model_name>_samples.npy (where applicable)
 
 2.5 Expected runtime (indicative)
@@ -60,11 +80,18 @@ Top‑level
 - README.md: short project overview and links (if present).
 - requirements.txt, requirements_llm_refactored.txt: Python dependencies.
 - data/sp500_data.csv: sample or user‑provided prices CSV (not committed by default in many setups).
+- checkpoints/precovid/: Pre-COVID model checkpoints with metadata and conditioning specs.
 - notebooks/: exploratory notebooks (diffusion, GARCH, evaluation).
 - results/: model outputs, metrics, figures, tables, consolidated reports.
-- final_results_thesis/: curated figures/tables and Overleaf assets used in thesis write‑up.
-- docs/: documentation assets.
+- results/addons/period_slices/: Systematic experiment results with versioning (A_v15, B_v10, etc.).
+- final_results_benchmarking/: curated publication-ready figures and comprehensive benchmarking.
+- docs/: documentation assets, project explainers, and technical guides.
 - configs/training_config.json: example shared config.
+- train_precovid_simplified.py: Standalone pre-COVID training runner.
+- experiment_A_evaluator_v2.py: Out-of-sample stress testing evaluator.
+- experiment_B_evaluator_v2.py: Controllability testing evaluator.
+- report_compiler.py: Professional PDF report generator.
+- hygiene_checks.py: Validation and reproducibility checking.
 - run_comprehensive_evaluation.py: thin runner for the comprehensive evaluator.
 - run_pipeline.py: umbrella entrypoint (if used in prior iterations).
 
@@ -165,7 +192,15 @@ Known references not found in repo
 
 7. Pipelines and CLI Entry Points
 
-7.1 Training
+7.1 Pre-COVID Training (Recommended)
+- Train pre-COVID models (2010-2019) for systematic experiments:
+  python train_precovid_simplified.py --models all
+- Custom configuration:
+  python train_precovid_simplified.py --models explicit llm --epochs 100 --batch-size 64
+- Quick test:
+  python train_precovid_simplified.py --models zero --epochs 2 --batch-size 8
+
+7.2 Full-Period Training
 - Train all models:
   python src/train_all.py
 - Select models:
@@ -175,33 +210,53 @@ Known references not found in repo
   python src/train_all.py --epochs 200 --batch-size 32 --lr 5e-4 --device auto
 - Performance flags: --amp, --compile, --workers, --grad-accum, --channels-last, --fast-dev-run.
 
-7.2 Comprehensive evaluation (side‑by‑side)
+7.3 Systematic Experiments
+- Experiment A (out-of-sample stress testing):
+  python experiment_A_evaluator_v2.py --window covid_crash --num-paths 1000 --csv-file data/sp500_data.csv
+- Experiment B (controllability testing):
+  python experiment_B_evaluator_v2.py --window covid_crash --num-paths 1000 --csv-file data/sp500_data.csv
+- Generate professional reports:
+  python report_compiler.py --expdir results/addons/period_slices/A_v15
+  python report_compiler.py --expdir results/addons/period_slices/B_v10
+- Hygiene validation:
+  python hygiene_checks.py --checkpoint checkpoints/precovid/explicit/20100101-20191231 --model-type explicit
+
+7.4 Comprehensive evaluation (side‑by‑side)
 - Simple runner:
   python run_comprehensive_evaluation.py
 - Direct engine:
   python src/comprehensive_evaluation_pipeline.py --models_dir results --results_dir results/comparisons --num_samples 1000
 
-7.3 Unified per‑model evaluator
+7.5 Unified per‑model evaluator
 - Robust evaluator that writes per‑model folders:
   python src/unified_evaluator_gpt5.py --models_dir results --results_dir results/separate_eval_gpt5 --num_samples 500
 
-7.4 Comparison framework (train + compare)
+7.6 Comparison framework (train + compare)
 - Programmatic use or CLI via:
   python src/comprehensive_comparison_framework.py --results-dir results/comprehensive_comparison
 
-7.5 Overleaf/export utilities
+7.7 Overleaf/export utilities
 - Export curated results to Overleaf structure:
   python src/overleaf_exporter.py --source final_results_thesis/overleaf --dest <your_overleaf_dir>
 Assumption: adjust paths to your local Overleaf export folder; see final_results_thesis/overleaf/README_overleaf.md.
 
-7.6 Sweeps and rolling windows
+7.8 Sweeps and rolling windows
 - Assumption: Hyper‑parameter sweeps executed via repeated CLI runs or shell loops; no dedicated sweeper in the repo.
 - Rolling evaluation windows can be emulated by slicing the input CSV by date and re‑running evaluation.
 
 
 8. Results Directory Layout
 
-8.1 Training outputs (per model)
+8.1 Pre-COVID training outputs
+checkpoints/precovid/
+  zero/20100101-20191231/
+    best.pt, last.pt, meta.json, conditioning_spec.json
+  explicit/20100101-20191231/
+    best.pt, last.pt, meta.json, conditioning_spec.json
+  llm/20100101-20191231/
+    best.pt, last.pt, meta.json, conditioning_spec.json, pca_model.pkl
+
+8.2 Full-period training outputs (per model)
 results/
   zero_conditioned/
     <run_id>/checkpoints/, figures/, tables/, training_history.*, metadata.json, README_RUN.md
@@ -210,13 +265,23 @@ results/
   llm_conditioned/
     <run_id>/checkpoints/, figures/, tables/, controllability_probe.pkl, probe_diagnostics.json, training_history.*, metadata.json, README_RUN.md
 
-8.2 Evaluation outputs
+8.3 Systematic experiment outputs
+- Experiment A (stress testing): results/addons/period_slices/A_v15/
+  plan.json, manifest.json, findings.jsonl, integrated_summary.json
+  covid_crash/{zero,explicit,llm}/samples.npy + metadata + figures/
+- Experiment B (controllability): results/addons/period_slices/B_v10/
+  plan.json, manifest.json, comparative_analysis.json, controllability_summary.json
+  covid_crash/{explicit,llm}/{real-conditions,calm-conditions,llm-knob-*}/samples.npy
+- Professional reports: results/addons/period_slices/<exp>/report_<exp>.pdf
+
+8.4 Comprehensive evaluation outputs
 - Comprehensive (side‑by‑side): results/comparisons/
   figures/stylized_facts|risk_management|controllability|diversity_coverage|interpretability|covid_case_study
   tables/...; consolidated_metrics.(csv|json); evaluation_report.md
 - Unified evaluator: results/separate_eval_gpt5/<model_type>/{figures,tables}/ + consolidated files
+- Final benchmarking: final_results_benchmarking/figures/ (publication-ready)
 
-8.3 Other artefacts
+8.5 Other artefacts
 - results/*_returns.npy, *_samples.npy: generated sequences used for analyses.
 - final_results_thesis/: curated figures/tables and Overleaf‑ready assets.
 
@@ -292,12 +357,25 @@ A: Use fixed seeds; avoid non‑deterministic flags (AMP/compile/DDP) if strict 
 
 14. Roadmap and Extensibility
 
+✅ **Recently Completed:**
+- Systematic experimental framework (Experiments A & B) with professional reporting
+- Pre-COVID training system with comprehensive checkpoint management
+- Hygiene validation and reproducibility checking framework
+- Period-based evaluation with automated versioning
+- Professional PDF report generation with LaTeX integration
+
+🔄 **In Progress/Next:**
 - Add proper kernel MMD (RBF/linear) and bootstrap CIs for metrics and back‑tests.
 - Implement Diebold–Mariano tests for forecast error comparisons.
+- Extend systematic experiments to additional crisis periods (2008 financial crisis, etc.)
+- Enhanced controllability metrics and sensitivity analysis
+
+🚀 **Future Extensions:**
 - Extend LLM conditioning to real multi‑source news; add retrieval, deduplication, and domain filters.
 - Multi‑modal conditioning: combine technical indicators, macro features, and embeddings (see create_enhanced_conditioning sketch in docs).
 - Cross‑attention‑based denoisers for richer conditioning injection.
 - Distributed training (DDP) and experiment tracking (e.g., MLflow/W&B).
 - Robust rolling‑window evaluation and multi‑asset generalisation beyond S&P 500.
+- Real-time deployment capabilities for live stress testing
 
 Methodological note: This explainer is derived from recursive scanning of the codebase (docstrings, CLI parsers, results folders). Where behaviour was unclear, we used explicit “Assumption:” labels and proposed safe defaults. If your thesis requires additional rigour (e.g., formal CIs), treat Section 14 as your implementation checklist.

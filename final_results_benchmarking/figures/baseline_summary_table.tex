@@ -1,0 +1,27 @@
+% Baseline Model Performance Summary Table
+% Generated automatically for MSc Thesis
+% Author: Simin Ali
+
+\begin{table}[htbp]
+\centering
+\caption{Baseline Model Performance Summary}
+\label{tab:baseline_performance}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Model} & \textbf{KS Stat.} & \textbf{MMD} & \textbf{Excess Kurt.} & \textbf{VaR 1\% Breach} & \textbf{RMSE} \\
+ & (\(\downarrow\)) & (\(\downarrow\)) & \textbf{Error} & \textbf{Rate (\%)} & (\(\downarrow\)) \\
+\midrule
+GARCH(1,1) & 0.4960 & 0.2715 & 0.006 & 114.3 & 1.171 \\
+Zero-DDPM & 0.0575 & 0.0012 & 1.601 & 100.0 & 1.489 \\
+TimeGrad & 0.0677 & 0.0086 & 0.227 & 100.0 & 1.429 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textbf{KS Stat.}: Kolmogorov-Smirnov test statistic (lower is better)
+\item \textbf{MMD}: Maximum Mean Discrepancy (proxy for Wasserstein distance, lower is better)
+\item \textbf{Excess Kurt. Error}: Absolute difference from real data excess kurtosis
+\item \textbf{VaR 1\% Breach Rate}: Percentage of violations relative to expected (100\% = perfect)
+\item \textbf{RMSE}: Root Mean Square Error in prediction (lower is better)
+\end{tablenotes}
+\end{table}

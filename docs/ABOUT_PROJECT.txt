@@ -1,6 +1,6 @@
 Overview
 
-This project builds generative diffusion models that create realistic, synthetic daily return sequences for financial risk management. It offers three flavours: (1) an unconditional baseline; (2) a controllable model conditioned on market regime and target volatility; and (3) a news‑aware model that uses language‑model embeddings of daily news to influence the behaviour of generated returns. The goal is simple: produce realistic synthetic data that helps stress‑test portfolios, check risk models, and explore what might happen under different conditions—without relying solely on one realised market history.
+This project builds generative diffusion models that create realistic, synthetic daily return sequences for financial risk management. It offers three flavours: (1) an unconditional baseline; (2) a controllable model conditioned on market regime and target volatility; and (3) a news‑aware model that uses language‑model embeddings of daily news to influence the behaviour of generated returns. The project includes a comprehensive experimental framework for systematic evaluation, featuring pre-COVID training capabilities, out-of-sample stress testing (Experiment A), and controllability assessment (Experiment B). The goal is simple: produce realistic synthetic data that helps stress‑test portfolios, check risk models, and explore what might happen under different conditions—without relying solely on one realised market history.
 
 Key Ideas
 
@@ -12,32 +12,48 @@ Contributions
 
 - Benchmarks vs classical models: alongside diffusion models, the repository includes GARCH/TimeGrad‑style baselines (and comparisons) to show where generative models help.
 - Two‑level conditioning: a transparent, explicitly conditioned model (regime + σ*) and a semantic, LLM‑conditioned variant using news embeddings.
+- Systematic experimental framework: Pre-COVID training (2010-2019), out-of-sample stress testing (Experiment A), and counterfactual controllability analysis (Experiment B) with professional report generation.
 - Rigorous evaluation: KS and Wasserstein distances, stylised facts (tails, ACF/PACF), VaR/ES back‑testing (Kupiec coverage; a simple independence ratio), and controllability diagnostics (target vs realised volatility with reliability curves).
-- Report‑ready outputs: figures, LaTeX tables, and consolidated metrics suitable for thesis or supervisory review. Assumption: references to Diebold–Mariano tests and bootstrap CIs are roadmap items rather than current code paths.
+- Comprehensive validation: Hygiene checks, reproducibility validation, checkpoint verification, and automated audit trails.
+- Report‑ready outputs: figures, LaTeX tables, professional PDF reports, and consolidated metrics suitable for thesis or supervisory review. Assumption: references to Diebold–Mariano tests and bootstrap CIs are roadmap items rather than current code paths.
 
 How to Use
 
 - Install dependencies:
   pip install -r requirements_llm_refactored.txt
-- Train models:
+- Pre-COVID training (recommended for experiments):
+  python train_precovid_simplified.py --models all --epochs 100
+- Full-period training:
   python src/train_all.py
   # or select models
   python src/train_all.py --models explicit llm
-- Evaluate results (auto‑discovers checkpoints):
+- Run systematic experiments:
+  # Experiment A: Out-of-sample stress testing
+  python experiment_A_evaluator_v2.py --window covid_crash --num-paths 1000
+  # Experiment B: Controllability testing
+  python experiment_B_evaluator_v2.py --window covid_crash --num-paths 1000
+- Generate professional reports:
+  python report_compiler.py --expdir results/addons/period_slices/A_v15
+- Comprehensive evaluation (auto‑discovers checkpoints):
   python run_comprehensive_evaluation.py
   # or per‑model with a robust evaluator
   python src/unified_evaluator_gpt5.py --models_dir results --results_dir results/separate_eval_gpt5
 - Where to look:
-  results/<model>/<run_id>/: checkpoints, training history, figures, tables
-  results/comparisons/ or results/separate_eval_gpt5/: evaluation figures, tables, and summaries
+  checkpoints/precovid/: Pre-COVID trained models with metadata
+  results/addons/period_slices/: Systematic experiment results with reports
+  results/<model>/<run_id>/: Full-period training outputs
+  final_results_benchmarking/figures/: Publication-ready comprehensive figures
 
 Interpretation
 
 - Accuracy of VaR/ES: compare curves and exceedance timelines; good models do not chronically under‑ or over‑estimate tail risk.
 - KS/Wasserstein: lower distances suggest synthetic data looks like real data distributionally.
 - Controllability: in explicitly conditioned runs, points close to the y=x line (target vs realised σ*) and near‑identity reliability curves indicate the model obeys the requested volatility. LLM‑conditioned diagnostics (MAE/R², bucket comparisons) indicate sensitivity to news signals.
-- Robustness: the evaluation includes stylised facts (tails, autocorrelation) and a COVID‑2020 case study to see performance in stress periods.
+- Experiment A results: Out-of-sample performance on stress periods validates model robustness and generalization beyond training data.
+- Experiment B results: Controllability scores (0-10 scale) and real vs calm condition comparisons reveal model responsiveness to conditioning inputs.
+- Pre-COVID validation: Models trained only on 2010-2019 data provide clean assessment of stress-period performance without data leakage.
+- Robustness: the evaluation includes stylised facts (tails, autocorrelation) and systematic COVID‑2020 stress testing to see performance in crisis periods.
 
 Conclusion
 
-The project shows how generative AI can enhance financial risk management by producing realistic, controllable synthetic data. Diffusion models can replicate key empirical features of returns, target specific conditions (regime, volatility), and react to information proxies such as news. This makes stress testing broader and faster, helps benchmark classical models, and provides more transparent, reproducible evidence for decision‑makers. Future extensions include formal statistical tests (e.g., Diebold–Mariano), bootstrap confidence intervals, richer attention‑based conditioning, and multi‑asset generalisation.
+The project demonstrates how generative AI can enhance financial risk management through a comprehensive framework combining realistic synthetic data generation with systematic experimental validation. The systematic experimental design (pre-COVID training, out-of-sample stress testing, controllability assessment) provides rigorous evidence of model capabilities and limitations. Diffusion models can replicate key empirical features of returns, target specific conditions (regime, volatility), and react to information proxies such as news, with quantified controllability and validated out-of-sample performance. The professional reporting system and extensive validation framework make this suitable for both academic research and practical risk management applications. This makes stress testing broader and faster, helps benchmark classical models, and provides transparent, reproducible evidence with full audit trails for decision‑makers. Future extensions include formal statistical tests (e.g., Diebold–Mariano), bootstrap confidence intervals, richer attention‑based conditioning, and multi‑asset generalisation.

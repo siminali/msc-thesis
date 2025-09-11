@@ -1,0 +1,13 @@
+\begin{table}
+\caption{Pre-COVID Training Results (2010-2019)}
+\label{tab:precovid_training}
+\begin{tabular}{l|r|r|r|r|r|r|r|r|r|l}
+\toprule
+Model_Type & Epochs_Trained & Final_Train_Loss & Final_Val_Loss & Parameters & Trainable_Parameters & Sequence_Length & Conditioning_Dim & Train_Sequences & Val_Sequences & Device \\
+\midrule
+LLM & 50 & 0.002543 & 0.002852 & 120,065 & 120,065 & 60 & 32 & 2,456 & 69 & CPU \\
+EXPLICIT & 50 & 0.002266 & 0.001076 & 639,489 & 639,489 & 60 & 6 & 2,456 & 69 & CPU \\
+ZERO & 50 & 0.804924 & 0.767359 & 681,340 & 681,340 & 60 & 0 & 2,456 & 69 & CPU \\
+\bottomrule
+\end{tabular}
+\end{table}

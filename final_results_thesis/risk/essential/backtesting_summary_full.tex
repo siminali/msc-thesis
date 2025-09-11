@@ -1,0 +1,27 @@
+\begin{table}[htbp]
+\centering
+\caption{Backtesting summary over the full evaluation period.}
+\begin{tabular}{llrrrrrl}
+\toprule
+Model & VaR Level & Coverage \% & Expected Exc & N Exceedances & Kupiec p-val & Christoff p-val & ES error \\
+\midrule
+GARCH & 1% & 114.29 & 7 & 8 & 0.871 & 1.000 & — \\
+GARCH & 5% & 102.70 & 37 & 38 & 0.967 & 0.174 & — \\
+DDPM & 1% & 100.00 & 10 & 10 & 1.000 & 1.000 & — \\
+DDPM & 5% & 100.00 & 50 & 50 & 1.000 & 0.052 & — \\
+TimeGrad & 1% & 100.00 & 10 & 10 & 1.000 & 1.000 & — \\
+TimeGrad & 5% & 100.00 & 50 & 50 & 1.000 & 0.754 & — \\
+LLM-Conditioned & 1% & 100.00 & 10 & 10 & 1.000 & 1.000 & — \\
+LLM-Conditioned & 5% & 100.00 & 50 & 50 & 1.000 & 0.270 & — \\
+Zero-DDPM & 5% & 1.19 & 188 & 45 & 0.00e+00 & 0.017 & — \\
+Zero-DDPM & 1% & 0.37 & 37 & 14 & 8.43e-06 & 0.042 & — \\
+Explicit-DDPM & 5% & 2.52 & 188 & 95 & 1.33e-14 & 6.57e-04 & — \\
+Explicit-DDPM & 1% & 0.45 & 37 & 17 & 1.43e-04 & 0.065 & — \\
+LLM-DDPM & 5% & 0.08 & 188 & 3 & 0.00e+00 & — & — \\
+LLM-DDPM & 1% & 0.03 & 37 & 1 & 3.33e-16 & — & — \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item Note: '—' indicates Christoffersen test undefined due to insufficient breaches.
+\end{tablenotes}
+\end{table}
