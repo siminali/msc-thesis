@@ -36,8 +36,8 @@ try:
     from experiment_A_evaluator import ExperimentAEvaluator
     from checkpoint_loader_sampler import CheckpointSampler, load_and_sample
     from eval_conditioning_providers import generate_eval_conditioning, load_conditioning_spec
-    from shared_metrics import MetricsCalculator
-    from shared_plotting import PlottingPipeline
+    from shared.metrics import MetricsCalculator
+    from shared.plotting import PlottingPipeline
 except ImportError as e:
     print(f"Error importing required modules: {e}")
     print("Make sure all required modules are available")

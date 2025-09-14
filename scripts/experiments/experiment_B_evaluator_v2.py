@@ -43,8 +43,8 @@ try:
         LLMEvalProvider
     )
     from experiment_A_evaluator import ExperimentAEvaluator
-    from shared_metrics import MetricsCalculator
-    from shared_plotting import PlottingPipeline
+    from shared.metrics import MetricsCalculator
+    from shared.plotting import PlottingPipeline
 except ImportError as e:
     print(f"Error importing required modules: {e}")
     sys.exit(1)

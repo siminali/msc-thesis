@@ -25,7 +25,7 @@ import glob
 
 # Import our metrics module
 try:
-    from shared_metrics import MetricsCalculator, RiskMetrics, QuantileLoss, DieboldMarianoTest, DistributionAnalysis
+    from shared.metrics import MetricsCalculator, RiskMetrics, QuantileLoss, DieboldMarianoTest, DistributionAnalysis
 except ImportError as e:
     print(f"Error importing shared_metrics: {e}")
     sys.exit(1)

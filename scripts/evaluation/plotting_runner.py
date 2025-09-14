@@ -17,7 +17,7 @@ from typing import Optional, List
 
 # Import our plotting module
 try:
-    from shared_plotting import PlottingPipeline, PlotGenerator, ColorPalette
+    from shared.plotting import PlottingPipeline, PlotGenerator, ColorPalette
 except ImportError as e:
     print(f"Error importing shared_plotting: {e}")
     sys.exit(1)
