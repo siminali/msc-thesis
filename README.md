@@ -6,7 +6,7 @@
 **Program**: MSc Artificial Intelligence Applications and Innovation  
 **Submission Date**: September 2025
 
-## 📋 Project Overview
+## Project Overview
 
 > For how to run the project, see `USER_GUIDE.md` (quick start and essential workflows).
 
@@ -17,7 +17,7 @@ This repository contains the implementation and evaluation of diffusion models f
 2. **DDPM**: Denoising Diffusion Probabilistic Model for unconditional synthetic return generation
 3. **TimeGrad**: Autoregressive diffusion-based forecasting
 
-## 🎯 Key Objectives
+## Key Objectives
 
 - Implement and evaluate diffusion models for financial time series generation
 - Compare performance against classical GARCH models
@@ -25,7 +25,7 @@ This repository contains the implementation and evaluation of diffusion models f
 - Provide reproducible results for thesis reporting
 - Create automated LaTeX table generation for thesis inclusion
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 Thesis Coding/
@@ -54,7 +54,7 @@ Thesis Coding/
 └── configs/                         # Config files
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Environment Setup
 
@@ -119,7 +119,7 @@ python src/add_evaluation_to_notebooks.py
 jupyter notebook notebooks/comprehensive_evaluation.ipynb
 ```
 
-## 📊 Evaluation Framework
+## Evaluation Framework
 
 The comprehensive evaluation framework provides:
 
@@ -154,7 +154,7 @@ The comprehensive evaluation framework provides:
 - **Results**: JSON files for reproducibility
 - **Summary**: Markdown reports with key findings
 
-## 📈 Using Results in Your Thesis
+## Using Results in Your Thesis
 
 ### LaTeX Tables
 
@@ -187,7 +187,7 @@ with open('results/comprehensive_evaluation/evaluation_results.json', 'r') as f:
     results = json.load(f)
 ```
 
-## 🔧 Customization
+## Customization
 
 ### Adding New Models
 
@@ -212,19 +212,9 @@ def compute_custom_metric(self, data, model_name):
     """Compute your custom metric."""
     # Your implementation here
     return {'Model': model_name, 'CustomMetric': value}
-```
+``` 
 
-## 📝 Supervisor Feedback Implementation
-
-This evaluation framework addresses the supervisor's specific requirements:
-
-✅ **Automated evaluation metrics** - Comprehensive statistical tests  
-✅ **LaTeX table generation** - Ready-to-use tables for thesis  
-✅ **Automated plotting** - Publication-ready figures  
-✅ **Reproducible results** - JSON exports and version control  
-✅ **Cross-model comparison** - Systematic evaluation across all models  
-
-## 🎓 Thesis Integration
+## Thesis Integration
 
 ### Results Chapter Structure
 
@@ -250,7 +240,7 @@ This evaluation framework addresses the supervisor's specific requirements:
 - QQ plots for normality assessment
 - Autocorrelation function comparisons
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -266,13 +256,13 @@ This evaluation framework addresses the supervisor's specific requirements:
 - Ensure data files are in the correct locations
 - Check that evaluation results are being saved to the `results/` directory
 
-## 📚 References
+## References
 
 - Ho, J., Jain, A., & Abbeel, P. (2020). Denoising Diffusion Probabilistic Models. NeurIPS.
 - Cont, R. (2001). Empirical properties of asset returns: stylized facts and statistical issues. Quantitative Finance.
 - Bollerslev, T. (1986). Generalized autoregressive conditional heteroskedasticity. Journal of Econometrics.
 
-## 📞 Contact
+## Contact
 
 For questions about this implementation, contact:
 - **Author**: Simin Ali
@@ -284,6 +274,6 @@ For questions about this implementation, contact:
 **Note**: This repository is part of an MSc thesis project. All code and results are for academic research purposes.
 
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License. See `LICENSE` for details.
