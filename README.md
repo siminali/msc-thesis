@@ -282,3 +282,8 @@ For questions about this implementation, contact:
 ---
 
 **Note**: This repository is part of an MSc thesis project. All code and results are for academic research purposes.
+
+
+## 📄 License
+
+This project is licensed under the MIT License. See `LICENSE` for details.
