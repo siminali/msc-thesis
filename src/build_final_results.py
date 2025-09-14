@@ -43,7 +43,7 @@ sys.path.append(str(Path(__file__).parent))
 
 # Import custom modules
 from final_results_evaluator import FinalResultsEvaluator
-from final_results_pdf_builder import FinalResultsPDFBuilder
+# FinalResultsPDFBuilder removed; exporting handled by overleaf exporter and figures/tables writers
 
 # Configuration
 real_data_path = "data/sp500_data.csv"
