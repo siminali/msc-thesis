@@ -8,6 +8,9 @@
 
 ## 📋 Project Overview
 
+> For how to run the project, see `USER_GUIDE.md` (quick start and essential workflows).
+
+
 This repository contains the implementation and evaluation of diffusion models for financial data synthesis and risk management. The project compares three approaches:
 
 1. **GARCH(1,1)**: Classical volatility modeling baseline
@@ -26,27 +29,29 @@ This repository contains the implementation and evaluation of diffusion models f
 
 ```
 Thesis Coding/
-├── README.md                           # This file
-├── requirements.txt                    # Python dependencies
-├── .gitignore                         # Git ignore rules
-├── src/                               # Source code
-│   ├── evaluation_framework.py        # Comprehensive evaluation framework
-│   └── add_evaluation_to_notebooks.py # Script to add evaluation to notebooks
-├── notebooks/                         # Jupyter notebooks
-│   ├── garch.ipynb                    # GARCH(1,1) implementation
-│   ├── diffusion.ipynb                # DDPM implementation
-│   ├── timegrad.ipynb                 # TimeGrad implementation
-│   └── comprehensive_evaluation.ipynb # Cross-model comparison
-├── data/                              # Data files
-│   └── sp500_data.csv                 # S&P 500 historical data
-├── results/                           # Evaluation results
-│   ├── garch_evaluation/              # GARCH evaluation outputs
-│   ├── ddpm_evaluation/               # DDPM evaluation outputs
-│   ├── timegrad_evaluation/           # TimeGrad evaluation outputs
-│   └── comprehensive_evaluation/      # Cross-model comparison outputs
-└── docs/                              # Documentation
-    ├── background_report.pdf          # Background literature review
-    └── intro chapter.pdf              # Introduction chapter
+├── README.md
+├── USER_GUIDE.md
+├── requirements/
+│   ├── base.txt
+│   └── llm_refactored.txt
+├── scripts/
+│   ├── training/                    # Training pipelines
+│   ├── evaluation/                  # Metrics and plotting runners
+│   ├── experiments/                 # Experiment A/B evaluators
+│   └── exports/                     # LaTeX/report exporters
+├── shared/                          # Shared modules
+│   ├── metrics.py
+│   └── plotting.py
+├── src/                             # Model code and utilities
+├── notebooks/                       # Jupyter notebooks
+├── data/                            # Data files (sp500_data.csv)
+├── results/                         # Evaluation results
+├── runs/                            # Training/eval run artifacts
+├── final_results_benchmarking/      # Final thesis results and figures
+├── latex_training_exports/          # LaTeX exports for training
+├── comprehensive_latex_exports/     # Comprehensive LaTeX exports
+├── docs/                            # Documentation and changelogs
+└── configs/                         # Config files
 ```
 
 ## 🚀 Quick Start
@@ -63,7 +68,7 @@ python -m venv thesis_env
 source thesis_env/bin/activate  # On Windows: thesis_env\Scripts\activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -r requirements/base.txt
 ```
 
 ### 2. Data Preparation
@@ -257,7 +262,7 @@ This evaluation framework addresses the supervisor's specific requirements:
 ### Getting Help
 
 - Check the notebook outputs for error messages
-- Verify all dependencies are installed: `pip install -r requirements.txt`
+- Verify all dependencies are installed: `pip install -r requirements/base.txt`
 - Ensure data files are in the correct locations
 - Check that evaluation results are being saved to the `results/` directory
 
